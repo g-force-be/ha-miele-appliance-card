@@ -19,6 +19,17 @@ Appliance types: washing machine, tumble dryer, steam oven, oven, microwave, cof
 - Home Assistant with the core **Miele** integration (Settings → Devices & services → Add integration → Miele).
 - To start programmes from Home Assistant: **MobileStart** (remote start) switched on at the appliance.
 
+## Development
+
+Requires Node 20+. The dev harness replays real appliance cycles (`docs/fixtures.json`, `dev/data/fixtures-extra.json`) through a mock Home Assistant.
+
+```sh
+npm install
+npm test          # model tests (node:test)
+npm run dev       # harness at http://127.0.0.1:5173/dev/
+npm run shots     # Playwright screenshots in dev/screenshots/ (uses the installed Chrome)
+```
+
 ## Credits
 
 Based on [hOn Washer & Dryer Card](https://github.com/spikey1965/ha-hon-appliance-card) by My Media Build (MIT). The original card is kept unchanged in [`reference/`](reference/). See [`NOTICE`](NOTICE) for details.

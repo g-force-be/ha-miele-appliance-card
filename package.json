@@ -1,0 +1,19 @@
+{
+  "name": "ha-miele-appliance-card",
+  "version": "0.1.0",
+  "description": "Lovelace cards for Miele appliances in Home Assistant (core miele integration)",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "test": "node --test \"test/**/*.test.mjs\"",
+    "dev": "node dev/serve.mjs",
+    "shots": "node test/screenshots.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.64.1"
+  }
+}

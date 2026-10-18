@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Miele dev-harnas</title>
+<style>
+  :root {
+    --bg: #f4f5f7; --panel: #ffffff; --line: #e3e5e9; --fg: #1d2025; --muted: #6b7280; --soft: #f0f1f4;
+    --accent: #8c0014; --lcd-bg: #0e1013; --lcd-fg: #ffb347;
+    --s-off: #a3a8b0; --s-offline: #c2c6cc; --s-standby: #7aa7e8; --s-ready: #3b8fd9; --s-scheduled: #8e7ad6;
+    --s-running: #2a9d5c; --s-paused: #d6a23a; --s-done: #1f7a47; --s-interrupted: #e07b39; --s-error: #d64545;
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+    --bg: #15171a; --panel: #1e2125; --line: #2c3036; --fg: #e8eaed; --muted: #9aa0a6; --soft: #262a2f; color-scheme: dark; } }
+  :root[data-theme="dark"] { --bg: #15171a; --panel: #1e2125; --line: #2c3036; --fg: #e8eaed; --muted: #9aa0a6; --soft: #262a2f; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 14px/1.45 system-ui, -apple-system, "Segoe UI", sans-serif; }
+  header { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 14px; padding: 12px 16px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  header h1 { font-size: 15px; margin: 0 8px 0 0; font-weight: 650; letter-spacing: .01em; }
+  header h1 small { font-weight: 500; color: var(--muted); margin-left: 6px; }
+  select, button, input[type=range] { font: inherit; color: inherit; }
+  select, button { background: var(--soft); border: 1px solid var(--line); border-radius: 8px; padding: 5px 9px; }
+  button { cursor: pointer; min-width: 34px; }
+  .clock { font-variant-numeric: tabular-nums; color: var(--muted); margin-left: auto; }
+  .scrub { display: flex; align-items: center; gap: 10px; padding: 0 16px 10px; background: var(--panel); border-bottom: 1px solid var(--line); }
+  .scrub input { flex: 1; accent-color: var(--accent); }
+  main { display: grid; grid-template-columns: minmax(300px, 420px) 1fr; gap: 16px; padding: 16px; max-width: 1200px; margin: 0 auto; }
+  @media (max-width: 760px) { main { grid-template-columns: 1fr; padding: 12px; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 16px; min-width: 0; }
+  .panel h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); margin: 0 0 10px; font-weight: 600; }
+  .dev { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; margin-bottom: 4px; }
+  .dev b { font-size: 16px; }
+  .dev span { color: var(--muted); font-size: 12px; white-space: nowrap; }
+  .gauge { position: relative; width: min(260px, 80%); aspect-ratio: 1; margin: 14px auto 10px; }
+  .gauge svg { width: 100%; height: 100%; transform: rotate(-90deg); }
+  .gauge .track { fill: none; stroke: var(--soft); stroke-width: 5; }
+  .gauge .bar { fill: none; stroke: var(--sc); stroke-width: 5; stroke-linecap: round; transition: stroke-dashoffset .4s linear, stroke .3s; }
+  .gauge .spin { fill: none; stroke: var(--sc); stroke-width: 5; stroke-dasharray: 18 82; opacity: 0; }
+  .gauge.indeterminate .spin { opacity: 1; animation: rot 2.4s linear infinite; transform-origin: 50% 50%; }
+  .gauge.stale { opacity: .55; }
+  @keyframes rot { to { transform: rotate(360deg); } }
+  .lcd { position: absolute; inset: 31% 17%; background: var(--lcd-bg); border-radius: 10px; display: grid; place-content: center; text-align: center; box-shadow: inset 0 0 0 1px #ffffff14; }
+  .lcd .m { font: 600 clamp(20px, 7vw, 32px)/1.1 ui-monospace, "SF Mono", Menlo, Consolas, monospace; color: var(--lcd-fg); font-variant-numeric: tabular-nums; }
+  .lcd .m.txt { font: 600 clamp(15px, 4.6vw, 20px)/1.15 system-ui, sans-serif; }
+  .lcd .s { color: #9aa0a6; font-size: 12px; margin-top: 4px; }
+  .pills { display: flex; flex-wrap: wrap; gap: 6px; justify-content: center; margin-bottom: 10px; }
+  .pill { border-radius: 999px; padding: 3px 11px; font-weight: 600; font-size: 12.5px; background: color-mix(in srgb, var(--sc) 16%, transparent); color: var(--sc); border: 1px solid color-mix(in srgb, var(--sc) 35%, transparent); }
+  .pill.ghost { --sc: var(--muted); }
+  dl { display: grid; grid-template-columns: auto 1fr; gap: 5px 14px; margin: 0; font-size: 13px; }
+  dt { color: var(--muted); } dd { margin: 0; text-align: right; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .chips { display: flex; flex-wrap: wrap; gap: 5px; justify-content: flex-end; }
+  .chip { font-size: 11.5px; padding: 1px 7px; border-radius: 6px; background: var(--soft); border: 1px solid var(--line); }
+  .chip.on { background: color-mix(in srgb, var(--accent) 12%, transparent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+  dt.full, dd.full { grid-column: 1 / -1; text-align: left; }
+  .ladder { display: flex; flex-wrap: wrap; gap: 4px; }
+  .ladder i { font-style: normal; font-size: 11.5px; padding: 2px 7px; border-radius: 6px; background: var(--soft); color: var(--muted); white-space: nowrap; }
+  .ladder i.r { background: color-mix(in srgb, var(--s-running) 18%, transparent); color: var(--fg); }
+  .ladder i.t { outline: 1.5px solid var(--s-running); }
+  .right { display: grid; gap: 16px; align-content: start; }
+  .timeline svg { width: 100%; height: 120px; display: block; }
+  .legend { display: flex; flex-wrap: wrap; gap: 4px 12px; font-size: 12px; color: var(--muted); margin-top: 6px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 4px; vertical-align: -1px; }
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  td { padding: 4px 6px; border-top: 1px solid var(--line); vertical-align: top; }
+  td:first-child { color: var(--muted); white-space: nowrap; width: 1%; }
+  td.eid { color: var(--muted); font-size: 11.5px; overflow-wrap: anywhere; }
+  td.val { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+  td.val.unk { color: var(--muted); }
+  .note { color: var(--muted); font-size: 12px; margin: 8px 0 0; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Miele dev-harnas <small>M1 · datamodel</small></h1>
+  <select id="cycle" aria-label="Cyclus"></select>
+  <button id="play" aria-label="Afspelen">▶</button>
+  <select id="speed" aria-label="Snelheid"><option>1</option><option>10</option><option selected>60</option><option>300</option></select>
+  <select id="lang" aria-label="Taal"><option value="nl">NL</option><option value="en">EN</option></select>
+  <button id="theme" aria-label="Thema">◐</button>
+  <span class="clock" id="clock"></span>
+</header>
+<div class="scrub"><input id="t" type="range" min="0" max="100" step="1" value="0" aria-label="Tijd"><span id="tlabel" class="clock"></span></div>
+<main>
+  <section class="panel" id="model">
+    <div class="dev"><b id="dname"></b><span id="dmodel"></span></div>
+    <div class="gauge" id="gauge">
+      <svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="44" pathLength="100"/>
+        <circle class="bar" id="bar" cx="50" cy="50" r="44" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/>
+        <circle class="spin" cx="50" cy="50" r="44" pathLength="100"/></svg>
+      <div class="lcd"><div class="m" id="lcdm"></div><div class="s" id="lcds"></div></div>
+    </div>
+    <div class="pills" id="pills"></div>
+    <dl id="facts"></dl>
+  </section>
+  <div class="right">
+    <section class="panel timeline">
+      <h2 id="tl-title">Tijdlijn</h2>
+      <svg id="tl" viewBox="0 0 1000 120" preserveAspectRatio="none"></svg>
+      <div class="legend" id="legend"></div>
+    </section>
+    <section class="panel">
+      <h2 id="snap-title">Wat het model leest</h2>
+      <table id="snap"></table>
+      <p class="note" id="note"></p>
+    </section>
+  </div>
+</main>
+<script type="module" src="./harness.js"></script>
+</body>
+</html>

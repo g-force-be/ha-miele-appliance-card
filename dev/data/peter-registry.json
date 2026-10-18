@@ -1,0 +1,2179 @@
+{
+ "_about": "Peter's Miele devices and entities in Home Assistant 2026.10.2, captured 2026-10-18 via the HA MCP (config/entity_registry/list_for_display + states). Used by the dev harness and the tests. Oven program option lists are shortened.",
+ "areas": {
+  "bijkeuken": {
+   "area_id": "bijkeuken",
+   "name": "Bijkeuken"
+  },
+  "keuken": {
+   "area_id": "keuken",
+   "name": "Keuken"
+  }
+ },
+ "devices": {
+  "82ddfc7a46859e3c356f96713e446d32": {
+   "id": "82ddfc7a46859e3c356f96713e446d32",
+   "name": "Miele Washing Machine",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Washing machine",
+   "model_id": "WEI895",
+   "area_id": "bijkeuken"
+  },
+  "16dcdde6211a28156e33bc53c65c55e4": {
+   "id": "16dcdde6211a28156e33bc53c65c55e4",
+   "name": "Miele Tumble Dryer",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Tumble dryer",
+   "model_id": "TEF775WP",
+   "area_id": "bijkeuken"
+  },
+  "b8ee6dfe5e0f82d19997caf1ab237969": {
+   "id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "name": "Miele Steam Oven",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Steam oven combi",
+   "model_id": "DGC7845X",
+   "area_id": "keuken"
+  },
+  "eeef45e3b771421c2439c81f17581b33": {
+   "id": "eeef45e3b771421c2439c81f17581b33",
+   "name": "Miele Microwave Oven",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Oven microwave",
+   "model_id": "H7440BMX",
+   "area_id": "keuken"
+  },
+  "1f0fc39845233a82f0628ef7fb858053": {
+   "id": "1f0fc39845233a82f0628ef7fb858053",
+   "name": "Miele Coffee Machine",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Coffee system",
+   "model_id": "CM7750",
+   "area_id": "keuken"
+  },
+  "31c740bf126234441a0fd0e0f35dabfc": {
+   "id": "31c740bf126234441a0fd0e0f35dabfc",
+   "name": "Miele Warming Drawer",
+   "name_by_user": null,
+   "manufacturer": "Miele",
+   "model": "Warming drawer",
+   "model_id": "ESW7020",
+   "area_id": "keuken"
+  }
+ },
+ "entities": [
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_deur",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_notificatie_actief",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_probleem",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_afstandsbediening",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_smart_grid",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "smart_grid",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Smart grid",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_washing_machine_mobiel_starten",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_deur",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_notificatie_actief",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_probleem",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_afstandsbediening",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_smart_grid",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "smart_grid",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Smart grid",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_tumble_dryer_mobiel_starten",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_deur",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_notificatie_actief",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_probleem",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_afstandsbediening",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_smart_grid",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "smart_grid",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Smart grid",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_microwave_oven_mobiel_starten",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_coffee_machine_notificatie_actief",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_coffee_machine_probleem",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_coffee_machine_afstandsbediening",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_coffee_machine_smart_grid",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "smart_grid",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Smart grid",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_coffee_machine_mobiel_starten",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_warming_drawer_deur",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_warming_drawer_notificatie_actief",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_warming_drawer_probleem",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_warming_drawer_afstandsbediening",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_warming_drawer_mobiel_starten",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_deur",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_notificatie_actief",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "notification_active",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Notificatie actief",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_probleem",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Probleem",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_afstandsbediening",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "remote_control",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Bediening op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_smart_grid",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "smart_grid",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Smart grid",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.miele_steam_oven_mobiel_starten",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "mobile_start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start op afstand",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "button.miele_tumble_dryer_starten",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": "Starten",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "button.miele_tumble_dryer_stoppen",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": "Stoppen",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "button.miele_tumble_dryer_pauzeren",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "pause",
+   "has_entity_name": true,
+   "name": "Pauzeren",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "light.miele_microwave_oven_licht",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": "Licht",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "light.miele_coffee_machine_licht",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": "Licht",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "light.miele_steam_oven_licht",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": "Licht",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_program",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_program_phase",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_program_type",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_energy_consumption",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "energy_consumption",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Energieverbruik",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_water_consumption",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "water_consumption",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Waterverbruik",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_spin_speed",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "spin_speed",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Centrifugetoerental",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_remaining_time",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "remaining_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Resterende tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_elapsed_time",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "elapsed_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Verstreken tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_start_in",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "start_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start in",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_program",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_program_phase",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_program_type",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_energy_consumption",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "energy_consumption",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Energieverbruik",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_remaining_time",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "remaining_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Resterende tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_elapsed_time",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "elapsed_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Verstreken tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_start_in",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "start_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start in",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_program",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_program_phase",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_program_type",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_remaining_time",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "remaining_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Resterende tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_elapsed_time",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "elapsed_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Verstreken tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_start_in",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "start_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start in",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_program",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_program_phase",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_program_type",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer_program",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer_program_phase",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer_program_type",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer_start_in",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "start_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start in",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_warming_drawer_temperatuur",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_program",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": "Programma",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_program_phase",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": "Programmafase",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_program_type",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "program_type",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Programmatype",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_remaining_time",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "remaining_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Resterende tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_elapsed_time",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "elapsed_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Verstreken tijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_start_in",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "start_time",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Start in",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_washing_machine_power",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_tumble_dryer_power",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_microwave_oven_power",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_coffee_machine_power",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_warming_drawer_power",
+   "platform": "miele",
+   "device_id": "31c740bf126234441a0fd0e0f35dabfc",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "switch.miele_steam_oven_power",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": "Aan/uit",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_energievoorspelling",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "energy_forecast",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Energieverbruik voorspelling",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_water_forecast",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "water_forecast",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Waterverbruik voorspelling",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_energievoorspelling",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "energy_forecast",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Energieverbruik voorspelling",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_drying_step",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "drying_step",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Droogtegraad",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_doeltemperatuur",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_temperatuur",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_doeltemperatuur",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_temperatuur",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_doeltemperatuur",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": "Temperatuur",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_finish",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "finish",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Eindtijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_start",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Starttijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_finish",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "finish",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Eindtijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_tumble_dryer_start",
+   "platform": "miele",
+   "device_id": "16dcdde6211a28156e33bc53c65c55e4",
+   "translation_key": "start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Starttijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_finish",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "finish",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Eindtijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_start",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Starttijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_finish",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "finish",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Eindtijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_start",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "start",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Starttijd",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_twindos_1_level",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "twin_dos_1_level",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "TwinDos 1 niveau",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_washing_machine_twindos_2_level",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "translation_key": "twin_dos_2_level",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "TwinDos 2 niveau",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_core_target_temperature",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "core_target_temperature",
+   "has_entity_name": true,
+   "name": "Core target temperature",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_core_temperature",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "core_temperature",
+   "has_entity_name": true,
+   "name": "Core temperature",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_core_target_temperature",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "core_target_temperature",
+   "has_entity_name": true,
+   "name": "Core target temperature",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_core_temperature",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "core_temperature",
+   "has_entity_name": true,
+   "name": "Core temperature",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_descaling_cycles",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "descaling_counter",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Descaling cycles",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_degreasing_cycles",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "degreasing_counter",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Degreasing cycles",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_coffee_machine_milk_pipework_cleaning_cycles",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "translation_key": "milk_cleaning_counter",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Milk pipework cleaning cycles",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_steam_oven_descaling_cycles",
+   "platform": "miele",
+   "device_id": "b8ee6dfe5e0f82d19997caf1ab237969",
+   "translation_key": "descaling_counter",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Descaling cycles",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "sensor.miele_microwave_oven_descaling_cycles",
+   "platform": "miele",
+   "device_id": "eeef45e3b771421c2439c81f17581b33",
+   "translation_key": "descaling_counter",
+   "entity_category": "diagnostic",
+   "has_entity_name": true,
+   "name": "Descaling cycles",
+   "next_name_part": "device"
+  },
+  {
+   "entity_id": "binary_sensor.keuken_miele_coffee_machine_deur",
+   "platform": "miele",
+   "device_id": "1f0fc39845233a82f0628ef7fb858053",
+   "has_entity_name": true,
+   "name": "Deur",
+   "next_name_part": "device"
+  }
+ ],
+ "attributes": {
+  "binary_sensor.miele_washing_machine_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Washing Machine Deur"
+  },
+  "binary_sensor.miele_washing_machine_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Washing Machine Notificatie actief"
+  },
+  "binary_sensor.miele_washing_machine_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Washing Machine Probleem"
+  },
+  "binary_sensor.miele_washing_machine_afstandsbediening": {
+   "friendly_name": "Miele Washing Machine Bediening op afstand"
+  },
+  "binary_sensor.miele_washing_machine_smart_grid": {
+   "friendly_name": "Miele Washing Machine Smart grid"
+  },
+  "binary_sensor.miele_washing_machine_mobiel_starten": {
+   "friendly_name": "Miele Washing Machine Start op afstand"
+  },
+  "binary_sensor.miele_tumble_dryer_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Tumble Dryer Deur"
+  },
+  "binary_sensor.miele_tumble_dryer_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Tumble Dryer Notificatie actief"
+  },
+  "binary_sensor.miele_tumble_dryer_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Tumble Dryer Probleem"
+  },
+  "binary_sensor.miele_tumble_dryer_afstandsbediening": {
+   "friendly_name": "Miele Tumble Dryer Bediening op afstand"
+  },
+  "binary_sensor.miele_tumble_dryer_smart_grid": {
+   "friendly_name": "Miele Tumble Dryer Smart grid"
+  },
+  "binary_sensor.miele_tumble_dryer_mobiel_starten": {
+   "friendly_name": "Miele Tumble Dryer Start op afstand"
+  },
+  "binary_sensor.miele_microwave_oven_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Microwave Oven Deur"
+  },
+  "binary_sensor.miele_microwave_oven_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Microwave Oven Notificatie actief"
+  },
+  "binary_sensor.miele_microwave_oven_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Microwave Oven Probleem"
+  },
+  "binary_sensor.miele_microwave_oven_afstandsbediening": {
+   "friendly_name": "Miele Microwave Oven Bediening op afstand"
+  },
+  "binary_sensor.miele_microwave_oven_smart_grid": {
+   "friendly_name": "Miele Microwave Oven Smart grid"
+  },
+  "binary_sensor.miele_microwave_oven_mobiel_starten": {
+   "friendly_name": "Miele Microwave Oven Start op afstand"
+  },
+  "binary_sensor.miele_coffee_machine_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Coffee Machine Notificatie actief"
+  },
+  "binary_sensor.miele_coffee_machine_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Coffee Machine Probleem"
+  },
+  "binary_sensor.miele_coffee_machine_afstandsbediening": {
+   "friendly_name": "Miele Coffee Machine Bediening op afstand"
+  },
+  "binary_sensor.miele_coffee_machine_smart_grid": {
+   "friendly_name": "Miele Coffee Machine Smart grid"
+  },
+  "binary_sensor.miele_coffee_machine_mobiel_starten": {
+   "friendly_name": "Miele Coffee Machine Start op afstand"
+  },
+  "binary_sensor.miele_warming_drawer_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Warming Drawer Deur"
+  },
+  "binary_sensor.miele_warming_drawer_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Warming Drawer Notificatie actief"
+  },
+  "binary_sensor.miele_warming_drawer_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Warming Drawer Probleem"
+  },
+  "binary_sensor.miele_warming_drawer_afstandsbediening": {
+   "friendly_name": "Miele Warming Drawer Bediening op afstand"
+  },
+  "binary_sensor.miele_warming_drawer_mobiel_starten": {
+   "friendly_name": "Miele Warming Drawer Start op afstand"
+  },
+  "binary_sensor.miele_steam_oven_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Steam Oven Deur"
+  },
+  "binary_sensor.miele_steam_oven_notificatie_actief": {
+   "device_class": "problem",
+   "friendly_name": "Miele Steam Oven Notificatie actief"
+  },
+  "binary_sensor.miele_steam_oven_probleem": {
+   "device_class": "problem",
+   "friendly_name": "Miele Steam Oven Probleem"
+  },
+  "binary_sensor.miele_steam_oven_afstandsbediening": {
+   "friendly_name": "Miele Steam Oven Bediening op afstand"
+  },
+  "binary_sensor.miele_steam_oven_smart_grid": {
+   "friendly_name": "Miele Steam Oven Smart grid"
+  },
+  "binary_sensor.miele_steam_oven_mobiel_starten": {
+   "friendly_name": "Miele Steam Oven Start op afstand"
+  },
+  "button.miele_tumble_dryer_starten": {
+   "friendly_name": "Miele Tumble Dryer Starten"
+  },
+  "button.miele_tumble_dryer_stoppen": {
+   "friendly_name": "Miele Tumble Dryer Stoppen"
+  },
+  "button.miele_tumble_dryer_pauzeren": {
+   "friendly_name": "Miele Tumble Dryer Pauzeren"
+  },
+  "light.miele_microwave_oven_licht": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "supported_features": 0,
+   "friendly_name": "Miele Microwave Oven Licht"
+  },
+  "light.miele_coffee_machine_licht": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "supported_features": 0,
+   "friendly_name": "Miele Coffee Machine Licht"
+  },
+  "light.miele_steam_oven_licht": {
+   "supported_color_modes": [
+    "onoff"
+   ],
+   "color_mode": null,
+   "supported_features": 0,
+   "friendly_name": "Miele Steam Oven Licht"
+  },
+  "sensor.miele_washing_machine": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:washing-machine",
+   "friendly_name": "Miele Washing Machine"
+  },
+  "sensor.miele_washing_machine_program": {
+   "options": [
+    "automatic_plus",
+    "bed_linen",
+    "clean_machine",
+    "cool_air",
+    "cottonrepair",
+    "cottons",
+    "cottons_eco",
+    "cottons_hygiene",
+    "curtains",
+    "dark_garments",
+    "dark_jeans",
+    "delicates",
+    "denim",
+    "down_duvets",
+    "down_filled_items",
+    "drain_spin",
+    "easy_care",
+    "eco_40_60",
+    "express_20",
+    "first_wash",
+    "freshen_up",
+    "game_pieces",
+    "minimum_iron",
+    "no_program",
+    "normal",
+    "outdoor_garments",
+    "outerwear",
+    "pillows",
+    "powerfresh",
+    "pre_ironing",
+    "proofing",
+    "quick_intense",
+    "quick_power_wash",
+    "rinse",
+    "rinse_out_lint",
+    "separate_rinse_starch",
+    "shirts",
+    "silks",
+    "smartmatic",
+    "sportswear",
+    "starch",
+    "steam_care",
+    "stuffed_toys",
+    "table_linen",
+    "towels",
+    "trainers",
+    "trainers_refresh",
+    "warm_air",
+    "woollens"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Washing Machine Programma"
+  },
+  "sensor.miele_washing_machine_program_phase": {
+   "options": [
+    "anti_crease",
+    "automatic_start",
+    "cancelled",
+    "cleaning",
+    "cooling_down",
+    "disinfecting",
+    "drain",
+    "drying",
+    "finished",
+    "flex_load_active",
+    "freshen_up_and_moisten",
+    "hygiene",
+    "main_wash",
+    "not_running",
+    "paused",
+    "pre_wash",
+    "rinse",
+    "rinse_hold",
+    "soak",
+    "spin",
+    "starch_stop",
+    "steam_smoothing",
+    "venting"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Washing Machine Programmafase"
+  },
+  "sensor.miele_washing_machine_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Washing Machine Programmatype"
+  },
+  "sensor.miele_washing_machine_energy_consumption": {
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh",
+   "device_class": "energy",
+   "friendly_name": "Miele Washing Machine Energieverbruik"
+  },
+  "sensor.miele_washing_machine_water_consumption": {
+   "state_class": "total_increasing",
+   "unit_of_measurement": "L",
+   "device_class": "water",
+   "friendly_name": "Miele Washing Machine Waterverbruik"
+  },
+  "sensor.miele_washing_machine_spin_speed": {
+   "unit_of_measurement": "rpm",
+   "friendly_name": "Miele Washing Machine Centrifugetoerental"
+  },
+  "sensor.miele_washing_machine_remaining_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Washing Machine Resterende tijd"
+  },
+  "sensor.miele_washing_machine_elapsed_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Washing Machine Verstreken tijd"
+  },
+  "sensor.miele_washing_machine_start_in": {
+   "device_class": "duration",
+   "unit_of_measurement": "h",
+   "friendly_name": "Miele Washing Machine Start in"
+  },
+  "sensor.miele_tumble_dryer": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:tumble-dryer",
+   "friendly_name": "Miele Tumble Dryer"
+  },
+  "sensor.miele_tumble_dryer_program": {
+   "options": [
+    "automatic",
+    "automatic_plus",
+    "basket_program",
+    "bed_linen",
+    "cool_air",
+    "cottons",
+    "cottons_eco",
+    "cottons_hygiene",
+    "curtains",
+    "delicates",
+    "denim",
+    "downs_duvets",
+    "eco",
+    "express",
+    "gentle_denim",
+    "gentle_smoothing",
+    "hygiene",
+    "large_pillows",
+    "minimum_iron",
+    "no_program",
+    "outerwear",
+    "pillows_sanitize",
+    "proofing",
+    "quick_hygiene",
+    "quick_power_dry",
+    "shirts",
+    "silks_handcare",
+    "smoothing",
+    "sportswear",
+    "standard_pillows",
+    "steam_smoothing",
+    "warm_air",
+    "woollens",
+    "woollens_handcare"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Tumble Dryer Programma"
+  },
+  "sensor.miele_tumble_dryer_program_phase": {
+   "options": [
+    "anti_crease",
+    "automatic_start",
+    "comfort_cooling",
+    "cooling_down",
+    "drying",
+    "extra_dry",
+    "finished",
+    "hand_iron",
+    "hand_iron_1",
+    "hand_iron_2",
+    "hygiene_drying",
+    "machine_iron",
+    "moisten",
+    "normal",
+    "normal_plus",
+    "not_running",
+    "perfect_dry_active",
+    "program_running",
+    "rinse_out_lint",
+    "rinses",
+    "safety_cooling",
+    "slightly_dry",
+    "smoothing",
+    "steam_smoothing",
+    "thermo_spin",
+    "timed_drying",
+    "warm_air"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Tumble Dryer Programmafase"
+  },
+  "sensor.miele_tumble_dryer_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Tumble Dryer Programmatype"
+  },
+  "sensor.miele_tumble_dryer_energy_consumption": {
+   "state_class": "total_increasing",
+   "unit_of_measurement": "kWh",
+   "device_class": "energy",
+   "friendly_name": "Miele Tumble Dryer Energieverbruik"
+  },
+  "sensor.miele_tumble_dryer_remaining_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Tumble Dryer Resterende tijd"
+  },
+  "sensor.miele_tumble_dryer_elapsed_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Tumble Dryer Verstreken tijd"
+  },
+  "sensor.miele_tumble_dryer_start_in": {
+   "device_class": "duration",
+   "unit_of_measurement": "h",
+   "friendly_name": "Miele Tumble Dryer Start in"
+  },
+  "sensor.miele_microwave_oven": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:chef-hat",
+   "friendly_name": "Miele Microwave Oven"
+  },
+  "sensor.miele_microwave_oven_program": {
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "grill",
+    "full_grill",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "rapid_steam_cooking",
+    "reheating_with_steam",
+    "defrosting_with_steam",
+    "moisture_plus_fan_plus",
+    "keeping_warm",
+    "descale",
+    "rinse",
+    "drying",
+    "microwave",
+    "quick_microwave",
+    "microwave_fan_plus",
+    "microwave_grill",
+    "microwave_fan_grill",
+    "microwave_auto_roast",
+    "defrosting_with_microwave",
+    "reheating_with_microwave",
+    "popcorn",
+    "auto_roast",
+    "low_temperature_cooking",
+    "sous_vide"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Microwave Oven Programma"
+  },
+  "sensor.miele_microwave_oven_program_phase": {
+   "options": [
+    "cooling_phase",
+    "energy_save",
+    "heating_up_phase",
+    "not_running",
+    "process_finished",
+    "process_running",
+    "steam_reduction",
+    "waiting_for_start"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Microwave Oven Programmafase"
+  },
+  "sensor.miele_microwave_oven_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Microwave Oven Programmatype"
+  },
+  "sensor.miele_microwave_oven_remaining_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Microwave Oven Resterende tijd"
+  },
+  "sensor.miele_microwave_oven_elapsed_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Microwave Oven Verstreken tijd"
+  },
+  "sensor.miele_microwave_oven_start_in": {
+   "device_class": "duration",
+   "unit_of_measurement": "h",
+   "friendly_name": "Miele Microwave Oven Start in"
+  },
+  "sensor.miele_coffee_machine": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:coffee-maker",
+   "friendly_name": "Miele Coffee Machine"
+  },
+  "sensor.miele_coffee_machine_program": {
+   "options": [
+    "appliance_rinse",
+    "appliance_settings",
+    "automatic_maintenance",
+    "barista_assistant",
+    "black_tea",
+    "brewing_unit_degrease",
+    "cafe_au_lait",
+    "caffe_americano",
+    "caffe_latte",
+    "cappuccino",
+    "cappuccino_italiano",
+    "chai_latte",
+    "check_appliance",
+    "coffee",
+    "coffee_pot",
+    "descaling",
+    "espresso",
+    "espresso_macchiato",
+    "flat_white",
+    "fruit_tea",
+    "green_tea",
+    "herbal_tea",
+    "hot_milk",
+    "hot_water",
+    "intermediate_rinsing",
+    "japanese_tea",
+    "latte_macchiato",
+    "long_black",
+    "long_coffee",
+    "milk_foam",
+    "milk_pipework_clean",
+    "milk_pipework_rinse",
+    "no_program",
+    "ristretto",
+    "very_hot_water",
+    "white_tea"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Coffee Machine Programma"
+  },
+  "sensor.miele_coffee_machine_program_phase": {
+   "options": [
+    "2nd_espresso",
+    "2nd_grinding",
+    "2nd_pre_brewing",
+    "dispensing",
+    "espresso",
+    "grinding",
+    "heating_up",
+    "hot_milk",
+    "milk_foam",
+    "not_running",
+    "pre_brewing",
+    "rinse"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Coffee Machine Programmafase"
+  },
+  "sensor.miele_coffee_machine_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Coffee Machine Programmatype"
+  },
+  "sensor.miele_warming_drawer": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:heat-wave",
+   "friendly_name": "Miele Warming Drawer"
+  },
+  "sensor.miele_warming_drawer_program": {
+   "options": [
+    "keep_warm",
+    "no_program",
+    "slow_roasting",
+    "warm_cups_glasses",
+    "warm_dishes_plates"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Warming Drawer Programma"
+  },
+  "sensor.miele_warming_drawer_program_phase": {
+   "options": [
+    "cooling_down",
+    "door_open",
+    "heating_up",
+    "keeping_warm",
+    "not_running"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Warming Drawer Programmafase"
+  },
+  "sensor.miele_warming_drawer_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Warming Drawer Programmatype"
+  },
+  "sensor.miele_warming_drawer_start_in": {
+   "device_class": "duration",
+   "unit_of_measurement": "h",
+   "friendly_name": "Miele Warming Drawer Start in"
+  },
+  "sensor.miele_warming_drawer_temperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Warming Drawer Temperatuur"
+  },
+  "sensor.miele_steam_oven": {
+   "options": [
+    "autocleaning",
+    "failure",
+    "idle",
+    "in_use",
+    "not_connected",
+    "off",
+    "on",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "programmed",
+    "reserved",
+    "rinse_hold",
+    "service",
+    "supercooling",
+    "supercooling_superfreezing",
+    "superfreezing",
+    "superheating",
+    "waiting_to_start"
+   ],
+   "device_class": "enum",
+   "icon": "mdi:chef-hat",
+   "friendly_name": "Miele Steam Oven"
+  },
+  "sensor.miele_steam_oven_program": {
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "grill",
+    "full_grill",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "rapid_steam_cooking",
+    "reheating_with_steam",
+    "defrosting_with_steam",
+    "moisture_plus_fan_plus",
+    "keeping_warm",
+    "descale",
+    "rinse",
+    "drying",
+    "microwave",
+    "quick_microwave",
+    "microwave_fan_plus",
+    "microwave_grill",
+    "microwave_fan_grill",
+    "microwave_auto_roast",
+    "defrosting_with_microwave",
+    "reheating_with_microwave",
+    "popcorn",
+    "auto_roast",
+    "low_temperature_cooking",
+    "sous_vide"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Steam Oven Programma"
+  },
+  "sensor.miele_steam_oven_program_phase": {
+   "options": [
+    "drying",
+    "energy_save",
+    "heating_up",
+    "heating_up_phase",
+    "not_running",
+    "pre_heating",
+    "process_finished",
+    "process_running",
+    "rinse",
+    "roasting",
+    "searing",
+    "steam_reduction",
+    "waiting_for_start"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Steam Oven Programmafase"
+  },
+  "sensor.miele_steam_oven_program_type": {
+   "options": [
+    "automatic_program",
+    "maintenance_program",
+    "normal_operation_mode",
+    "own_program"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Steam Oven Programmatype"
+  },
+  "sensor.miele_steam_oven_remaining_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Steam Oven Resterende tijd"
+  },
+  "sensor.miele_steam_oven_elapsed_time": {
+   "device_class": "duration",
+   "unit_of_measurement": "min",
+   "friendly_name": "Miele Steam Oven Verstreken tijd"
+  },
+  "sensor.miele_steam_oven_start_in": {
+   "device_class": "duration",
+   "unit_of_measurement": "h",
+   "friendly_name": "Miele Steam Oven Start in"
+  },
+  "switch.miele_washing_machine_power": {
+   "friendly_name": "Miele Washing Machine Aan/uit"
+  },
+  "switch.miele_tumble_dryer_power": {
+   "friendly_name": "Miele Tumble Dryer Aan/uit"
+  },
+  "switch.miele_microwave_oven_power": {
+   "friendly_name": "Miele Microwave Oven Aan/uit"
+  },
+  "switch.miele_coffee_machine_power": {
+   "friendly_name": "Miele Coffee Machine Aan/uit"
+  },
+  "switch.miele_warming_drawer_power": {
+   "friendly_name": "Miele Warming Drawer Aan/uit"
+  },
+  "switch.miele_steam_oven_power": {
+   "friendly_name": "Miele Steam Oven Aan/uit"
+  },
+  "sensor.miele_washing_machine_energievoorspelling": {
+   "unit_of_measurement": "%",
+   "friendly_name": "Miele Washing Machine Energieverbruik voorspelling"
+  },
+  "sensor.miele_washing_machine_water_forecast": {
+   "unit_of_measurement": "%",
+   "friendly_name": "Miele Washing Machine Waterverbruik voorspelling"
+  },
+  "sensor.miele_tumble_dryer_energievoorspelling": {
+   "unit_of_measurement": "%",
+   "friendly_name": "Miele Tumble Dryer Energieverbruik voorspelling"
+  },
+  "sensor.miele_tumble_dryer_drying_step": {
+   "options": [
+    "extra_dry",
+    "hand_iron_1",
+    "hand_iron_2",
+    "machine_iron",
+    "normal",
+    "normal_plus",
+    "slightly_dry",
+    "smoothing"
+   ],
+   "device_class": "enum",
+   "friendly_name": "Miele Tumble Dryer Droogtegraad"
+  },
+  "sensor.miele_washing_machine_doeltemperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Washing Machine Temperatuur"
+  },
+  "sensor.miele_microwave_oven_temperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Microwave Oven Temperatuur"
+  },
+  "sensor.miele_microwave_oven_doeltemperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Microwave Oven Temperatuur"
+  },
+  "sensor.miele_steam_oven_temperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Steam Oven Temperatuur"
+  },
+  "sensor.miele_steam_oven_doeltemperatuur": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Steam Oven Temperatuur"
+  },
+  "sensor.miele_steam_oven_finish": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Steam Oven Eindtijd"
+  },
+  "sensor.miele_steam_oven_start": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Steam Oven Starttijd"
+  },
+  "sensor.miele_tumble_dryer_finish": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Tumble Dryer Eindtijd"
+  },
+  "sensor.miele_tumble_dryer_start": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Tumble Dryer Starttijd"
+  },
+  "sensor.miele_washing_machine_finish": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Washing Machine Eindtijd"
+  },
+  "sensor.miele_washing_machine_start": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Washing Machine Starttijd"
+  },
+  "sensor.miele_microwave_oven_finish": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Microwave Oven Eindtijd"
+  },
+  "sensor.miele_microwave_oven_start": {
+   "device_class": "timestamp",
+   "friendly_name": "Miele Microwave Oven Starttijd"
+  },
+  "sensor.miele_washing_machine_twindos_1_level": {
+   "unit_of_measurement": "%",
+   "friendly_name": "Miele Washing Machine TwinDos 1 niveau"
+  },
+  "sensor.miele_washing_machine_twindos_2_level": {
+   "unit_of_measurement": "%",
+   "friendly_name": "Miele Washing Machine TwinDos 2 niveau"
+  },
+  "sensor.miele_microwave_oven_core_target_temperature": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Microwave Oven Core target temperature"
+  },
+  "sensor.miele_microwave_oven_core_temperature": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Microwave Oven Core temperature"
+  },
+  "sensor.miele_steam_oven_core_target_temperature": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Steam Oven Core target temperature"
+  },
+  "sensor.miele_steam_oven_core_temperature": {
+   "state_class": "measurement",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C",
+   "friendly_name": "Miele Steam Oven Core temperature"
+  },
+  "sensor.miele_coffee_machine_descaling_cycles": {
+   "state_class": "total_increasing",
+   "friendly_name": "Miele Coffee Machine Descaling cycles"
+  },
+  "sensor.miele_coffee_machine_degreasing_cycles": {
+   "state_class": "total_increasing",
+   "friendly_name": "Miele Coffee Machine Degreasing cycles"
+  },
+  "sensor.miele_coffee_machine_milk_pipework_cleaning_cycles": {
+   "state_class": "total_increasing",
+   "friendly_name": "Miele Coffee Machine Milk pipework cleaning cycles"
+  },
+  "sensor.miele_steam_oven_descaling_cycles": {
+   "state_class": "total_increasing",
+   "friendly_name": "Miele Steam Oven Descaling cycles"
+  },
+  "sensor.miele_microwave_oven_descaling_cycles": {
+   "state_class": "total_increasing",
+   "friendly_name": "Miele Microwave Oven Descaling cycles"
+  },
+  "binary_sensor.keuken_miele_coffee_machine_deur": {
+   "device_class": "door",
+   "friendly_name": "Miele Coffee Machine Deur"
+  }
+ },
+ "disabled": [
+  {
+   "entity_id": "button.miele_washing_machine_starten",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "unique_id": "000187896956-start",
+   "translation_key": "start",
+   "disabled_by": "integration",
+   "original_name": "Starten"
+  },
+  {
+   "entity_id": "button.miele_washing_machine_pauzeren",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "unique_id": "000187896956-pause",
+   "translation_key": "pause",
+   "disabled_by": "integration",
+   "original_name": "Pauzeren"
+  },
+  {
+   "entity_id": "button.miele_washing_machine_stoppen",
+   "platform": "miele",
+   "device_id": "82ddfc7a46859e3c356f96713e446d32",
+   "unique_id": "000187896956-stop",
+   "translation_key": "stop",
+   "disabled_by": "integration",
+   "original_name": "Stoppen"
+  }
+ ],
+ "serials": {
+  "82ddfc7a46859e3c356f96713e446d32": "000187896956",
+  "16dcdde6211a28156e33bc53c65c55e4": "000177853792",
+  "b8ee6dfe5e0f82d19997caf1ab237969": "000175685894"
+ }
+}

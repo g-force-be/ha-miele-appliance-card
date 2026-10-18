@@ -1,0 +1,22 @@
+Miele Appliance Card for Home Assistant
+Copyright (c) 2026 Peter Gheeraert
+Licensed under the MIT License (see LICENSE).
+
+Based on hOn Washer & Dryer Card by My Media Build
+(https://github.com/spikey1965/ha-hon-appliance-card), MIT.
+Copyright (c) 2026 My Media Build.
+An unchanged copy of the original card (upstream commit
+e07fa7f70ca2cb4ac85547e774e1cd39a1174b95) is kept in reference/ with its
+licence.
+
+Third-party code
+----------------
+Code taken from another MIT project is listed here and in a header comment
+in the file concerned, together with the MIT permission notice. At this
+time no such code is included.
+
+Trademarks
+----------
+Not affiliated with or endorsed by Miele. Miele is a trademark of
+Miele & Cie. KG. This project contains no Miele logo, wordmark or product
+photography; the appliance drawings are original artwork.

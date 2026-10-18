@@ -112,7 +112,7 @@ export function laundrySVG(u, dryer = false) {
   <circle cx="486" cy="50" r="26" fill="${g("chrome")}"/>
   <circle cx="486" cy="50" r="22.5" fill="${g("chromeIn")}"/>
   <circle cx="486" cy="50" r="19" fill="${g("knob")}" stroke="#000" stroke-opacity=".08"/>
-  <path d="M486 37 V44" style="stroke:${f("ink")}" stroke-width="2.6" stroke-linecap="round"/>
+  <path d="M480.5 59.5 L476.5 66.5" stroke="#f2a33a" stroke-width="3.4" stroke-linecap="round"/>
 </g>
 
 <g class="door">
@@ -122,6 +122,7 @@ export function laundrySVG(u, dryer = false) {
   <circle cx="300" cy="370" r="186" fill="#8d959c"/>
   <circle cx="300" cy="370" r="183" fill="${g("bezel")}"/>
   <circle cx="300" cy="370" r="151" fill="${g("glass")}"/>
+  <path d="${dryer ? "M370.6 218.6 A167 167 0 0 1 447.4 291.6" : "M148.6 299.4 A167 167 0 0 1 216.5 225.4"}" fill="none" stroke="#f2a33a" stroke-width="8" stroke-linecap="round"/>
   <path d="M520 334 a228 228 0 0 1 0 72" fill="none" stroke="#000" stroke-opacity=".22" stroke-width="7" stroke-linecap="round"/>
   <path d="M110 250 a222 222 0 0 1 150 -100" fill="none" stroke="#fff" stroke-opacity=".6" stroke-width="3.5" stroke-linecap="round"/>
 </g>

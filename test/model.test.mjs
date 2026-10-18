@@ -199,6 +199,16 @@ describe("tracker", () => {
     assert.equal(guessed.state, "running"); assert.equal(guessed.guessed, true); assert.equal(guessed.phase, "rinse");
   });
 
+  test("oven below its target without a timer is heating up, even in phase 'process_running'", () => {
+    const tr = new MieleTracker(familyOf("Oven microwave", "H7440BMX"));
+    const oven = { ...base, program: "fan_plus", phase: "process_running", remaining: 0, targetTemp: 160, temp: 32 };
+    assert.equal(tr.update(oven, 0).progress.mode, "heat");
+    const v = tr.update({ ...oven, temp: 96 }, 60e3);
+    assert.equal(v.progress.mode, "heat"); assert.ok(Math.abs(v.progress.value - 0.5) < 0.001);
+    assert.equal(tr.update({ ...oven, temp: 159 }, 120e3).progress.mode, "at_temp");
+    assert.equal(tr.update({ ...oven, temp: 100, remaining: 12, remainingAt: 120e3 }, 130e3).progress.mode, "time");
+  });
+
   test("unreachable with nothing known yet: offline straight away", () => {
     const vm = new MieleTracker(fam).update({ ...base, status: "not_connected" }, 0);
     assert.equal(vm.state, "offline"); assert.deepEqual(vm.lcd.main, { kind: "dashes" });

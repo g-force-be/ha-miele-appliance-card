@@ -317,7 +317,9 @@ export class MieleTracker {
 
     // --- heating (ovens): progress from the temperature while it climbs to the target
     const heatInfo = fam.group === "oven" && snap.targetTemp != null && snap.temp != null && active;
-    const heating = heatInfo && HEAT_PHASES.has(snap.phase) && snap.temp < snap.targetTemp - AT_TEMP_MARGIN;
+    // below the target and no timer running: still heating up, whatever the phase is called ("process_running" on the
+    // oven-microwave with Fan plus, seen live on 18-10)
+    const heating = heatInfo && snap.temp < snap.targetTemp - AT_TEMP_MARGIN && (HEAT_PHASES.has(snap.phase) || !(snap.remaining > 0));
     if (heating && !stale) c.heatFrom = Math.min(c.heatFrom ?? snap.temp, snap.temp);
 
     // --- progress

@@ -22,9 +22,29 @@ import { drawingFor, DRAWINGS } from "../drawings/index.js";
 import { finishPalette, finishVars } from "../drawings/finish.js";
 import { CARD_CSS } from "../ui/styles.js";
 import { countdown, duration, clockTime, temp } from "../ui/format.js";
+import { sevenSeg } from "../ui/sevenseg.js";
+
+// The four drinks tiles of the CM 7750's start screen ("Dranken").
+const DRINK_TILES = `<svg viewBox="0 0 100 62" aria-hidden="true"><g fill="#c4cad0">
+  <rect x="2" y="2" width="47" height="28" rx="2.5"/><rect x="51" y="2" width="47" height="28" rx="2.5"/>
+  <rect x="2" y="32" width="47" height="28" rx="2.5"/><rect x="51" y="32" width="47" height="28" rx="2.5"/></g>
+  <g fill="none" stroke="#3b4148" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <path d="M21 11 h8 v7 a4 4 0 0 1 -8 0 Z M29 13 h2 a2 2 0 0 1 0 4 h-2"/><path d="M69 11 h12 v6 a6 6 0 0 1 -12 0 Z M81 13 h2 a2 2 0 0 1 0 4 h-2"/>
+  <path d="M19 41 h12 v7 a6 6 0 0 1 -12 0 Z M31 43 h2 a2 2 0 0 1 0 4 h-2 M21 39 c1 -2 3 -2 4 0"/><path d="M71 39 h8 l-1 14 h-6 Z M72 46 h6"/></g></svg>`;
+const LOCK = `<svg viewBox="0 0 12 14" aria-hidden="true"><path d="M3 6 V4.2 a3 3 0 0 1 6 0 V6" fill="none" stroke="currentColor" stroke-width="1.5"/>
+  <rect x="1.2" y="6" width="9.6" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 8.6 v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
+const hm = sec => duration(Math.ceil(Math.max(0, sec) / 60) * 60);   // whole minutes up, like the appliance
 
 const ACCENT = { washer: "#4fa3e0", dryer: "#e9a23b", steam_oven: "#e07a4f", microwave: "#e07a4f", coffee: "#c98b5a", drawer: "#e0a84f", generic: "#4fa3e0" };
 const LADDER = DRY_LADDER.filter(k => k !== "hand_iron");
+// What each kind of display holds; _display() fills it in.
+const DISPLAY_MARKUP = {
+  basic: `<span class="t" id="lcd-t"></span><span class="s" id="lcd-s"></span>`,
+  line: `<span class="lk" id="lcd-k"></span><span class="lb" id="lcd-l"></span><span class="t" id="lcd-t"></span>`,
+  seg: `<span class="lad" id="lcd-l"></span><span class="sg" id="lcd-t"></span>`,
+  oven: `<span class="lb" id="lcd-l"></span><span class="t" id="lcd-t"></span><span class="cur" id="lcd-s"></span>`,
+  menu: `<span class="hd"><span id="lcd-l"></span><span id="lcd-k"></span></span><span class="bd" id="lcd-t"></span>`,
+};
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 let uid = 0;
 
@@ -102,6 +122,7 @@ export class MieleApplianceCard extends HTMLElement {
     const draw = this._draw = DRAWINGS[c.drawing] ? c.drawing : fam.drawing;
     const d = drawingFor(draw), g = d.geom, u = `mc${++uid}`;
     this._geom = g;
+    const style = this._style = d.display ?? "basic";
     const palette = finishPalette(c.finish, fam.finish);
     const accent = c.accent || ACCENT[draw] || ACCENT.generic;
     const name = this._name = c.name || this._hass.devices?.[dev.id]?.name_by_user || this._t(`kind.${fam.kind}`);
@@ -134,7 +155,7 @@ export class MieleApplianceCard extends HTMLElement {
     <svg class="ring" viewBox="${g.view}" aria-hidden="true"><path class="track" d="${g.ring.path}" pathLength="100" style="stroke-width:${g.ring.width}"/>
       <path class="bar" id="bar" d="${g.ring.path}" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="stroke-width:${g.ring.width}"/></svg>
     ${g.ring.spin ? `<div class="at spinbox" style="left:${g.ring.spin.x}%;top:${g.ring.spin.y}%;width:${g.ring.spin.d}%"><div class="spin"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48.5" pathLength="100"/></svg></div></div>` : ""}
-    <div class="lcd${g.lcd.ghost ? " ghost" : ""}" style="left:${g.lcd.x}%;top:${g.lcd.y}%;width:${g.lcd.w}%;height:${g.lcd.h}%"><span class="t" id="lcd-t"></span><span class="s" id="lcd-s"></span></div>
+    <div class="lcd ${style}${g.lcd.ghost ? " ghost" : ""}" style="left:${g.lcd.x}%;top:${g.lcd.y}%;width:${g.lcd.w}%;height:${g.lcd.h}%">${DISPLAY_MARKUP[style]}</div>
     ${icons}
     ${p ? panel : ""}
   </div>
@@ -166,12 +187,14 @@ export class MieleApplianceCard extends HTMLElement {
   _set(id, value) {               // only touch the DOM when the text really changed
     if (this._text[id] === value) return;
     this._text[id] = value;
-    this._el(id).textContent = value;
+    const el = this._el(id);
+    if (el) el.textContent = value;
   }
   _setHTML(id, html) {
     if (this._text[id] === html) return;
     this._text[id] = html;
-    this._el(id).innerHTML = html;
+    const el = this._el(id);
+    if (el) el.innerHTML = html;
   }
 
   _update() {
@@ -194,9 +217,10 @@ export class MieleApplianceCard extends HTMLElement {
       "f-micro": oven && s === "running" && /microwave|popcorn/.test(prog),
       "f-grind": coffee && s === "running" && /grinding/.test(phase),
       "f-dispense": dispensing, "f-rinse": coffee && s === "running" && (f.rinsing || phase === "rinse"),
-      "f-warm": drawer && (moving || f.keepWarm), "f-door": f.doorOpen || phase === "door_open",
+      "f-warm": drawer && (moving || f.keepWarm), "f-door": f.doorOpen || phase === "door_open" || (drawer && s === "paused"),
       lit: moving || f.doorOpen || f.antiCrease || (s === "done" && f.cooling) || f.light === true,
-      loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s) && !(coffee && !moving),
+      loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s) && !(coffee && !moving)
+        && vm.programType !== "maintenance_program" && !/clean_machine|descal|rinse_out_lint|^rinse$/.test(prog),
       quiet: ["off", "standby", "offline"].includes(s),
       wet: draw === "washer" && moving && !f.spin && !f.drain && !["anti_crease", "drying", "finished"].includes(vm.phase),
       "has-phase": !!vm.phase && (moving || s === "done"),
@@ -213,15 +237,12 @@ export class MieleApplianceCard extends HTMLElement {
     if (s === "running" && f.almostDone) pill = this._t("pill.almost_done");
     else if (s === "running" && vm.phase) pill = mieleLabel(h, "phase", vm.phase, this._lang);
     else if (s === "scheduled" && f.smartGridWait) pill = this._t("pill.smart_grid");
+    else if (s === "paused" && draw === "drawer") pill = this._t("pill.drawer_open");
+    else if (s === "paused" && f.doorOpen) pill = this._t("pill.door_open");
     this._set("pill", pill);
     this._set("phase", vm.phase ? mieleLabel(h, "phase", vm.phase, this._lang) : "");
 
-    // the display
-    const main = vm.lcd.main, sub = vm.lcd.sub;
-    this._set("lcd-t", this._lcd(main, vm));
-    // the phase already sits in the window; the display keeps to time, temperature and percentage
-    this._set("lcd-s", sub?.kind === "phase" ? "" : this._lcd(sub, vm));
-    this._el("lcd-t").classList.toggle("word", ["text", "program", "phase"].includes(main?.kind));
+    this._display(vm, snap);
 
     // the ring
     // a fault or an interruption closes the ring in its warning colour
@@ -245,6 +266,56 @@ export class MieleApplianceCard extends HTMLElement {
 
     this._rows(vm, snap, lang);
     this._controls(vm, snap);
+  }
+
+  // The appliance's own display, in the style of the real one (Peter's photos, 18-10):
+  // W1 one line "🔒 Phase 0:31"; T1 seven-segment time with the dryness levels; ovens programme, target and current
+  // temperature in orange; the coffee machine its "Drinks" screen. Switched on means lit: the clock when nothing runs.
+  _display(vm, snap) {
+    const h = this._hass, lang = this._lang, s = vm.state, main = vm.lcd.main, style = this._style;
+    const L = (kind, key) => mieleLabel(h, kind, key, lang);
+    if (style === "basic") {
+      this._set("lcd-t", this._lcd(main, vm));
+      this._set("lcd-s", vm.lcd.sub?.kind === "phase" ? "" : this._lcd(vm.lcd.sub, vm));
+      this._el("lcd-t").classList.toggle("word", ["text", "program", "phase"].includes(main?.kind));
+      return;
+    }
+    const clock = clockTime(now(), h, lang);
+    const text = main?.kind === "text" ? this._t(`lcd.${main.value}`) : "";
+    const time = s === "standby" ? clock : main?.kind === "countdown" ? hm(main.value) : main?.kind === "duration" ? duration(main.value)
+      : main?.kind === "clock" ? clockTime(main.value, h, lang) : "";
+    const moving = s === "running" || s === "paused";
+    this._root.classList.toggle("lcd-on", s !== "off" && s !== "offline");
+
+    if (style === "line") {
+      const label = text || (s === "paused" ? this._t("lcd.paused") : s === "ready" ? L("program", vm.program)
+        : s === "scheduled" ? this._t("lcd.starts") : moving && vm.phase ? L("phase", vm.phase) : moving ? L("program", vm.program) : "");
+      this._setHTML("lcd-k", moving && !vm.flags.doorOpen ? LOCK : "");
+      this._set("lcd-l", label);
+      this._set("lcd-t", text ? "" : time);
+    } else if (style === "seg") {
+      const target = snap.dryingStep, order = [...LADDER].reverse(), i = order.indexOf(target);
+      const showLadder = i >= 0 && !text && ["ready", "scheduled", "running", "paused"].includes(s);
+      this._setHTML("lcd-l", showLadder
+        ? order.slice(Math.max(0, Math.min(i - 1, order.length - 3)), Math.max(0, Math.min(i - 1, order.length - 3)) + 3).map(k => `<span class="${k === target ? "on" : ""}">${esc(L("dryness", k))}</span>`).join("")
+        : `<span class="on">${esc(text || (s === "standby" ? "" : L("program", vm.program)))}</span>`);
+      this._setHTML("lcd-t", time && !text ? sevenSeg(time) : "");
+    } else if (style === "oven") {
+      const t = vm.temps, u = t.unit;
+      const big = main?.kind === "countdown" ? hm(main.value) : t.target != null && (moving || s === "ready" || s === "scheduled") ? temp(t.target, u)
+        : text || time;
+      this._set("lcd-l", s === "standby" ? "" : text && big !== text ? text : L("program", vm.program));
+      this._set("lcd-t", big);
+      this._el("lcd-t").classList.toggle("word", big === text && !!text);
+      this._set("lcd-s", moving && t.current != null ? temp(t.current, u) : "");
+    } else if (style === "menu") {
+      const drink = vm.program ? L("program", vm.program) : "";
+      this._set("lcd-l", s === "standby" ? this._t("lcd.drinks") : text || drink || (vm.flags.rinsing ? this._t("lcd.rinsing") : ""));
+      this._set("lcd-k", s === "off" || s === "offline" ? "" : clock);
+      this._setHTML("lcd-t", s === "standby" ? DRINK_TILES
+        : s === "running" || s === "paused" ? `<span class="big">${esc(vm.flags.rinsing ? this._t("lcd.rinsing") : drink)}</span><span class="small">${esc(vm.phase ? L("phase", vm.phase) : "")}</span>`
+        : text ? `<span class="big">${esc(text)}</span>` : "");
+    }
   }
 
   _icon(i, icon, state, title, show) {

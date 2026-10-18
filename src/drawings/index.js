@@ -32,11 +32,11 @@ const genericSVG = u => `<svg class="art-svg" viewBox="0 0 600 700" xmlns="http:
   <circle cx="300" cy="364" r="132" fill="#14181d"/></svg>`;
 
 export const DRAWINGS = {
-  washer: { svg: u => laundrySVG(u, false), geom: LAUNDRY_GEOM, window: u => windowLayers(u, false) },
-  dryer: { svg: u => laundrySVG(u, true), geom: LAUNDRY_GEOM, window: u => windowLayers(u, true) },
-  steam_oven: { svg: u => artlineSVG(u, false), geom: artlineGeom(false), window: u => cavityLayers(u, false) },
-  microwave: { svg: u => artlineSVG(u, true), geom: artlineGeom(true), window: u => cavityLayers(u, true) },
-  coffee: { svg: coffeeSVG, geom: COFFEE_GEOM, window: coffeeLayers },
+  washer: { svg: u => laundrySVG(u, false), geom: LAUNDRY_GEOM, window: u => windowLayers(u, false), display: "line" },
+  dryer: { svg: u => laundrySVG(u, true), geom: LAUNDRY_GEOM, window: u => windowLayers(u, true), display: "seg" },
+  steam_oven: { svg: u => artlineSVG(u, false), geom: artlineGeom(false), window: u => cavityLayers(u, false), display: "oven" },
+  microwave: { svg: u => artlineSVG(u, true), geom: artlineGeom(true), window: u => cavityLayers(u, true), display: "oven" },
+  coffee: { svg: coffeeSVG, geom: COFFEE_GEOM, window: coffeeLayers, display: "menu" },
   drawer: { svg: drawerSVG, geom: DRAWER_GEOM, window: drawerLayers },
   generic: { svg: genericSVG, geom: GENERIC_GEOM, window: () => "" },
 };

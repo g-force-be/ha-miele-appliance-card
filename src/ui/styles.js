@@ -94,13 +94,46 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .stale .ring, .stale .lcd { opacity: .6; }
 
 /* the appliance's own display: white on black, like Miele's */
-.lcd { position: absolute; display: flex; align-items: center; justify-content: center; container-type: size;
+.lcd { position: absolute; box-sizing: border-box; display: flex; align-items: center; justify-content: center; container-type: size;
   border-radius: 6px; color: #f2f4f6; font-variant-numeric: tabular-nums; white-space: nowrap; overflow: hidden; }
 .lcd .t { font-size: min(58cqh, 15cqw); font-weight: 500; letter-spacing: .01em; line-height: 1; }
 .lcd .t.word { font-size: min(42cqh, 11cqw); letter-spacing: 0; }
 .lcd .s { font-size: min(30cqh, 8cqw); color: #9ba4ae; line-height: 1; margin-left: .45em; }
 .lcd .s:empty { display: none; }
 .st-off .lcd .t { color: #5d6268; }
+
+/* display styles after the real appliances (see _display in the card) */
+.lcd.line { justify-content: flex-start; gap: 1cqw; padding: 0 2cqw; }
+.lcd.line .lk { display: inline-flex; width: 7cqw; height: 34cqh; flex: none; }
+.lcd.line .lk:empty { display: none; }
+.lcd.line .lk svg { width: 100%; height: 100%; }
+.lcd.line .lb { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font-size: min(40cqh, 10.5cqw); font-weight: 500; }
+.lcd.line .t { font-size: min(44cqh, 12cqw); font-weight: 500; }
+.lcd.seg { justify-content: space-between; gap: 1cqw; padding: 0 1.8cqw; }
+.lcd.seg .lad { display: grid; flex: 1 1 0; overflow: hidden; gap: 2cqh; min-width: 0; font-size: min(19cqh, 7cqw); line-height: 1.1; color: #687078; }
+.lcd.seg .lad span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.lcd.seg .lad .on { color: #f2f4f6; font-weight: 600; }
+.lcd.seg .sg { display: flex; height: 56cqh; flex: none; }
+.lcd.seg .sg svg { height: 100%; width: auto; overflow: visible; }
+.lcd.seg .sg path { fill: none; stroke: currentColor; stroke-width: 2.3; stroke-linecap: round; }
+.lcd.seg .sg path.off { opacity: .07; }
+.lcd.seg .sg circle { fill: currentColor; }
+.lcd.oven { display: grid; grid-template-rows: auto auto auto; justify-items: center; align-content: center; gap: .25cqw; padding: 0 1.5cqw; }
+.lcd.oven .lb { max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: min(19cqh, 8cqw); color: #cfd4d9; }
+.lcd.oven .t { font-size: min(40cqh, 15cqw); line-height: 1; }
+.lcd.oven .t.word { font-size: min(26cqh, 8.5cqw); }
+.lcd.oven .cur { font-size: min(19cqh, 8cqw); color: #f0a23c; }
+.lcd.oven .lb:empty, .lcd.oven .cur:empty { display: none; }
+.lcd.menu { display: grid; grid-template-rows: auto 1fr; align-items: stretch; gap: .6cqw; padding: .8cqw 1.2cqw; transition: background .4s; }
+.lcd.menu .hd { display: flex; justify-content: space-between; gap: 4cqw; font-size: min(13cqh, 10cqw); white-space: nowrap; }
+.lcd.menu .bd { display: grid; align-content: center; justify-items: center; min-height: 0; text-align: center; }
+.lcd.menu .bd svg { width: 100%; height: 100%; }
+.lcd.menu .bd .big { font-size: min(16cqh, 11cqw); font-weight: 500; }
+.lcd.menu .bd .small { font-size: min(10cqh, 7cqw); color: #c3c9cf; }
+/* switched on means a lit display, like the real ones (the coffee machine's screen is a light grey UI) */
+.lcd-on .lcd.line, .lcd-on .lcd.seg, .lcd-on .lcd.oven { background: linear-gradient(#ffffff0c, #ffffff04); }
+.lcd-on .lcd.menu { background: #4a5158; }
+.coffee:not(.moving) .ring .track { opacity: 0; }
 
 /* status icons on the front */
 .icon { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
@@ -198,8 +231,9 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 /* warming drawer: the front slides out when the drawer opens, a warm line along the top while it heats */
 .drawer .glass.box { overflow: visible; }
 .front { transition: transform .8s ease; }
-.f-door .front { transform: translateY(5%) scale(1.015); }
-.drawer .pic { margin-bottom: 4%; }
+.f-door .front { transform: translateY(13%) scale(1.015); }
+.drawer .pic { margin-bottom: 4%; transition: margin-bottom .8s ease; }
+.drawer.f-door .pic { margin-bottom: 14%; }
 .warmline { bottom: auto; height: 12%; background: linear-gradient(to bottom, #ffa45c99, #ffa45c00); opacity: 0; transition: opacity 1s; }
 .f-warm .warmline { opacity: 1; }
 .anim-full.f-warm .warmline { animation: mc-pulse 4s ease-in-out infinite; }

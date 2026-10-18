@@ -1,17 +1,18 @@
 // Miele CM 7750 CoffeeSelect, the freestanding countertop machine, drawn for this card: no logo, no photo.
-// From Miele's product views: a narrow, tall obsidian black body with a lid on top (bean containers underneath),
-// a glass control strip with a small colour display and a line of sensor keys, the central stainless spout with
-// the milk pipe running to it, the cup recess, the drip tray with a stainless grille, and the glass milk
-// container at the side. 600 × 620 units; the body takes its colours from --f-*; `u` prefixes the ids.
+// From Miele's product views and Peter's own photo: a glossy black control block that sticks out over the body,
+// with a small square colour display, the on/off sensor bottom left and a back arrow under the display; under it
+// the central stainless spout (milk pipe running to it), a flat obsidian front with one horizontal seam, the drip
+// tray with long slots and two round cup holes, and the glass milk container at the side.
+// 600 × 620 units; the body takes its colours from --f-*; `u` prefixes the ids.
 import { roundedRing } from "./artline.js";
 
 const f = v => `var(--f-${v})`;
 
 export const COFFEE_GEOM = {
   ratio: "600/620", view: "0 0 600 620",
-  window: { left: 36.67, top: 48.39, width: 53.33, height: 41.94, radius: "4% / 5%" },   // cup recess 220..540 × 300..560
+  window: { left: 36.67, top: 48.39, width: 53.33, height: 41.94, radius: "4% / 5%" },   // cup area 220..540 × 300..560
   ring: { path: roundedRing(212, 292, 336, 276, 18), width: 4.5 },
-  lcd: { x: 53.67, y: 8.71, w: 19.33, h: 13.55 },
+  lcd: { x: 55, y: 10, w: 16.67, h: 12.58 },
   icons: { size: 4.4, at: [[78, 13.5], [82.6, 13.5], [87.2, 13.5], [91.8, 13.5]] },
   panel: null,
 };
@@ -21,16 +22,17 @@ export function coffeeSVG(u) {
   return `<svg class="art-svg" viewBox="0 0 600 620" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
   <linearGradient id="${u}-body" x1="0" x2="1">
-    <stop offset="0" style="stop-color:${f("lo")}"/><stop offset=".3" style="stop-color:${f("hi")}"/><stop offset=".7" style="stop-color:${f("mid")}"/><stop offset="1" style="stop-color:${f("lo")}"/>
+    <stop offset="0" style="stop-color:${f("lo")}"/><stop offset=".3" style="stop-color:${f("mid")}"/><stop offset=".7" style="stop-color:${f("mid")}"/><stop offset="1" style="stop-color:${f("lo")}"/>
   </linearGradient>
-  <linearGradient id="${u}-glass" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0" stop-color="#fff" stop-opacity=".1"/><stop offset="1" stop-color="#fff" stop-opacity=".02"/>
+  <linearGradient id="${u}-block" x1="0" x2="0" y1="0" y2="1">
+    <stop offset="0" style="stop-color:${f("mid")}"/><stop offset="1" style="stop-color:${f("edge")}"/>
   </linearGradient>
+  <linearGradient id="${u}-gloss" x1="0" y1="0" x2="1" y2="1">
+    <stop offset="0" stop-color="#fff" stop-opacity=".16"/><stop offset=".35" stop-color="#fff" stop-opacity=".03"/><stop offset=".6" stop-color="#fff" stop-opacity="0"/><stop offset="1" stop-color="#fff" stop-opacity=".06"/>
+  </linearGradient>
+  <linearGradient id="${u}-under" x1="0" x2="0" y1="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity=".55"/><stop offset="1" stop-color="#000" stop-opacity="0"/></linearGradient>
   <linearGradient id="${u}-steel" x1="0" x2="1">
     <stop offset="0" stop-color="#8d949a"/><stop offset=".25" stop-color="#e9ecee"/><stop offset=".55" stop-color="#b4bac0"/><stop offset=".8" stop-color="#f4f6f7"/><stop offset="1" stop-color="#7f868c"/>
-  </linearGradient>
-  <linearGradient id="${u}-niche" x1="0" x2="0" y1="0" y2="1">
-    <stop offset="0" stop-color="#050506"/><stop offset="1" stop-color="#18191b"/>
   </linearGradient>
   <linearGradient id="${u}-jar" x1="0" x2="1">
     <stop offset="0" stop-color="#fff" stop-opacity=".35"/><stop offset=".2" stop-color="#fff" stop-opacity=".08"/><stop offset=".8" stop-color="#fff" stop-opacity=".05"/><stop offset="1" stop-color="#fff" stop-opacity=".3"/>
@@ -54,37 +56,40 @@ export function coffeeSVG(u) {
 </g>
 
 <g class="body">
-  <rect x="206" y="14" width="348" height="22" rx="7" style="fill:${f("lo")};stroke:${f("edge")}" stroke-width="1.4"/>
-  <rect x="190" y="30" width="380" height="580" rx="12" fill="${g("body")}"/>
-  <rect x="190.5" y="30.5" width="379" height="579" rx="12" fill="none" style="stroke:${f("edge")}" stroke-width="1.4"/>
-  <rect x="190" y="30" width="380" height="176" rx="12" fill="${g("glass")}"/>
-  <path d="M190 206 H570" stroke="#000" stroke-opacity=".45" stroke-width="2"/>
-  <path d="M198 34 H562" stroke="#fff" stroke-opacity=".14" stroke-width="1.2"/>
+  <rect x="300" y="8" width="160" height="18" rx="5" style="fill:${f("lo")};stroke:${f("edge")}" stroke-width="1.2"/>
+  <rect x="190" y="196" width="380" height="408" rx="10" fill="${g("body")}"/>
+  <rect x="190.5" y="196.5" width="379" height="407" rx="10" fill="none" style="stroke:${f("edge")}" stroke-width="1.4"/>
+  <path d="M192 414 H568" stroke="#000" stroke-opacity=".4" stroke-width="2"/>
+  <path d="M192 416 H568" stroke="#fff" stroke-opacity=".06" stroke-width="1"/>
+  <rect x="190" y="208" width="380" height="16" fill="${g("under")}"/>
 </g>
 
 <g class="controls">
-  <rect x="322" y="54" width="116" height="84" rx="5" fill="${g("screen")}" stroke="#fff" stroke-opacity=".08"/>
-  <path d="M214 176 H546" style="stroke:${f("ink")}" stroke-opacity=".35" stroke-width="1.2"/>
-  <circle cx="236" cy="166" r="7" fill="none" style="stroke:${f("ink")}" stroke-opacity=".7" stroke-width="1.6"/>
-  <path d="M236 159 v5" style="stroke:${f("ink")}" stroke-opacity=".7" stroke-width="1.6" stroke-linecap="round"/>
-  <path d="M374 162 a5 5 0 1 1 -5 5" fill="none" style="stroke:${f("ink")}" stroke-opacity=".55" stroke-width="1.4"/>
+  <rect x="176" y="22" width="408" height="186" rx="9" fill="${g("block")}"/>
+  <rect x="176" y="22" width="408" height="186" rx="9" fill="${g("gloss")}"/>
+  <rect x="176.5" y="22.5" width="407" height="185" rx="9" fill="none" stroke="#fff" stroke-opacity=".12" stroke-width="1.2"/>
+  <path d="M184 206 H576" stroke="#000" stroke-opacity=".6" stroke-width="3"/>
+  <rect x="330" y="62" width="100" height="78" rx="3" fill="${g("screen")}" stroke="#fff" stroke-opacity=".08"/>
+  <circle cx="214" cy="182" r="9" fill="none" style="stroke:${f("ink")}" stroke-opacity=".8" stroke-width="1.6"/>
+  <path d="M214 175 v5" style="stroke:${f("ink")}" stroke-opacity=".8" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M374 182 h9 a5 5 0 0 1 0 10 h-7 M378 178 l-4 4 l4 4" fill="none" style="stroke:${f("ink")}" stroke-opacity=".75" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </g>
 
 <g class="front">
-  <rect x="220" y="300" width="320" height="260" rx="14" fill="${g("niche")}"/>
-  <rect x="328" y="212" width="104" height="90" rx="5" fill="${g("steel")}"/>
-  <path d="M332 214 H428" stroke="#fff" stroke-opacity=".7" stroke-width="1.2"/>
+  <rect x="330" y="216" width="100" height="84" rx="3" fill="${g("steel")}"/>
+  <path d="M334 218 H426" stroke="#fff" stroke-opacity=".7" stroke-width="1.2"/>
   <rect x="340" y="296" width="80" height="10" rx="3" fill="#2c2f33"/>
   <g fill="#0c0d0e"><circle cx="366" cy="303" r="3.5"/><circle cx="380" cy="303" r="3.5"/><circle cx="394" cy="303" r="3.5"/></g>
-  <rect x="214" y="540" width="332" height="30" rx="6" fill="${g("steel")}"/>
-  <g stroke="#000" stroke-opacity=".28" stroke-width="2.4">${Array.from({ length: 15 }, (_, i) => `<path d="M${236 + i * 20} 546 V564"/>`).join("")}</g>
-  <rect x="210" y="570" width="340" height="30" rx="6" fill="#0d0e0f"/>
-  <path d="M214 571 H546" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/>
+  <rect x="206" y="538" width="348" height="36" rx="5" fill="${g("steel")}"/>
+  <g stroke="#000" stroke-opacity=".3" stroke-width="2" stroke-linecap="round">${[546, 552, 558, 564, 570].map(y => `<path d="M224 ${y} H536"/>`).join("")}</g>
+  <g fill="#1e2124" stroke="#fff" stroke-opacity=".35" stroke-width="1.2"><circle cx="352" cy="557" r="8.5"/><circle cx="408" cy="557" r="8.5"/><circle cx="474" cy="549" r="4"/></g>
+  <rect x="198" y="574" width="364" height="30" rx="6" fill="#0d0e0f"/>
+  <path d="M202 575 H558" stroke="#fff" stroke-opacity=".1" stroke-width="1.2"/>
 </g>
 </svg>`;
 }
 
-// The cup recess: a latte glass, the coffee and milk running into it, steam, rinse drops and the cup light.
+// The cup area: a latte glass, the coffee and milk running into it, steam, rinse drops and the cup light.
 // 320 × 260 units, matching the recess.
 export function coffeeLayers(u) {
   return `<div class="layer cuplight"></div>

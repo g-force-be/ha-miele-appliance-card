@@ -20,7 +20,7 @@ export const artlineGeom = microwave => ({
   ratio: "600/456", view: "0 0 600 456",
   window: { left: 17, top: 44.96, width: 66, height: 36.62, radius: "1.6% / 3.8%" },     // 102..498 × 205..372
   ring: { path: roundedRing(92, 195, 416, 187, 14), width: 6 },
-  lcd: microwave ? { x: 41.5, y: 11, w: 17, h: 7.6 } : { x: 37, y: 7, w: 26, h: 13 },
+  lcd: microwave ? { x: 41.5, y: 11, w: 17, h: 7.6 } : { x: 34, y: 5.26, w: 32, h: 15.35 },
   icons: { size: 4.2, at: [[78, 9], [83, 9], [88, 9], [93, 9]] },           // right end of the control strip
   panel: null,                                                               // details go below the drawing
 });
@@ -35,16 +35,16 @@ const sensorLine = (y, ink) => {
 };
 
 // the H 7440 BMX's row of programme symbols: small outlined squares with a mark inside
-const symbolRow = ink => Array.from({ length: 10 }, (_, i) => {
-  const x = 146 + i * 30;
-  return `<rect x="${x}" y="31" width="16" height="12" rx="2.4" fill="none" style="stroke:${ink}" stroke-opacity=".9" stroke-width="1.3"/>
-    <path d="M${x + 4} ${i % 2 ? 37 : 39} h8" style="stroke:${ink}" stroke-opacity=".8" stroke-width="1.2" stroke-linecap="round"/>`;
+const symbolRow = ink => Array.from({ length: 8 }, (_, i) => {
+  const x = 146 + i * 38;
+  return `<rect x="${x}" y="24" width="24" height="17" rx="3" fill="none" style="stroke:${ink}" stroke-opacity=".9" stroke-width="1.5"/>
+    <path d="M${x + 6} ${i % 2 ? 31 : 34} h12 M${x + 6} ${i % 2 ? 35 : 30} h7" style="stroke:${ink}" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/>`;
 }).join("");
 
 export function artlineSVG(u, microwave = false) {
   const g = id => `url(#${u}-${id})`;
   const ink = f("ink");
-  const disp = microwave ? { x: 249, y: 50, w: 102, h: 35 } : { x: 222, y: 32, w: 156, h: 59 };
+  const disp = microwave ? { x: 249, y: 50, w: 102, h: 35 } : { x: 204, y: 24, w: 192, h: 70 };
   return `<svg class="art-svg" viewBox="0 0 600 456" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
 <defs>
   <linearGradient id="${u}-front" x1="0" y1="0" x2="1" y2="1">

@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { registry, translations, play } from "./support.mjs";
 import { createMockHass } from "../dev/mock-hass.js";
 import {
-  roleOf, deviceRoles, disabledControls, familyOf, scanDevices, cardState, toMinutes, readSnapshot, MieleTracker,
+  roleOf, deviceRoles, disabledControls, familyOf, scanDevices, cardState, toMinutes, readSnapshot, MieleTracker, oldIntegration,
 } from "../src/miele-model.js";
 
 const WASHER = "82ddfc7a46859e3c356f96713e446d32", DRYER = "16dcdde6211a28156e33bc53c65c55e4", STEAM = "b8ee6dfe5e0f82d19997caf1ab237969",
@@ -111,11 +111,16 @@ describe("families", () => {
     assert.deepEqual(f("Steam oven combi", "DGC7845X"), ["steam_oven_combi", "steam_oven", true]);
     assert.deepEqual(f("Oven microwave", "H7440BMX"), ["oven_microwave", "microwave", true]);
     assert.deepEqual(f("Coffee system", "CM7750"), ["coffee", "coffee", false]);
-    assert.deepEqual(f("Coffee system", "CVA7845"), ["coffee", "coffee", true]);
+    assert.deepEqual(f("Coffee system", "CVA7845"), ["coffee", "coffee_builtin", true]);
     assert.deepEqual(f("Warming drawer", "ESW7020"), ["drawer", "drawer", true]);
-    assert.deepEqual(f("Dishwasher", "G7310"), ["dishwasher", "generic", true]);
-    assert.deepEqual(f("Washer dryer", "WTD160"), ["washer_dryer", "washer", false]);
-    assert.deepEqual(f("Robot vacuum cleaner", "RX3"), ["vacuum", "generic", false]);
+    assert.deepEqual(f("Dishwasher", "G7310"), ["dishwasher", "dishwasher", false], "a dishwasher is not part of the built-in column");
+    assert.deepEqual(f("Washer dryer", "WTD160"), ["washer_dryer", "washer_dryer", false]);
+    assert.deepEqual(f("Robot vacuum cleaner", "RX3"), ["vacuum", "robot", false]);
+    assert.deepEqual(f("Oven", "H7464BP"), ["oven", "oven", true]);
+    assert.deepEqual(f("Hob extraction", "KMDA7774FL"), ["hob", "hob", false]);
+    assert.deepEqual(f("Hood", "DA6698W"), ["hood", "hood", false]);
+    assert.deepEqual(f("Fridge freezer", "KFN7774D"), ["fridge", "fridge", false]);
+    assert.deepEqual(f("Wine cabinet", "KWT6834SGS"), ["wine", "wine", false]);
   });
   test("from the type number when the type is unknown", () => {
     assert.equal(familyOf("WWD660", "WWD660").kind, "washer");
@@ -156,6 +161,11 @@ describe("states and units", () => {
     const vm = t.update(snap("pause", "not_running", "fan_plus"), at + 49e3);
     assert.equal(vm.state, "ready", "set from the app or HA, waiting for Start on the oven");
     assert.equal(vm.program, "fan_plus");
+  });
+  test("an old HACS integration (domain miele, no translation keys) is recognised", () => {
+    assert.equal(oldIntegration({ entities: { "sensor.wasmachine": { platform: "miele", device_id: "d" } } }), true);
+    assert.equal(oldIntegration({ entities: { "sensor.wasmachine": { platform: "miele", device_id: "d", translation_key: "status" } } }), false);
+    assert.equal(oldIntegration({ entities: {} }), false);
   });
   test("durations follow the entity's unit (start_in is in hours)", () => {
     assert.equal(toMinutes(1.5, "h"), 90);

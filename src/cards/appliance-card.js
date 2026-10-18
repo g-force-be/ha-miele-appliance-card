@@ -14,12 +14,13 @@
 //   language: nl                    default: Home Assistant's language
 //   max_width: 400px
 //   drawing: generic               another drawing: washer | dryer | steam_oven | microwave | coffee | drawer | generic
+//   design: white                  another design line of the drawing (door colour, PureLine/VitroLine, …); default from the type number
 //   images: /local/miele/           own pictures: <drawing>.svg (washer.svg, dryer.svg, …)
 //   entities: { remaining: sensor.x }   override a detected role
-import { MieleTracker, describeDevice, readSnapshot, scanDevices, DRY_LADDER } from "../miele-model.js";
+import { MieleTracker, describeDevice, readSnapshot, scanDevices, oldIntegration, plateLevel, DRY_LADDER } from "../miele-model.js";
 import { now } from "../clock.js";
 import { t, languageOf, mieleLabel } from "../i18n/index.js";
-import { drawingFor, DRAWINGS } from "../drawings/index.js";
+import { drawingFor, designOf, DRAWINGS, ACCENTS } from "../drawings/index.js";
 import { finishPalette, finishVars } from "../drawings/finish.js";
 import { CARD_CSS } from "../ui/styles.js";
 import { countdown, duration, clockTime, temp } from "../ui/format.js";
@@ -37,7 +38,6 @@ const LOCK = `<svg viewBox="0 0 12 14" aria-hidden="true"><path d="M3 6 V4.2 a3 
   <rect x="1.2" y="6" width="9.6" height="7" rx="1.4" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M6 8.6 v2" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>`;
 const hm = sec => duration(Math.ceil(Math.max(0, sec) / 60) * 60);   // whole minutes up, like the appliance
 
-const ACCENT = { washer: "#4fa3e0", dryer: "#e9a23b", steam_oven: "#e07a4f", microwave: "#e07a4f", coffee: "#c98b5a", drawer: "#e0a84f", generic: "#4fa3e0" };
 const LADDER = DRY_LADDER.filter(k => k !== "hand_iron");
 // What each kind of display holds; _display() fills it in.
 const DISPLAY_MARKUP = {
@@ -46,7 +46,18 @@ const DISPLAY_MARKUP = {
   seg: `<span class="lad" id="lcd-l"></span><span class="sg" id="lcd-t"></span>`,
   oven: `<span class="lb" id="lcd-l"></span><span class="t" id="lcd-t"></span><span class="cur" id="lcd-s"></span>`,
   menu: `<span class="hd"><span id="lcd-l"></span><span id="lcd-k"></span></span><span class="bd" id="lcd-t"></span>`,
+  zones: `<span class="zt" id="lcd-t"></span>`,
+  hood: `<span class="hb" id="lcd-t"></span>`,
+  cool: `<span class="ct" id="lcd-t"></span>`,
+  robot: `<span class="t" id="lcd-t"></span>`,
 };
+// the hood's fan level 1–4 (HA's fan entity in steps of 25 %), 0 when it is off
+// zone temperatures (fridge, freezer, wine): the measured ones, else what the thermostats report
+const coolTemps = snap => {
+  const sensors = [snap.temp, snap.temp2, snap.temp3].filter(t => t != null);
+  return sensors.length ? sensors : (snap.thermo ?? []).map(z => z.current).filter(t => t != null);
+};
+const fanLevel = snap => snap.fan?.on ? Math.max(1, Math.min(4, Math.ceil(snap.fan.pct / 25))) : 0;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 let uid = 0;
 
@@ -111,7 +122,7 @@ export class MieleApplianceCard extends HTMLElement {
 
   _buildEmpty() {
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });
-    r.innerHTML = `<style>${CARD_CSS}</style><ha-card class="theme-${this._themeName()}"><div class="err">${esc(this._t("err.no_device"))}</div></ha-card>`;
+    r.innerHTML = `<style>${CARD_CSS}</style><ha-card class="theme-${this._themeName()}"><div class="err">${esc(this._t(oldIntegration(this._hass) ? "err.old_integration" : "err.no_device"))}</div></ha-card>`;
   }
 
   _themeName() {
@@ -123,11 +134,13 @@ export class MieleApplianceCard extends HTMLElement {
   _build() {
     const c = this._config, dev = this._dev, fam = dev.family;
     const draw = this._draw = DRAWINGS[c.drawing] ? c.drawing : fam.drawing;
-    const d = drawingFor(draw), g = d.geom, u = `mc${++uid}`;
+    const modelId = this._hass.devices?.[dev.id]?.model_id ?? dev.modelId;
+    const design = this._design = designOf(draw, c.design, modelId);
+    const d = drawingFor(draw, design, modelId), g = d.geom, u = `mc${++uid}`;
     this._geom = g;
     const style = this._style = d.display ?? "basic";
-    const palette = finishPalette(c.finish, fam.finish);
-    const accent = c.accent || ACCENT[draw] || ACCENT.generic;
+    const palette = finishPalette(c.finish, d.finish ?? fam.finish);
+    const accent = c.accent || ACCENTS[draw] || ACCENTS.generic;
     const name = this._name = c.name || this._hass.devices?.[dev.id]?.name_by_user || this._t(`kind.${fam.kind}`);
     // in a sentence: "on the washing machine", but a name you gave stays as you wrote it
     this._inText = c.name || this._hass.devices?.[dev.id]?.name_by_user ? name : name.toLowerCase();
@@ -142,8 +155,8 @@ export class MieleApplianceCard extends HTMLElement {
     const art = c.images ? `<img src="${esc(String(c.images).replace(/\/?$/, "/") + fam.drawing + ".svg")}" alt="">` : d.svg(u);
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });
     r.innerHTML = `<style>${CARD_CSS}</style>
-<ha-card class="${draw} ${round ? "round" : "flat"} theme-${this._themeName()} anim-${["full", "reduced", "off"].includes(c.animations) ? c.animations : "full"}"
-  style="--c:${esc(accent)};${finishVars(palette)}${c.max_width ? `;--maxw:${esc(c.max_width)}` : ""}">
+<ha-card class="${draw} g-${fam.group} ${round ? "round" : "flat"} theme-${this._themeName()} anim-${["full", "reduced", "off"].includes(c.animations) ? c.animations : "full"}"
+  style="--c:${esc(accent)};${finishVars(palette)}${c.max_width || d.maxWidth ? `;--maxw:${esc(c.max_width || d.maxWidth)}` : ""}">
   <div class="head"><span class="name">${esc(name)}</span><span class="pill" id="pill"></span></div>
   <div class="bigtime" id="bigtime" hidden><span class="bt" id="bt"></span><span class="bs" id="bs"></span></div>
   <div class="ctl" id="ctl" hidden>
@@ -215,15 +228,20 @@ export class MieleApplianceCard extends HTMLElement {
     const f = vm.flags ?? {}, s = vm.state;
     const moving = s === "running" || s === "paused";
     const draw = this._draw, prog = vm.program ?? "", phase = vm.phase ?? "";
-    const oven = dev.family.group === "oven", coffee = draw === "coffee", drawer = draw === "drawer";
+    const oven = dev.family.group === "oven", coffee = draw === "coffee" || draw === "coffee_builtin", drawer = draw === "drawer";
     const dispensing = coffee && s === "running" && !f.rinsing && !/grinding|rinse/.test(phase);
     const cls = {
       [`st-${s}`]: true, [`m-${vm.progress.mode}`]: true, moving: moving || false, stale: vm.stale,
       "f-spin": f.spin && s === "running", "f-anti": f.antiCrease && s === "done",
       "f-cool": f.cooling,
-      "f-heat": (draw === "dryer" && moving && !f.cooling) || (oven && s === "running" && !f.cooling) || false,
+      "f-heat": (draw === "dryer" && moving && !f.cooling) || (oven && s === "running" && !f.cooling)
+        || (draw === "washer_dryer" && moving && phase === "drying") || false,
       "f-heating": oven && s === "running" && f.heating,
-      "f-steam": oven && moving && (/steam|moisture|sous_vide|blanching|bottling|defrost/.test(prog) || phase === "steam_reduction"),
+      "f-steam": (oven && moving && (/steam|moisture|sous_vide|blanching|bottling|defrost/.test(prog) || phase === "steam_reduction"))
+        || (draw === "dishwasher" && moving && phase === "drying"),
+      "f-spray": draw === "dishwasher" && s === "running" && /dishwash|rinse|reactivating/.test(phase),
+      "f-super": !!(snap.supercooling || snap.superfreezing),
+      "f-clean": snap.vacuum === "cleaning", "f-docked": snap.vacuum === "docked",
       "f-micro": oven && s === "running" && /microwave|popcorn/.test(prog),
       "f-grind": coffee && s === "running" && /grinding/.test(phase),
       "f-dispense": dispensing, "f-rinse": coffee && s === "running" && (f.rinsing || phase === "rinse"),
@@ -234,7 +252,7 @@ export class MieleApplianceCard extends HTMLElement {
       loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s) && !(coffee && !moving)
         && vm.programType !== "maintenance_program" && !/clean_machine|descal|rinse_out_lint|^rinse$/.test(prog),
       quiet: ["off", "standby", "offline"].includes(s),
-      wet: draw === "washer" && moving && !f.spin && !f.drain && !["anti_crease", "drying", "finished"].includes(vm.phase),
+      wet: (draw === "washer" || draw === "washer_dryer") && moving && !f.spin && !f.drain && !["anti_crease", "drying", "finished"].includes(vm.phase),
       "has-phase": !!vm.phase && (moving || s === "done"),
     };
     const want = Object.entries(cls).filter(([, on]) => on).map(([k]) => k).join(" ");
@@ -251,16 +269,31 @@ export class MieleApplianceCard extends HTMLElement {
     else if (s === "scheduled" && f.smartGridWait) pill = this._t("pill.smart_grid");
     else if (s === "paused" && draw === "drawer") pill = this._t("pill.drawer_open");
     else if (s === "paused" && f.doorOpen) pill = this._t("pill.door_open");
+    const group = dev.family.group, fan = fanLevel(snap);
+    if (group === "hob") {
+      const on = (snap.plates ?? []).filter(k => plateLevel(k).level > 0).length;
+      if (on) pill = this._t("pill.zones", { n: on });
+    } else if (group === "hood" && fan) pill = this._t("pill.fan", { n: fan });
+    else if (group === "cooling" && s !== "offline") {
+      pill = snap.supercooling ? this._t("pill.supercool") : snap.superfreezing ? this._t("pill.superfreeze")
+        : coolTemps(snap).map(t => temp(t, vm.temps.unit)).join(" · ") || pill;
+    } else if (group === "vacuum" && snap.vacuum) {
+      pill = { cleaning: this._t("pill.cleaning"), returning: this._t("pill.returning"), paused: this._t("state.paused"), error: this._t("state.error"),
+        docked: this._t(snap.battery != null && snap.battery < 100 ? "pill.charging" : "pill.docked") }[snap.vacuum] ?? pill;
+    }
     this._set("pill", pill);
     this._set("phase", vm.phase ? mieleLabel(h, "phase", vm.phase, this._lang) : "");
 
     this._display(vm, snap);
+    this._extra(snap);
 
     // the ring
     // a fault or an interruption closes the ring in its warning colour
     // busy without a known progress: round drawings turn an arc, the others let the whole ring breathe
-    const busy = vm.progress.mode === "indeterminate" && !this._geom.ring.spin;
-    const p = s === "error" || s === "interrupted" || busy ? 1 : vm.progress.value;
+    // the robot's ring is its battery
+    const battery = draw === "robot" && snap.battery != null ? Math.max(0, Math.min(1, snap.battery / 100)) : null;
+    const busy = battery == null && vm.progress.mode === "indeterminate" && !this._geom.ring.spin;
+    const p = battery ?? (s === "error" || s === "interrupted" || busy ? 1 : vm.progress.value);
     this._root.classList.toggle("breathe", busy);
     const bar = this._el("bar");
     const off = String(100 - Math.round((p ?? 0) * 1000) / 10);
@@ -284,9 +317,44 @@ export class MieleApplianceCard extends HTMLElement {
   // The appliance's own display, in the style of the real one (Peter's photos, 18-10):
   // W1 one line "🔒 Phase 0:31"; T1 seven-segment time with the dryness levels; ovens programme, target and current
   // temperature in orange; the coffee machine its "Drinks" screen. Switched on means lit: the clock when nothing runs.
+  // Drawings that show more than a cycle: the power of every hob zone, the hood's fan level and its light ring.
+  _extra(snap) {
+    const draw = this._draw, root = this._root;
+    if (draw === "hob") {
+      const levels = (snap.plates ?? []).map(k => String(plateLevel(k).level));
+      root.querySelectorAll(".zone").forEach(z => {
+        const v = levels[Number(z.dataset.z)] ?? "0";
+        if (z.style.getPropertyValue("--lvl") !== v) z.style.setProperty("--lvl", v);
+      });
+    } else if (draw === "hood") {
+      const lvl = fanLevel(snap);
+      for (let i = 1; i <= 4; i++) root.classList.toggle(`fan-${i}`, i === lvl);
+      root.classList.toggle("fan-on", lvl > 0);
+      root.classList.toggle("ambient", snap.ambient === true);
+    }
+  }
+
   _display(vm, snap) {
     const h = this._hass, lang = this._lang, s = vm.state, main = vm.lcd.main, style = this._style;
     const L = (kind, key) => mieleLabel(h, kind, key, lang);
+    if (style === "zones") {         // the hob's ComfortSelect row: the level of every zone, lit when on
+      this._setHTML("lcd-t", (snap.plates ?? []).map(k => { const p = plateLevel(k); return `<i class="${p.level > 0 ? "on" : ""}">${esc(p.text)}</i>`; }).join(""));
+      return;
+    }
+    if (style === "cool") {          // the temperature of every zone, as the appliance shows it
+      this._setHTML("lcd-t", coolTemps(snap).map(t => `<b>${Math.round(t)}°</b>`).join(""));
+      this._root.classList.toggle("lcd-on", vm.state !== "off" && vm.state !== "offline");
+      return;
+    }
+    if (style === "robot") {
+      this._set("lcd-t", snap.battery != null ? `${Math.round(snap.battery)} %` : "");
+      return;
+    }
+    if (style === "hood") {          // four fan level bars
+      const lvl = fanLevel(snap);
+      this._setHTML("lcd-t", [1, 2, 3, 4].map(i => `<i class="${i <= lvl ? "on" : ""}"></i>`).join(""));
+      return;
+    }
     if (style === "basic") {
       this._set("lcd-t", this._lcd(main, vm));
       this._set("lcd-s", vm.lcd.sub?.kind === "phase" ? "" : this._lcd(vm.lcd.sub, vm));
@@ -391,6 +459,8 @@ export class MieleApplianceCard extends HTMLElement {
 
   _rows(vm, snap, lang) {
     const h = this._hass, fam = this._dev.family, s = vm.state;
+    const special = this._specialRows(fam, snap);
+    if (special) return this._showRows(special);
     const rows = [[this._t("row.program"), vm.program ? esc(mieleLabel(h, "program", vm.program, this._lang)) : "—"]];
     if (fam.kind === "dryer" || fam.kind === "washer_dryer") {
       const target = snap.dryingStep, reached = vm.dryness?.reached;
@@ -412,8 +482,45 @@ export class MieleApplianceCard extends HTMLElement {
     else if (s === "scheduled" && vm.startAt) rows.push([this._t("row.starts"), clockTime(vm.startAt, h, lang)]);
     else if (vm.endAt && ["running", "paused", "done", "scheduled"].includes(s)) rows.push([this._t(s === "done" ? "row.ended" : "row.ends"), clockTime(vm.endAt, h, lang)]);
     else if ((s === "running" || s === "paused") && vm.elapsedMin != null) rows.push([this._t("row.elapsed"), `${vm.elapsedMin} ${this._t("unit.min")}`]);
+    this._showRows(rows);
+  }
+
+  _showRows(rows) {
+    rows = rows.slice(0, 4);
     while (rows.length < 4) rows.push(["", ""]);
     rows.forEach(([k, v], i) => { this._set(`k${i}`, k); this._setHTML(`v${i}`, v); this._el(`k${i}`).parentElement.hidden = !k; });
+  }
+
+  // Rows for appliances without programmes: hob zones, the hood's fan and lights. Null for the rest.
+  _specialRows(fam, snap) {
+    const onOff = v => v == null ? "—" : this._t(v ? "btn.on_state" : "state.off");
+    if (fam.group === "hob") {
+      const on = (snap.plates ?? []).map((k, i) => [i + 1, plateLevel(k)]).filter(([, p]) => p.level > 0);
+      return [[this._t("row.zones"), on.length ? on.map(([i, p]) => `${i}: ${esc(p.text)}`).join(" · ") : this._t("state.off")]];
+    }
+    if (fam.group === "hood") {
+      const lvl = fanLevel(snap);
+      const rows = [[this._t("row.fan"), lvl ? this._t("pill.fan", { n: lvl }) : this._t("state.off")], [this._t("row.light"), onOff(snap.light)]];
+      if (snap.ambient != null) rows.push([this._t("row.ambient"), onOff(snap.ambient)]);
+      return rows;
+    }
+    if (fam.group === "cooling") {
+      const u = this._vm?.temps?.unit, zones = coolTemps(snap), th = snap.thermo ?? [];
+      const rows = zones.map((t, i) => {
+        const target = th[i]?.target;
+        const label = fam.kind === "wine" ? this._t("row.zone", { n: i + 1 }) : this._t((target ?? t) < 0 ? "row.freezer" : "row.fridge");
+        return [label, target != null ? `${Math.round(t)} → ${temp(target, u)}` : temp(t, u)];
+      });
+      if (snap.supercooling) rows.push([this._t("pill.supercool"), this._t("btn.on_state")]);
+      if (snap.superfreezing) rows.push([this._t("pill.superfreeze"), this._t("btn.on_state")]);
+      return rows.length ? rows : [[this._t("row.temp"), "—"]];
+    }
+    if (fam.group === "vacuum") {
+      return [[this._t("row.battery"), snap.battery != null ? `${Math.round(snap.battery)} %` : "—"],
+        [this._t("row.suction"), snap.fanSpeed ? esc(snap.fanSpeed.replace(/^./, c => c.toUpperCase())) : "—"],
+        [this._t("row.program"), this._vm?.program ? esc(mieleLabel(this._hass, "program", this._vm.program, this._lang)) : "—"]];
+    }
+    return null;
   }
 
   _controls(vm, snap) {

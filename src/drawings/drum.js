@@ -61,10 +61,11 @@ const reflect = u => `<svg viewBox="0 0 200 200" aria-hidden="true"><defs>
   <circle cx="100" cy="100" r="100" fill="url(#${u}-vig)"/>
   <path d="M30 70 A80 80 0 0 1 112 22 A92 92 0 0 0 46 96 Z" fill="url(#${u}-shine)"/></svg>`;
 
-export function windowLayers(u, dryer = false) {
+// `both`: a washer-dryer, with water while it washes and warm air while it dries
+export function windowLayers(u, dryer = false, both = false) {
   return `<div class="layer drum">${drum(u, dryer)}</div>
     <div class="layer laundry">${laundry(u, dryer)}</div>
-    ${dryer ? `<div class="layer heat"></div><div class="layer chill"></div>` : `<div class="layer water"><div class="wave">${water(u)}</div></div>`}
+    ${dryer ? `<div class="layer heat"></div><div class="layer chill"></div>` : `<div class="layer water"><div class="wave">${water(u)}</div></div>`}${both ? `<div class="layer heat"></div><div class="layer chill"></div>` : ""}
     <div class="layer led"></div>
     <div class="layer reflect">${reflect(u)}</div>`;
 }

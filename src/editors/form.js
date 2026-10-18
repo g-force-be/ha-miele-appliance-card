@@ -3,7 +3,7 @@
 import { describeDevice, scanDevices } from "../miele-model.js";
 import { mieleLabel, t } from "../i18n/index.js";
 import { FINISHES } from "../drawings/finish.js";
-import { DRAWINGS } from "../drawings/index.js";
+import { DRAWINGS, designOf } from "../drawings/index.js";
 import { readCache, readPrograms } from "../programs.js";
 
 // ha-form is only defined once some editor has needed it; the entities card's editor pulls it in.
@@ -42,6 +42,7 @@ export const selectors = lang => ({
   animations: { select: { mode: "dropdown", options: ["full", "reduced", "off"].map(v => opt(v, t(lang, `ed.anim.${v}`))) } },
   language: { select: { mode: "dropdown", options: [opt("nl", "Nederlands"), opt("en", "English")] } },
   text: { text: {} },
+  design: drawing => ({ select: { mode: "dropdown", options: (DRAWINGS[drawing]?.designs ?? []).map(v => opt(v, t(lang, `ed.design.${v}`))) } }),
   boolean: { boolean: {} },
 });
 
@@ -107,6 +108,13 @@ export class FormEditor extends HTMLElement {
     if (!dev) return t(this._lang, "err.no_device");
     const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
     return t(this._lang, "ed.found", { model: `<b>${esc(dev.modelId ?? dev.model ?? "?")}</b>`, kind: esc(t(this._lang, `kind.${dev.family.kind}`)),
-      drawing: `<b>${esc(t(this._lang, `ed.drawing.${this._config.drawing || dev.family.drawing}`))}</b>` });
+      drawing: `<b>${esc(t(this._lang, `ed.drawing.${this._config.drawing || dev.family.drawing}`))}${this._designHint(dev)}</b>` });
+  }
+
+  // the design line the card uses, when the drawing has lines ("ArtLine (grepeloos)")
+  _designHint(dev) {
+    const drawing = this._config.drawing || dev.family.drawing;
+    const d = designOf(drawing, this._config.design, this._hass.devices?.[dev.id]?.model_id ?? dev.modelId);
+    return d ? `, ${t(this._lang, `ed.design.${d}`)}` : "";
   }
 }

@@ -8,7 +8,7 @@
 //   editor=1                         the first card's visual editor next to it (with a stand-in for ha-form), and its YAML
 // All cards share one virtual clock: every cycle is shifted so its moment t falls on the same instant.
 import * as mdi from "../node_modules/@mdi/js/mdi.js";
-import { simulate, Player } from "./replay.js";
+import { simulate, Player, resolveCycles, mergeRegistry } from "./replay.js";
 import { createMockHass } from "./mock-hass.js";
 
 // Stand-in for Home Assistant's <ha-icon>: draws the Material Design icon named in `icon`.
@@ -26,10 +26,11 @@ if (!customElements.get("ha-icon")) customElements.define("ha-icon", class exten
 });
 
 const getJSON = p => fetch(p).then(r => r.json());
-const [registry, nl, en, fixtures, extra, synthetic, programs] = await Promise.all([
+const [peter, nl, en, fixtures, extra, synthetic, programs, demoRegistry, demoFixtures] = await Promise.all([
   getJSON("./data/peter-registry.json"), getJSON("./data/translations.nl.json"), getJSON("./data/translations.en.json"),
-  getJSON("../docs/fixtures.json"), getJSON("./data/fixtures-extra.json"), getJSON("./data/fixtures-synthetic.json"), getJSON("./data/programs.json")]);
-const cycles = Object.fromEntries([...fixtures.cycles, ...extra.cycles, ...synthetic.cycles].map(c => [c.id, c]));
+  getJSON("../docs/fixtures.json"), getJSON("./data/fixtures-extra.json"), getJSON("./data/fixtures-synthetic.json"), getJSON("./data/programs.json"),
+  getJSON("./data/demo-registry.json"), getJSON("./data/fixtures-demo.json")]);
+const cycles = resolveCycles([...fixtures.cycles, ...extra.cycles, ...synthetic.cycles, ...demoFixtures.cycles]);
 
 const q = new URLSearchParams(location.search);
 if (q.get("editor") === "1") await import("./ha-form-stub.js");
@@ -41,6 +42,9 @@ const entries = (q.getAll("c").length ? q.getAll("c") : ["washer_cottons_with_pa
   const [id, t] = s.split("@");
   return { cycle: cycles[id], t: Number(t ?? 0) };
 });
+
+// Peter's appliances, plus the demo ones (other types and design lines) when asked or when a demo cycle plays
+const registry = q.get("demo") === "1" || entries.some(e => e.cycle.deviceId?.startsWith("demo_")) ? mergeRegistry(peter, demoRegistry) : peter;
 
 // One virtual instant for all cards: the first cycle's own time at its t.
 const anchor = Date.parse(entries[0].cycle.start) + entries[0].t * 1000;
@@ -85,6 +89,7 @@ const cards = overview ? [(() => {
     animations: q.get("anim") ?? "full", controls: q.get("controls") !== "0" };
   if (q.get("drawing")) cfg.drawing = q.get("drawing");
   if (q.get("finish")) cfg.finish = q.get("finish");
+  if (q.get("design")) cfg.design = q.get("design");
   if (q.get("programs")) cfg.programs = q.get("programs").split(",");
   card.setConfig(cfg);
   stage.append(card);

@@ -6,6 +6,7 @@ import { PRESETS, resolveAppliances, suggestAppliances, planLayout, exportCards 
 import { t } from "../i18n/index.js";
 import { toYaml } from "../ui/yaml.js";
 import { loadHaForm, fireConfig, clean, selectors, programmeOptions } from "./form.js";
+import { DRAWINGS } from "../drawings/index.js";
 
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 
@@ -149,6 +150,7 @@ export class MieleOverviewCardEditor extends HTMLElement {
     form.hass = h;
     form.schema = [
       { type: "grid", name: "", schema: [{ name: "name", selector: s.text }, { name: "finish", selector: s.finish }] },
+      ...((DRAWINGS[dev.family.drawing]?.designs?.length ?? 0) > 1 ? [{ name: "design", selector: s.design(dev.family.drawing) }] : []),
       { type: "grid", name: "", schema: [{ name: "accent", selector: s.text }, ...(startable ? [{ name: "programmes", selector: s.boolean }] : [])] },
       ...(startable && opts.programmes !== false ? [{ name: "programs", selector: { select: { multiple: true, mode: "list", options: programmeOptions(h, dev, lang) } } }] : []),
     ];

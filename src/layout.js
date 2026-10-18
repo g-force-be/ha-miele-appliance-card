@@ -51,7 +51,7 @@ const isActive = state => state && state !== "off" && state !== "offline";
 function cards(dev, opts, preset, config) {
   const common = {};
   for (const k of ["theme", "language", "accent", "animations"]) if (config[k] != null) common[k] = config[k];
-  for (const k of ["name", "finish", "accent"]) if (opts[k] != null) common[k] = opts[k];
+  for (const k of ["name", "finish", "accent", "design"]) if (opts[k] != null) common[k] = opts[k];
   const entity = statusEntity(dev);
   const appliance = { type: "custom:miele-appliance-card", entity, ...common };
   if (preset === "phone") appliance.max_width = "250px";

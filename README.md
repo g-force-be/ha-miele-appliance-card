@@ -23,7 +23,7 @@ Dashboard cards for Miele appliances connected through Home Assistant's built-in
 
 **By hand:** copy `dist/miele-appliance-card.js` to `config/www/` and add it under *Settings → Dashboards → ⋮ → Resources* as `/local/miele-appliance-card.js` (JavaScript module).
 
-You need the core **Miele** integration (*Settings → Devices & services → Add integration → Miele*).
+You need Home Assistant's built-in **Miele** integration (*Settings → Devices & services → Add integration → Miele*, since 2025.5). The older HACS integrations (HomeAssistant-Mods/home-assistant-miele, astrandb/miele) are not supported: their entities don't say what they are, so the cards can't read them. astrandb's README explains how to move to the built-in one.
 
 ## The appliance card
 
@@ -113,7 +113,8 @@ accent: "#7bb661"
 | `accent` | Ring and highlight colour. |
 | `language` | `nl` or `en`. Default: Home Assistant's language. |
 | `max_width` | Maximum width of the drawing, e.g. `380px`. |
-| `drawing` | Another drawing: `washer`, `dryer`, `steam_oven`, `microwave`, `coffee`, `drawer` or `generic`. |
+| `drawing` | Another drawing (see *Supported appliances*). |
+| `design` | Another design line of the drawing, e.g. `pureline` for an oven or `white` for a W1. Default: guessed from the type number. |
 | `images` | A folder with your own drawings (`washer.svg`, `dryer.svg`, …), e.g. `/local/miele/`. |
 | `entities` | Use another entity for a role, e.g. `{ remaining: sensor.my_remaining_time }`. |
 
@@ -210,17 +211,32 @@ Appliances not in the list follow in the suggested order, so a new appliance sho
 
 ## Supported appliances
 
-| Drawing | Modelled on | Used for |
-|---|---|---|
-| `washer` | W1 front loader (WEI 895) | washing machines, washer-dryers |
-| `dryer` | T1 heat-pump dryer (TEF 775 WP) | tumble dryers |
-| `steam_oven` | ArtLine compact steam oven (DGC 7845 X) | ovens, steam ovens, combi steam ovens |
-| `microwave` | ArtLine oven with microwave (H 7440 BMX) | microwaves, ovens with microwave |
-| `coffee` | CM 7750 CoffeeSelect | coffee machines |
-| `drawer` | Warming drawer (ESW 7020) | warming drawers |
-| `generic` | — | everything else (dishwasher, hob, hood, fridge, robot vacuum, …) |
+Every connected Miele line of the last five years has its own drawing, in its design lines. The card picks the drawing
+and the line from the appliance's type number; `drawing:` and `design:` override them.
 
-The card picks the drawing by the appliance's model number; `drawing:` overrides it.
+| Drawing | Design lines (`design`) | Recognised from |
+|---|---|---|
+| `washer` | `chrome` (W1 Chrome Edition), `white` (White Edition), `black`, `graphite`, `mtouch` (M Touch, no dial) | W…; WS…/WW… white, WWR/WWV M Touch |
+| `washer_dryer` | as the washer, with drying | WT…; WTR/WTW M Touch |
+| `dryer` | as the washer | T…; TWR/TWV M Touch |
+| `dishwasher` | `integrated` (SCVi), `semi` (SCi), `freestanding` (SC) | G 5000/G 7000, by the suffix |
+| `oven` | `vitroline`, `pureline`, `artline` (handleless), `contourline`, `active` (H 2000, knobs) | H 7·6·/H 2·6· (60 cm), Dialog DO; the control strip (DirectSensor S, DirectSensor, M Touch S, M Touch) from the class digit |
+| `steam_oven` | `artline`, `vitroline`, `pureline`, `contourline` | 45 cm steam and combi-steam ovens (DG, DGC) |
+| `microwave` | as the steam oven | 45 cm ovens with microwave (H …BM, DGM) |
+| `coffee` | `cm7` (CM 7350/7550/7750), `cm6` (CM 6 MilkPerfection) | CM… |
+| `coffee_builtin` | — | CVA 7000 |
+| `drawer` | — | ESW 7000 warming drawers |
+| `hob` | `induction`, `extractor` (KMDA) | KM 7000, KMDA; zones as Home Assistant counts them |
+| `hood` | `wall`, `aura` (DA 7378 D) | DA… |
+| `fridge` | `freestanding`, `integrated` | K/KF/KFN/F/FNS; freestanding for the 2000/4000 series |
+| `wine` | `freestanding`, `integrated` | KWT… (iG/UG integrated) |
+| `robot` | — | Scout RX2/RX3 |
+| `generic` | — | anything else |
+
+Peter's own appliances (W1 WEI 895, T1 TEF 775 WP, DGC 7845 X, H 7440 BMX, CM 7750, ESW 7020) were drawn from photos
+and tested live; the other lines are drawn from Miele's spec sheets ([docs/TOESTELREEKSEN.md](docs/TOESTELREEKSEN.md))
+and tested on synthetic data. The newest generations (W2/T2, KM 8000, G8, the 2025–26 hoods and fridges) aren't in
+Miele's API yet, so Home Assistant can't show them.
 
 ## Releases and versions
 

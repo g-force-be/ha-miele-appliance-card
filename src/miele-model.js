@@ -12,12 +12,16 @@ const TK_ROLES = {
     target_temperature: "target_temp", core_temperature: "core_temp", core_target_temperature: "core_target",
     temperature_zone_2: "temp_2", temperature_zone_3: "temp_3", spin_speed: "spin_speed", drying_step: "drying_step",
     energy_consumption: "energy", energy_forecast: "energy_forecast", water_consumption: "water", water_forecast: "water_forecast",
-    twin_dos_1_level: "twindos_1", twin_dos_2_level: "twindos_2",
+    twin_dos_1_level: "twindos_1", twin_dos_2_level: "twindos_2", plate: "plate",
   },
   binary_sensor: { remote_control: "remote_control", mobile_start: "mobile_start", smart_grid: "smart_grid", notification_active: "notification" },
   button: { start: "btn_start", stop: "btn_stop", pause: "btn_pause" },
-  switch: { power: "power" },
+  switch: { power: "power", supercooling: "supercooling", superfreezing: "superfreezing" },
   light: { light: "light", ambient_light: "ambient_light" },
+  fan: { fan: "fan" },                                   // hood; read-only on a hob with extraction
+  climate: { zone_2: "thermo_2", zone_3: "thermo_3" },   // fridges, freezers, wine units (zone 1 has no key)
+  vacuum: { vacuum: "vacuum" },
+  select: { fridge_freezer_mode: "mode" },
 };
 // Fallback for admins: the part of the unique_id after the first "-" is the integration's description.key.
 const UID_ROLES = {
@@ -30,9 +34,12 @@ const UID_ROLES = {
   twin_dos_1_level: "twindos_1", twin_dos_2_level: "twindos_2", state_signal_door: "door", state_signal_failure: "failure",
   state_signal_info: "notification", state_full_remote_control: "remote_control", state_mobile_start: "mobile_start",
   state_smart_grid: "smart_grid", start: "btn_start", stop: "btn_stop", pause: "btn_pause", poweronoff: "power", light: "light",
+  state_temperature_2: "temp_2", state_temperature_3: "temp_3", state_plate_step: "plate", state_battery: "battery",
+  thermostat: "thermo_1", thermostat2: "thermo_2", thermostat3: "thermo_3", supercooling: "supercooling", superfreezing: "superfreezing",
+  fan: "fan", fan_readonly: "fan", ambient_light: "ambient_light",
 };
-// Entities without a translation_key: the measured temperature, the door and the failure sensor.
-const DC_ROLES = { "sensor.temperature": "temp", "binary_sensor.door": "door", "binary_sensor.problem": "failure" };
+// Entities without a translation_key: the measured temperature, the door, the failure sensor, the robot's battery.
+const DC_ROLES = { "sensor.temperature": "temp", "binary_sensor.door": "door", "binary_sensor.problem": "failure", "sensor.battery": "battery" };
 // Last resort for enum sensors without translation_key or unique_id: one option only that sensor has
 // (checked in this order: the dryer's phase list also contains "extra_dry").
 const OPTION_ROLES = [["program_ended", "status"], ["no_program", "program"], ["normal_operation_mode", "program_type"],
@@ -43,24 +50,33 @@ export function roleOf(entityId, entry, stateObj, uniqueId) {
   const tk = entry?.translation_key;
   if (tk) return TK_ROLES[domain]?.[tk] ?? null;
   if (uniqueId) {
-    const role = UID_ROLES[uniqueId.slice(uniqueId.indexOf("-") + 1)];
+    const key = uniqueId.slice(uniqueId.indexOf("-") + 1);
+    const role = UID_ROLES[key] ?? UID_ROLES[key.replace(/-\d+$/, "")];   // zone entities end in "-<zone>"
     if (role) return role;
   }
   const a = stateObj?.attributes ?? {};
   if (domain === "sensor" && a.device_class === "enum" && Array.isArray(a.options))
     for (const [opt, role] of OPTION_ROLES) if (a.options.includes(opt)) return role;
+  // the first thermostat of a fridge, freezer or wine unit has no translation key either
+  if (domain === "climate") return "thermo_1";
   return DC_ROLES[`${domain}.${a.device_class}`] ?? null;
 }
 
 // { role: entity_id } for one device. `uniqueIds` (entity_id -> unique_id) comes from config/entity_registry/list when the
 // user is an admin; `overrides` is the card's `entities:` option.
 export function deviceRoles(hass, deviceId, { uniqueIds = {}, overrides = {} } = {}) {
-  const roles = {};
+  const roles = {}, plates = [];
   for (const [eid, e] of Object.entries(hass.entities ?? {})) {
     if (e.device_id !== deviceId || e.platform !== "miele") continue;
     const role = roleOf(eid, e, hass.states?.[eid], uniqueIds[eid]);
-    if (role && !roles[role]) roles[role] = eid;
+    if (role === "plate") plates.push(eid);
+    else if (role && !roles[role]) roles[role] = eid;
   }
+  // A hob's zones share one translation key; the zone number is in the unique_id (admins) or in the name HA gives
+  // them ("Kookzone 3", "Plate 3"), else they keep the registry's order.
+  const zone = eid => Number(/-(\d+)$/.exec(uniqueIds[eid] ?? "")?.[1] ?? /(\d+)\s*$/.exec(hass.states?.[eid]?.attributes?.friendly_name ?? "")?.[1] ?? NaN);
+  plates.map((eid, i) => [Number.isFinite(zone(eid)) ? zone(eid) : 100 + i, eid]).sort((a, b) => a[0] - b[0])
+    .forEach(([, eid], i) => { roles[`plate_${i + 1}`] = eid; });
   for (const [role, eid] of Object.entries(overrides ?? {})) if (eid) roles[role] = eid;
   return roles;
 }
@@ -95,18 +111,23 @@ const PREFIX_KINDS = [[/^(WT|WWT)/, "washer_dryer"], [/^W/, "washer"], [/^T/, "d
 
 const KIND = {
   washer:           { group: "laundry",    drawing: "washer" },
-  washer_dryer:     { group: "laundry",    drawing: "washer" },
+  washer_dryer:     { group: "laundry",    drawing: "washer_dryer" },
   dryer:            { group: "laundry",    drawing: "dryer" },
-  dishwasher:       { group: "dishwasher", drawing: "generic" },
-  oven:             { group: "oven",       drawing: "steam_oven" },
+  dishwasher:       { group: "dishwasher", drawing: "dishwasher" },
+  oven:             { group: "oven",       drawing: "oven" },
   steam_oven:       { group: "oven",       drawing: "steam_oven" },
   steam_oven_combi: { group: "oven",       drawing: "steam_oven" },
-  dialog_oven:      { group: "oven",       drawing: "steam_oven" },
+  dialog_oven:      { group: "oven",       drawing: "oven" },
   steam_oven_micro: { group: "oven",       drawing: "microwave" },
   oven_microwave:   { group: "oven",       drawing: "microwave" },
   microwave:        { group: "oven",       drawing: "microwave" },
   coffee:           { group: "coffee",     drawing: "coffee" },
   drawer:           { group: "drawer",     drawing: "drawer" },
+  hob:              { group: "hob",        drawing: "hob" },
+  hood:             { group: "hood",       drawing: "hood" },
+  fridge:           { group: "cooling",    drawing: "fridge" },
+  wine:             { group: "cooling",    drawing: "wine" },
+  vacuum:           { group: "vacuum",     drawing: "robot" },
 };
 
 export function familyOf(model, modelId) {
@@ -118,11 +139,19 @@ export function familyOf(model, modelId) {
   }
   const k = KIND[kind] ?? { group: "other", drawing: "generic" };
   return {
-    kind, group: k.group, drawing: k.drawing,
-    builtIn: kind === "coffee" ? id.startsWith("CVA") : !["washer", "washer_dryer", "dryer", "vacuum", "other"].includes(kind),
+    kind, group: k.group, drawing: kind === "coffee" && id.startsWith("CVA") ? "coffee_builtin" : k.drawing,
+    // what goes into a built-in column (ovens, drawers, the CVA coffee machine); dishwashers, hobs and fridges don't
+    builtIn: kind === "coffee" ? id.startsWith("CVA") : ["oven", "drawer"].includes(k.group),
     finish: k.group === "laundry" ? "lotus_white" : "obsidian_black",
   };
 }
+
+// The old HACS integrations (HomeAssistant-Mods, astrandb's custom component) also use the domain "miele", but
+// their entities carry no translation keys, so the cards can't tell what each entity is.
+export const oldIntegration = hass => {
+  const ours = Object.values(hass?.entities ?? {}).filter(e => e.platform === "miele");
+  return ours.length > 0 && !ours.some(e => e.translation_key);
+};
 
 // All Miele appliances in this Home Assistant, in a stable order.
 export function scanDevices(hass, opts) {
@@ -173,7 +202,30 @@ export function readSnapshot(hass, roles) {
     remote: bool("remote_control"), mobileStart: bool("mobile_start"), smartGrid: bool("smart_grid"),
     power: bool("power"), light: bool("light"),
     buttons: { start: btn("btn_start"), stop: btn("btn_stop"), pause: btn("btn_pause") },
+    // hob zones in order (HA's plate_step keys), the hood's fan and lights, cooling zones, the robot
+    plates: plateRoles(roles).map(r => val(r)),
+    fan: roles.fan ? { on: so("fan")?.state === "on", pct: Number(so("fan")?.attributes?.percentage) || 0 } : null,
+    ambient: bool("ambient_light"),
+    temp2: num("temp_2"), temp3: num("temp_3"),
+    thermo: ["thermo_1", "thermo_2", "thermo_3"].filter(r => roles[r]).map(r => {
+      const a = so(r)?.attributes ?? {}, n = v => (Number.isFinite(Number(v)) && v != null ? Number(v) : null);
+      return { current: n(a.current_temperature), target: n(a.temperature), min: n(a.min_temp), max: n(a.max_temp) };
+    }),
+    supercooling: bool("supercooling"), superfreezing: bool("superfreezing"),
+    battery: num("battery"), vacuum: val("vacuum"), fanSpeed: so("vacuum")?.attributes?.fan_speed ?? null,
   };
+}
+
+const plateRoles = roles => Object.keys(roles).filter(r => /^plate_\d+$/.test(r)).sort((a, b) => a.slice(6) - b.slice(6));
+
+// A hob zone's power as 0…1 and the way the hob shows it: plate_step_1…18 are the levels 1–9 in half steps
+// ("4." is 4½), warming keeps warm, boost is full power.
+export function plateLevel(key) {
+  if (!key || key === "plate_step_0") return { level: 0, text: "0" };
+  if (key === "plate_step_warming") return { level: .12, text: "w" };
+  if (key.startsWith("plate_step_boost")) return { level: 1, text: "B" };
+  const n = Number(key.slice(11));
+  return Number.isFinite(n) ? { level: Math.min(1, n / 18), text: n % 2 ? `${(n - 1) / 2}.` : String(n / 2) } : { level: 0, text: "-" };
 }
 
 // ---------------------------------------------------------------- card states

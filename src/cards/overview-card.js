@@ -19,7 +19,7 @@
 // active   only appliances that are on, the busiest first
 // phone    one column, smaller drawings, busiest first
 // display  the kitchen screen: only what's on, no buttons, large countdown; a calm clock when everything is off
-import { scanDevices, MieleTracker, readSnapshot } from "../miele-model.js";
+import { scanDevices, MieleTracker, readSnapshot, oldIntegration } from "../miele-model.js";
 import { planLayout } from "../layout.js";
 import { now } from "../clock.js";
 import { t, languageOf } from "../i18n/index.js";
@@ -129,7 +129,7 @@ export class MieleOverviewCard extends HTMLElement {
     const root = document.createElement("div");
     root.className = `ov preset-${plan.preset}`;
     if (!this._devices.length) {
-      root.innerHTML = `<div class="empty">${esc(t(this._lang, "err.no_device"))}</div>`;
+      root.innerHTML = `<div class="empty">${esc(t(this._lang, oldIntegration(this._hass) ? "err.old_integration" : "err.no_device"))}</div>`;
     } else if (plan.quiet) {
       root.innerHTML = `<div class="quiet"><div class="clock" id="clock"${plan.preset === "display" ? "" : " hidden"}></div>
         <div class="msg">${esc(t(this._lang, "ov.all_off"))}</div><div class="chips" id="chips"></div></div>`;

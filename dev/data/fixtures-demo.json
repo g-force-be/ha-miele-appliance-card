@@ -1,0 +1,702 @@
+{
+ "_about": "Synthetic cycles for the demo appliances (dev/data/demo-registry.json). \"like\" copies the events of a real cycle onto another appliance. Phases and programmes as HA's const.py names them.",
+ "cycles": [
+  {
+   "id": "demo_washer_white_cottons",
+   "deviceId": "demo_washer_white",
+   "like": "washer_cottons_with_pause",
+   "start": "2026-10-12T09:00:00+02:00"
+  },
+  {
+   "id": "demo_washer_mtouch_cottons",
+   "deviceId": "demo_washer_mtouch",
+   "like": "washer_cottons_with_pause",
+   "start": "2026-10-12T09:00:00+02:00"
+  },
+  {
+   "id": "demo_dryer_mtouch_cottons",
+   "deviceId": "demo_dryer_mtouch",
+   "like": "dryer_cottons_dryness_ladder",
+   "start": "2026-10-12T12:00:00+02:00"
+  },
+  {
+   "id": "demo_washer_dryer_wash_dry",
+   "deviceId": "demo_washer_dryer",
+   "start": "2026-10-12T09:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "on"
+    ],
+    [
+     4,
+     "status",
+     "programmed"
+    ],
+    [
+     4,
+     "program",
+     "cottons"
+    ],
+    [
+     4,
+     "drying_step",
+     "normal"
+    ],
+    [
+     4,
+     "target_temp",
+     40
+    ],
+    [
+     4,
+     "remaining",
+     250
+    ],
+    [
+     60,
+     "status",
+     "in_use"
+    ],
+    [
+     60,
+     "phase",
+     "main_wash"
+    ],
+    [
+     60,
+     "remaining",
+     249
+    ],
+    [
+     3000,
+     "phase",
+     "rinse"
+    ],
+    [
+     3000,
+     "remaining",
+     200
+    ],
+    [
+     4500,
+     "phase",
+     "spin"
+    ],
+    [
+     4500,
+     "remaining",
+     175
+    ],
+    [
+     5400,
+     "phase",
+     "drying"
+    ],
+    [
+     5400,
+     "remaining",
+     160
+    ],
+    [
+     13200,
+     "phase",
+     "cooling_down"
+    ],
+    [
+     13200,
+     "remaining",
+     30
+    ],
+    [
+     15000,
+     "phase",
+     "finished"
+    ],
+    [
+     15000,
+     "status",
+     "program_ended"
+    ],
+    [
+     15000,
+     "remaining",
+     0
+    ],
+    [
+     15600,
+     "status",
+     "off"
+    ],
+    [
+     15600,
+     "program",
+     "no_program"
+    ],
+    [
+     15600,
+     "phase",
+     "not_running"
+    ]
+   ]
+  },
+  {
+   "id": "demo_dish_eco",
+   "deviceId": "demo_dish_integrated",
+   "start": "2026-10-12T20:30:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "on"
+    ],
+    [
+     4,
+     "status",
+     "programmed"
+    ],
+    [
+     4,
+     "program",
+     "eco"
+    ],
+    [
+     4,
+     "remaining",
+     199
+    ],
+    [
+     60,
+     "status",
+     "in_use"
+    ],
+    [
+     60,
+     "phase",
+     "pre_dishwash"
+    ],
+    [
+     60,
+     "remaining",
+     198
+    ],
+    [
+     600,
+     "phase",
+     "main_dishwash"
+    ],
+    [
+     600,
+     "remaining",
+     189
+    ],
+    [
+     3600,
+     "phase",
+     "interim_rinse"
+    ],
+    [
+     3600,
+     "remaining",
+     139
+    ],
+    [
+     5400,
+     "phase",
+     "final_rinse"
+    ],
+    [
+     5400,
+     "remaining",
+     109
+    ],
+    [
+     7200,
+     "phase",
+     "drying"
+    ],
+    [
+     7200,
+     "remaining",
+     79
+    ],
+    [
+     11940,
+     "phase",
+     "finished"
+    ],
+    [
+     11940,
+     "status",
+     "program_ended"
+    ],
+    [
+     11940,
+     "remaining",
+     0
+    ],
+    [
+     12000,
+     "door",
+     "on"
+    ],
+    [
+     12060,
+     "door",
+     "off"
+    ],
+    [
+     12600,
+     "status",
+     "off"
+    ],
+    [
+     12600,
+     "program",
+     "no_program"
+    ],
+    [
+     12600,
+     "phase",
+     "not_running"
+    ]
+   ]
+  },
+  {
+   "id": "demo_dish_semi_eco",
+   "deviceId": "demo_dish_semi",
+   "like": "demo_dish_eco",
+   "start": "2026-10-12T20:30:00+02:00"
+  },
+  {
+   "id": "demo_dish_free_eco",
+   "deviceId": "demo_dish_free",
+   "like": "demo_dish_eco",
+   "start": "2026-10-12T20:30:00+02:00"
+  },
+  {
+   "id": "demo_oven_fan_plus",
+   "deviceId": "demo_oven",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_oven_mtouch_fan_plus",
+   "deviceId": "demo_oven_mtouch",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_oven_artline_fan_plus",
+   "deviceId": "demo_oven_artline",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_oven_active_fan_plus",
+   "deviceId": "demo_oven_active",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_dialog_fan_plus",
+   "deviceId": "demo_dialog",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_steam_vitro_fan_plus",
+   "deviceId": "demo_steam_vitro",
+   "like": "steam_oven_fan_plus_timer",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_micro_vitro_combo",
+   "deviceId": "demo_micro_vitro",
+   "like": "microwave_wifi_dropouts",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_coffee_cm6_morning",
+   "deviceId": "demo_coffee_cm6",
+   "like": "coffee_morning",
+   "start": "2026-10-12T07:00:00+02:00"
+  },
+  {
+   "id": "demo_coffee_cva_morning",
+   "deviceId": "demo_coffee_cva",
+   "like": "coffee_morning",
+   "start": "2026-10-12T07:00:00+02:00"
+  },
+  {
+   "id": "demo_hob_cooking",
+   "deviceId": "demo_hob",
+   "start": "2026-10-12T18:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "off"
+    ],
+    [
+     60,
+     "status",
+     "on"
+    ],
+    [
+     90,
+     "status",
+     "in_use"
+    ],
+    [
+     90,
+     "plate_2",
+     "plate_step_18"
+    ],
+    [
+     300,
+     "plate_2",
+     "plate_step_12"
+    ],
+    [
+     300,
+     "plate_3",
+     "plate_step_boost"
+    ],
+    [
+     600,
+     "plate_3",
+     "plate_step_14"
+    ],
+    [
+     600,
+     "plate_5",
+     "plate_step_5"
+    ],
+    [
+     900,
+     "plate_1",
+     "plate_step_warming"
+    ],
+    [
+     1800,
+     "plate_2",
+     "plate_step_0"
+    ],
+    [
+     1800,
+     "plate_3",
+     "plate_step_0"
+    ],
+    [
+     1800,
+     "plate_5",
+     "plate_step_0"
+    ],
+    [
+     1800,
+     "plate_1",
+     "plate_step_0"
+    ],
+    [
+     1800,
+     "status",
+     "on"
+    ],
+    [
+     1900,
+     "status",
+     "off"
+    ]
+   ]
+  },
+  {
+   "id": "demo_hob4_cooking",
+   "deviceId": "demo_hob_4",
+   "like": "demo_hob_cooking",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_hob_extr_cooking",
+   "deviceId": "demo_hob_extr",
+   "like": "demo_hob_cooking",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_hood_cooking",
+   "deviceId": "demo_hood",
+   "start": "2026-10-12T18:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "off"
+    ],
+    [
+     60,
+     "status",
+     "in_use"
+    ],
+    [
+     60,
+     "fan",
+     "on"
+    ],
+    [
+     60,
+     "attr:fan:percentage",
+     25
+    ],
+    [
+     60,
+     "light",
+     "on"
+    ],
+    [
+     300,
+     "attr:fan:percentage",
+     75
+    ],
+    [
+     900,
+     "attr:fan:percentage",
+     100
+    ],
+    [
+     1500,
+     "attr:fan:percentage",
+     50
+    ],
+    [
+     1800,
+     "fan",
+     "off"
+    ],
+    [
+     1800,
+     "attr:fan:percentage",
+     0
+    ],
+    [
+     1800,
+     "light",
+     "off"
+    ],
+    [
+     1800,
+     "status",
+     "off"
+    ]
+   ]
+  },
+  {
+   "id": "demo_hood_aura_cooking",
+   "deviceId": "demo_hood_aura",
+   "like": "demo_hood_cooking",
+   "start": "2026-10-12T18:00:00+02:00"
+  },
+  {
+   "id": "demo_fridge_day",
+   "deviceId": "demo_fridge_int",
+   "start": "2026-10-12T12:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "in_use"
+    ],
+    [
+     0,
+     "temp",
+     4
+    ],
+    [
+     0,
+     "temp_2",
+     -18
+    ],
+    [
+     600,
+     "door",
+     "on"
+    ],
+    [
+     660,
+     "door",
+     "off"
+    ],
+    [
+     660,
+     "temp",
+     6
+    ],
+    [
+     900,
+     "supercooling",
+     "on"
+    ],
+    [
+     900,
+     "temp",
+     5
+    ],
+    [
+     2400,
+     "temp",
+     3
+    ],
+    [
+     3600,
+     "supercooling",
+     "off"
+    ],
+    [
+     3600,
+     "temp",
+     4
+    ]
+   ]
+  },
+  {
+   "id": "demo_fridge_free_day",
+   "deviceId": "demo_fridge_free",
+   "like": "demo_fridge_day",
+   "start": "2026-10-12T12:00:00+02:00"
+  },
+  {
+   "id": "demo_wine_day",
+   "deviceId": "demo_wine",
+   "start": "2026-10-12T12:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "in_use"
+    ],
+    [
+     0,
+     "temp",
+     8
+    ],
+    [
+     0,
+     "temp_2",
+     12
+    ],
+    [
+     0,
+     "temp_3",
+     16
+    ],
+    [
+     600,
+     "light",
+     "on"
+    ],
+    [
+     1200,
+     "light",
+     "off"
+    ],
+    [
+     1800,
+     "door",
+     "on"
+    ],
+    [
+     1830,
+     "door",
+     "off"
+    ]
+   ]
+  },
+  {
+   "id": "demo_robot_clean",
+   "deviceId": "demo_robot",
+   "start": "2026-10-12T10:00:00+02:00",
+   "events": [
+    [
+     0,
+     "status",
+     "on"
+    ],
+    [
+     0,
+     "vacuum",
+     "docked"
+    ],
+    [
+     0,
+     "battery",
+     100
+    ],
+    [
+     60,
+     "status",
+     "in_use"
+    ],
+    [
+     60,
+     "program",
+     "auto"
+    ],
+    [
+     60,
+     "phase",
+     "vacuum_cleaning"
+    ],
+    [
+     60,
+     "vacuum",
+     "cleaning"
+    ],
+    [
+     600,
+     "battery",
+     82
+    ],
+    [
+     1500,
+     "battery",
+     57
+    ],
+    [
+     2400,
+     "vacuum",
+     "returning"
+    ],
+    [
+     2400,
+     "phase",
+     "returning"
+    ],
+    [
+     2400,
+     "battery",
+     41
+    ],
+    [
+     2500,
+     "vacuum",
+     "docked"
+    ],
+    [
+     2500,
+     "phase",
+     "docked"
+    ],
+    [
+     2500,
+     "status",
+     "on"
+    ],
+    [
+     4000,
+     "battery",
+     78
+    ]
+   ]
+  }
+ ]
+}

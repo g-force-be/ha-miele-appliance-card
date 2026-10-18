@@ -1,0 +1,5535 @@
+{
+ "_about": "Synthetic Miele appliances Peter doesn't have, built by dev/data/make-demo.mjs with the entities HA's core miele integration (2026.10) creates for each type. For the harness (?demo=1) and the tests.",
+ "areas": {
+  "demo": {
+   "area_id": "demo",
+   "name": "Demo"
+  }
+ },
+ "devices": {
+  "demo_washer_white": {
+   "id": "demo_washer_white",
+   "name": "Demo W1 White Edition",
+   "name_by_user": null,
+   "model": "Washing machine",
+   "model_id": "WSG883",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_washer_mtouch": {
+   "id": "demo_washer_mtouch",
+   "name": "Demo W1 M Touch",
+   "name_by_user": null,
+   "model": "Washing machine",
+   "model_id": "WWV980",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_dryer_mtouch": {
+   "id": "demo_dryer_mtouch",
+   "name": "Demo T1 M Touch",
+   "name_by_user": null,
+   "model": "Tumble dryer",
+   "model_id": "TWV780WP",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_washer_dryer": {
+   "id": "demo_washer_dryer",
+   "name": "Demo WT1",
+   "name_by_user": null,
+   "model": "Washer dryer",
+   "model_id": "WTR870",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_dish_integrated": {
+   "id": "demo_dish_integrated",
+   "name": "Demo G 7000 SCVi",
+   "name_by_user": null,
+   "model": "Dishwasher",
+   "model_id": "G7980SCVi",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_dish_semi": {
+   "id": "demo_dish_semi",
+   "name": "Demo G 7000 SCi",
+   "name_by_user": null,
+   "model": "Dishwasher",
+   "model_id": "G7310SCi",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_dish_free": {
+   "id": "demo_dish_free",
+   "name": "Demo G 7000 SC",
+   "name_by_user": null,
+   "model": "Dishwasher",
+   "model_id": "G7110SC",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_oven": {
+   "id": "demo_oven",
+   "name": "Demo H 7464 BP",
+   "name_by_user": null,
+   "model": "Oven",
+   "model_id": "H7464BP",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_oven_mtouch": {
+   "id": "demo_oven_mtouch",
+   "name": "Demo H 7860 BP",
+   "name_by_user": null,
+   "model": "Oven",
+   "model_id": "H7860BP",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_oven_artline": {
+   "id": "demo_oven_artline",
+   "name": "Demo H 7464 BPX",
+   "name_by_user": null,
+   "model": "Oven",
+   "model_id": "H7464BPX",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_oven_active": {
+   "id": "demo_oven_active",
+   "name": "Demo H 2465 BP",
+   "name_by_user": null,
+   "model": "Oven",
+   "model_id": "H2465BP",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_dialog": {
+   "id": "demo_dialog",
+   "name": "Demo DO 7860",
+   "name_by_user": null,
+   "model": "Dialog oven",
+   "model_id": "DO7860",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_steam_vitro": {
+   "id": "demo_steam_vitro",
+   "name": "Demo DGC 7440 HC",
+   "name_by_user": null,
+   "model": "Steam oven combi",
+   "model_id": "DGC7440HC",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_micro_vitro": {
+   "id": "demo_micro_vitro",
+   "name": "Demo H 7840 BM",
+   "name_by_user": null,
+   "model": "Oven microwave",
+   "model_id": "H7840BM",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_coffee_cm6": {
+   "id": "demo_coffee_cm6",
+   "name": "Demo CM 6360",
+   "name_by_user": null,
+   "model": "Coffee system",
+   "model_id": "CM6360",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_coffee_cva": {
+   "id": "demo_coffee_cva",
+   "name": "Demo CVA 7845",
+   "name_by_user": null,
+   "model": "Coffee system",
+   "model_id": "CVA7845",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_hob": {
+   "id": "demo_hob",
+   "name": "Demo KM 7897 FL",
+   "name_by_user": null,
+   "model": "Hob",
+   "model_id": "KM7897FL",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_hob_4": {
+   "id": "demo_hob_4",
+   "name": "Demo KM 7464 FR",
+   "name_by_user": null,
+   "model": "Hob",
+   "model_id": "KM7464FR",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_hob_extr": {
+   "id": "demo_hob_extr",
+   "name": "Demo KMDA 7774 FL",
+   "name_by_user": null,
+   "model": "Hob extraction",
+   "model_id": "KMDA7774FL",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_hood": {
+   "id": "demo_hood",
+   "name": "Demo DA 6698 W",
+   "name_by_user": null,
+   "model": "Hood",
+   "model_id": "DA6698W",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_hood_aura": {
+   "id": "demo_hood_aura",
+   "name": "Demo DA 7378 D",
+   "name_by_user": null,
+   "model": "Hood",
+   "model_id": "DA7378D",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_fridge_int": {
+   "id": "demo_fridge_int",
+   "name": "Demo KFN 7774 D",
+   "name_by_user": null,
+   "model": "Fridge freezer",
+   "model_id": "KFN7774D",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_fridge_free": {
+   "id": "demo_fridge_free",
+   "name": "Demo KFN 4795 CD",
+   "name_by_user": null,
+   "model": "Fridge freezer",
+   "model_id": "KFN4795CD",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_wine": {
+   "id": "demo_wine",
+   "name": "Demo KWT 6834 SGS",
+   "name_by_user": null,
+   "model": "Wine cabinet",
+   "model_id": "KWT6834SGS",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  },
+  "demo_robot": {
+   "id": "demo_robot",
+   "name": "Demo Scout RX3",
+   "name_by_user": null,
+   "model": "Robot vacuum cleaner",
+   "model_id": "RX3",
+   "manufacturer": "Miele",
+   "area_id": "demo"
+  }
+ },
+ "entities": [
+  {
+   "entity_id": "sensor.demo_w1_white_edition",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_white_edition_remote_control",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_white_edition_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_white_edition_problem",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_w1_white_edition_power",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_program_id",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_program_phase",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_start_time",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_finish",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_start",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_w1_white_edition_start",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_w1_white_edition_stop",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_white_edition_door",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_white_edition_spin_speed",
+   "platform": "miele",
+   "device_id": "demo_washer_white",
+   "translation_key": "spin_speed",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_m_touch_remote_control",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_m_touch_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_m_touch_problem",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_w1_m_touch_power",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_program_id",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_program_phase",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_start_time",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_finish",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_start",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_w1_m_touch_start",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_w1_m_touch_stop",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_w1_m_touch_door",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_w1_m_touch_spin_speed",
+   "platform": "miele",
+   "device_id": "demo_washer_mtouch",
+   "translation_key": "spin_speed",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_t1_m_touch_remote_control",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_t1_m_touch_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_t1_m_touch_problem",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_t1_m_touch_power",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_program_id",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_program_phase",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_start_time",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_finish",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_start",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_t1_m_touch_door",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_t1_m_touch_drying_step",
+   "platform": "miele",
+   "device_id": "demo_dryer_mtouch",
+   "translation_key": "drying_step",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_wt1_remote_control",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_wt1_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_wt1_problem",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_wt1_power",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_program_id",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_program_phase",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_start_time",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_finish",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_start",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_wt1_door",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_spin_speed",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "spin_speed",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_wt1_drying_step",
+   "platform": "miele",
+   "device_id": "demo_washer_dryer",
+   "translation_key": "drying_step",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_scvi_remote_control",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_scvi_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_scvi_problem",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_g_7000_scvi_power",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_program_id",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_program_phase",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_start_time",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_finish",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_scvi_start",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_scvi_start",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_scvi_stop",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_scvi_pause",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "pause",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_scvi_door",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_scvi_smart_grid",
+   "platform": "miele",
+   "device_id": "demo_dish_integrated",
+   "translation_key": "smart_grid",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sci_remote_control",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sci_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sci_problem",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_g_7000_sci_power",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_program_id",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_program_phase",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_start_time",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_finish",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sci_start",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sci_start",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sci_stop",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sci_pause",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "pause",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sci_door",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sci_smart_grid",
+   "platform": "miele",
+   "device_id": "demo_dish_semi",
+   "translation_key": "smart_grid",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sc_remote_control",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sc_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sc_problem",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_g_7000_sc_power",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_program_id",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_program_phase",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_start_time",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_finish",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_g_7000_sc_start",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sc_start",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sc_stop",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_g_7000_sc_pause",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "pause",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sc_door",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_g_7000_sc_smart_grid",
+   "platform": "miele",
+   "device_id": "demo_dish_free",
+   "translation_key": "smart_grid",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bp_remote_control",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bp_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bp_problem",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_h_7464_bp_power",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_program_id",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_program_phase",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_start_time",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_finish",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7464_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7464_bp_stop",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bp_door",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bp_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_h_7464_bp_light",
+   "platform": "miele",
+   "device_id": "demo_oven",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7860_bp_remote_control",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7860_bp_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7860_bp_problem",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_h_7860_bp_power",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_program_id",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_program_phase",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_start_time",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_finish",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7860_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7860_bp_stop",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7860_bp_door",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7860_bp_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_h_7860_bp_light",
+   "platform": "miele",
+   "device_id": "demo_oven_mtouch",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bpx_remote_control",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bpx_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bpx_problem",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_h_7464_bpx_power",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_program_id",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_program_phase",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_start_time",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_finish",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_start",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7464_bpx_start",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7464_bpx_stop",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7464_bpx_door",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7464_bpx_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_h_7464_bpx_light",
+   "platform": "miele",
+   "device_id": "demo_oven_artline",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_2465_bp_remote_control",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_2465_bp_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_2465_bp_problem",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_h_2465_bp_power",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_program_id",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_program_phase",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_start_time",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_finish",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_2465_bp_start",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_2465_bp_stop",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_2465_bp_door",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_2465_bp_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_h_2465_bp_light",
+   "platform": "miele",
+   "device_id": "demo_oven_active",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_do_7860_remote_control",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_do_7860_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_do_7860_problem",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_do_7860_power",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_program_id",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_program_phase",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_start_time",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_finish",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_start",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_do_7860_start",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_do_7860_stop",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_do_7860_door",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_temperature",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_do_7860_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_do_7860_light",
+   "platform": "miele",
+   "device_id": "demo_dialog",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_dgc_7440_hc_remote_control",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_dgc_7440_hc_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_dgc_7440_hc_problem",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_dgc_7440_hc_power",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_program_id",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_program_phase",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_start_time",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_finish",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_start",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_dgc_7440_hc_start",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_dgc_7440_hc_stop",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_dgc_7440_hc_door",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_temperature",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_dgc_7440_hc_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_dgc_7440_hc_light",
+   "platform": "miele",
+   "device_id": "demo_steam_vitro",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7840_bm_remote_control",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7840_bm_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7840_bm_problem",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_h_7840_bm_power",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_program_id",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_program_phase",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_remaining_time",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "remaining_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_elapsed_time",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "elapsed_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_start_time",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "start_time",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_finish",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "finish",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_start",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7840_bm_start",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "button.demo_h_7840_bm_stop",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "stop",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_h_7840_bm_door",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_temperature",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_h_7840_bm_target_temperature",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "target_temperature",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_h_7840_bm_light",
+   "platform": "miele",
+   "device_id": "demo_micro_vitro",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cm_6360",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cm_6360_remote_control",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cm_6360_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cm_6360_problem",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_cm_6360_power",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cm_6360_program_id",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cm_6360_program_phase",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_cm_6360_light",
+   "platform": "miele",
+   "device_id": "demo_coffee_cm6",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cva_7845",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cva_7845_remote_control",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cva_7845_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_cva_7845_problem",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_cva_7845_power",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cva_7845_program_id",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_cva_7845_program_phase",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_cva_7845_light",
+   "platform": "miele",
+   "device_id": "demo_coffee_cva",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_1",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_2",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_3",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_4",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_5",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7897_fl_plate_6",
+   "platform": "miele",
+   "device_id": "demo_hob",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7464_fr",
+   "platform": "miele",
+   "device_id": "demo_hob_4",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7464_fr_plate_1",
+   "platform": "miele",
+   "device_id": "demo_hob_4",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7464_fr_plate_2",
+   "platform": "miele",
+   "device_id": "demo_hob_4",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7464_fr_plate_3",
+   "platform": "miele",
+   "device_id": "demo_hob_4",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_km_7464_fr_plate_4",
+   "platform": "miele",
+   "device_id": "demo_hob_4",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl_plate_1",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl_plate_2",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl_plate_3",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl_plate_4",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kmda_7774_fl_plate_5",
+   "platform": "miele",
+   "device_id": "demo_hob_extr",
+   "translation_key": "plate",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_da_6698_w",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_6698_w_remote_control",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_6698_w_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_6698_w_problem",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_da_6698_w_power",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "fan.demo_da_6698_w_fan",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "fan",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_da_6698_w_light",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_da_6698_w_ambient_light",
+   "platform": "miele",
+   "device_id": "demo_hood",
+   "translation_key": "ambient_light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_da_7378_d",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_7378_d_remote_control",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_7378_d_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_da_7378_d_problem",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_da_7378_d_power",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "power",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "fan.demo_da_7378_d_fan",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "fan",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_da_7378_d_light",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_da_7378_d_ambient_light",
+   "platform": "miele",
+   "device_id": "demo_hood_aura",
+   "translation_key": "ambient_light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_7774_d",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_7774_d_remote_control",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_7774_d_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_7774_d_problem",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_7774_d_door",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_7774_d_temperature",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_7774_d_temperature_zone_2",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "temperature_zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kfn_7774_d_zone_1",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kfn_7774_d_zone_2",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_kfn_7774_d_supercooling",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "supercooling",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_kfn_7774_d_superfreezing",
+   "platform": "miele",
+   "device_id": "demo_fridge_int",
+   "translation_key": "superfreezing",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_4795_cd",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_4795_cd_remote_control",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_4795_cd_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_4795_cd_problem",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kfn_4795_cd_door",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_4795_cd_temperature",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kfn_4795_cd_temperature_zone_2",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "temperature_zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kfn_4795_cd_zone_1",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kfn_4795_cd_zone_2",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_kfn_4795_cd_supercooling",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "supercooling",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "switch.demo_kfn_4795_cd_superfreezing",
+   "platform": "miele",
+   "device_id": "demo_fridge_free",
+   "translation_key": "superfreezing",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kwt_6834_sgs",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kwt_6834_sgs_remote_control",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kwt_6834_sgs_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kwt_6834_sgs_problem",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_kwt_6834_sgs_door",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kwt_6834_sgs_temperature",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kwt_6834_sgs_temperature_zone_2",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "temperature_zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_kwt_6834_sgs_temperature_zone_3",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "temperature_zone_3",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kwt_6834_sgs_zone_1",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kwt_6834_sgs_zone_2",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "zone_2",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "climate.demo_kwt_6834_sgs_zone_3",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "zone_3",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "light.demo_kwt_6834_sgs_light",
+   "platform": "miele",
+   "device_id": "demo_wine",
+   "translation_key": "light",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_scout_rx3",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "status",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_scout_rx3_remote_control",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "remote_control",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_scout_rx3_mobile_start",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "mobile_start",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "binary_sensor.demo_scout_rx3_problem",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_scout_rx3_program_id",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "program_id",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_scout_rx3_program_phase",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "program_phase",
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "sensor.demo_scout_rx3_battery",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": null,
+   "has_entity_name": true,
+   "name": null
+  },
+  {
+   "entity_id": "vacuum.demo_scout_rx3_vacuum",
+   "platform": "miele",
+   "device_id": "demo_robot",
+   "translation_key": "vacuum",
+   "has_entity_name": true,
+   "name": null
+  }
+ ],
+ "attributes": {
+  "sensor.demo_w1_white_edition": {
+   "friendly_name": "Demo W1 White Edition status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_w1_white_edition_remote_control": {
+   "friendly_name": "Demo W1 White Edition remote_control"
+  },
+  "binary_sensor.demo_w1_white_edition_mobile_start": {
+   "friendly_name": "Demo W1 White Edition mobile_start"
+  },
+  "binary_sensor.demo_w1_white_edition_problem": {
+   "friendly_name": "Demo W1 White Edition problem",
+   "device_class": "problem"
+  },
+  "switch.demo_w1_white_edition_power": {
+   "friendly_name": "Demo W1 White Edition power"
+  },
+  "sensor.demo_w1_white_edition_program_id": {
+   "friendly_name": "Demo W1 White Edition program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "cottons",
+    "minimum_iron",
+    "delicates",
+    "woollens",
+    "eco_40_60",
+    "quick_power_wash",
+    "express_20",
+    "rinse",
+    "drain_spin"
+   ]
+  },
+  "sensor.demo_w1_white_edition_program_phase": {
+   "friendly_name": "Demo W1 White Edition program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "pre_wash",
+    "soak",
+    "main_wash",
+    "rinse",
+    "rinse_hold",
+    "cleaning",
+    "cooling_down",
+    "drain",
+    "spin",
+    "anti_crease",
+    "finished",
+    "drying"
+   ]
+  },
+  "sensor.demo_w1_white_edition_remaining_time": {
+   "friendly_name": "Demo W1 White Edition remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_white_edition_elapsed_time": {
+   "friendly_name": "Demo W1 White Edition elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_white_edition_start_time": {
+   "friendly_name": "Demo W1 White Edition start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_white_edition_finish": {
+   "friendly_name": "Demo W1 White Edition finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_w1_white_edition_start": {
+   "friendly_name": "Demo W1 White Edition start",
+   "device_class": "timestamp"
+  },
+  "button.demo_w1_white_edition_start": {
+   "friendly_name": "Demo W1 White Edition start"
+  },
+  "button.demo_w1_white_edition_stop": {
+   "friendly_name": "Demo W1 White Edition stop"
+  },
+  "binary_sensor.demo_w1_white_edition_door": {
+   "friendly_name": "Demo W1 White Edition door",
+   "device_class": "door"
+  },
+  "sensor.demo_w1_white_edition_target_temperature": {
+   "friendly_name": "Demo W1 White Edition target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_w1_white_edition_spin_speed": {
+   "friendly_name": "Demo W1 White Edition spin_speed",
+   "unit_of_measurement": "rpm"
+  },
+  "sensor.demo_w1_m_touch": {
+   "friendly_name": "Demo W1 M Touch status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_w1_m_touch_remote_control": {
+   "friendly_name": "Demo W1 M Touch remote_control"
+  },
+  "binary_sensor.demo_w1_m_touch_mobile_start": {
+   "friendly_name": "Demo W1 M Touch mobile_start"
+  },
+  "binary_sensor.demo_w1_m_touch_problem": {
+   "friendly_name": "Demo W1 M Touch problem",
+   "device_class": "problem"
+  },
+  "switch.demo_w1_m_touch_power": {
+   "friendly_name": "Demo W1 M Touch power"
+  },
+  "sensor.demo_w1_m_touch_program_id": {
+   "friendly_name": "Demo W1 M Touch program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "cottons",
+    "minimum_iron",
+    "delicates",
+    "woollens",
+    "eco_40_60",
+    "quick_power_wash",
+    "express_20",
+    "rinse",
+    "drain_spin"
+   ]
+  },
+  "sensor.demo_w1_m_touch_program_phase": {
+   "friendly_name": "Demo W1 M Touch program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "pre_wash",
+    "soak",
+    "main_wash",
+    "rinse",
+    "rinse_hold",
+    "cleaning",
+    "cooling_down",
+    "drain",
+    "spin",
+    "anti_crease",
+    "finished",
+    "drying"
+   ]
+  },
+  "sensor.demo_w1_m_touch_remaining_time": {
+   "friendly_name": "Demo W1 M Touch remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_m_touch_elapsed_time": {
+   "friendly_name": "Demo W1 M Touch elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_m_touch_start_time": {
+   "friendly_name": "Demo W1 M Touch start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_w1_m_touch_finish": {
+   "friendly_name": "Demo W1 M Touch finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_w1_m_touch_start": {
+   "friendly_name": "Demo W1 M Touch start",
+   "device_class": "timestamp"
+  },
+  "button.demo_w1_m_touch_start": {
+   "friendly_name": "Demo W1 M Touch start"
+  },
+  "button.demo_w1_m_touch_stop": {
+   "friendly_name": "Demo W1 M Touch stop"
+  },
+  "binary_sensor.demo_w1_m_touch_door": {
+   "friendly_name": "Demo W1 M Touch door",
+   "device_class": "door"
+  },
+  "sensor.demo_w1_m_touch_target_temperature": {
+   "friendly_name": "Demo W1 M Touch target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_w1_m_touch_spin_speed": {
+   "friendly_name": "Demo W1 M Touch spin_speed",
+   "unit_of_measurement": "rpm"
+  },
+  "sensor.demo_t1_m_touch": {
+   "friendly_name": "Demo T1 M Touch status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_t1_m_touch_remote_control": {
+   "friendly_name": "Demo T1 M Touch remote_control"
+  },
+  "binary_sensor.demo_t1_m_touch_mobile_start": {
+   "friendly_name": "Demo T1 M Touch mobile_start"
+  },
+  "binary_sensor.demo_t1_m_touch_problem": {
+   "friendly_name": "Demo T1 M Touch problem",
+   "device_class": "problem"
+  },
+  "switch.demo_t1_m_touch_power": {
+   "friendly_name": "Demo T1 M Touch power"
+  },
+  "sensor.demo_t1_m_touch_program_id": {
+   "friendly_name": "Demo T1 M Touch program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "cottons",
+    "minimum_iron",
+    "woollens_handcare",
+    "warm_air",
+    "cool_air",
+    "express"
+   ]
+  },
+  "sensor.demo_t1_m_touch_program_phase": {
+   "friendly_name": "Demo T1 M Touch program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "program_running",
+    "drying",
+    "machine_iron",
+    "hand_iron_2",
+    "normal",
+    "normal_plus",
+    "cooling_down",
+    "hand_iron_1",
+    "anti_crease",
+    "finished",
+    "extra_dry",
+    "hand_iron",
+    "smoothing",
+    "slightly_dry",
+    "safety_cooling"
+   ]
+  },
+  "sensor.demo_t1_m_touch_remaining_time": {
+   "friendly_name": "Demo T1 M Touch remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_t1_m_touch_elapsed_time": {
+   "friendly_name": "Demo T1 M Touch elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_t1_m_touch_start_time": {
+   "friendly_name": "Demo T1 M Touch start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_t1_m_touch_finish": {
+   "friendly_name": "Demo T1 M Touch finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_t1_m_touch_start": {
+   "friendly_name": "Demo T1 M Touch start",
+   "device_class": "timestamp"
+  },
+  "binary_sensor.demo_t1_m_touch_door": {
+   "friendly_name": "Demo T1 M Touch door",
+   "device_class": "door"
+  },
+  "sensor.demo_t1_m_touch_drying_step": {
+   "friendly_name": "Demo T1 M Touch drying_step",
+   "device_class": "enum",
+   "options": [
+    "extra_dry",
+    "normal_plus",
+    "normal",
+    "slightly_dry",
+    "hand_iron_1",
+    "hand_iron_2",
+    "machine_iron",
+    "smoothing"
+   ]
+  },
+  "sensor.demo_wt1": {
+   "friendly_name": "Demo WT1 status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_wt1_remote_control": {
+   "friendly_name": "Demo WT1 remote_control"
+  },
+  "binary_sensor.demo_wt1_mobile_start": {
+   "friendly_name": "Demo WT1 mobile_start"
+  },
+  "binary_sensor.demo_wt1_problem": {
+   "friendly_name": "Demo WT1 problem",
+   "device_class": "problem"
+  },
+  "switch.demo_wt1_power": {
+   "friendly_name": "Demo WT1 power"
+  },
+  "sensor.demo_wt1_program_id": {
+   "friendly_name": "Demo WT1 program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "cottons",
+    "minimum_iron",
+    "delicates",
+    "woollens",
+    "eco_40_60",
+    "quick_power_wash",
+    "express_20",
+    "rinse",
+    "drain_spin"
+   ]
+  },
+  "sensor.demo_wt1_program_phase": {
+   "friendly_name": "Demo WT1 program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "pre_wash",
+    "soak",
+    "main_wash",
+    "rinse",
+    "rinse_hold",
+    "cleaning",
+    "cooling_down",
+    "drain",
+    "spin",
+    "anti_crease",
+    "finished",
+    "drying"
+   ]
+  },
+  "sensor.demo_wt1_remaining_time": {
+   "friendly_name": "Demo WT1 remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_wt1_elapsed_time": {
+   "friendly_name": "Demo WT1 elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_wt1_start_time": {
+   "friendly_name": "Demo WT1 start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_wt1_finish": {
+   "friendly_name": "Demo WT1 finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_wt1_start": {
+   "friendly_name": "Demo WT1 start",
+   "device_class": "timestamp"
+  },
+  "binary_sensor.demo_wt1_door": {
+   "friendly_name": "Demo WT1 door",
+   "device_class": "door"
+  },
+  "sensor.demo_wt1_target_temperature": {
+   "friendly_name": "Demo WT1 target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_wt1_spin_speed": {
+   "friendly_name": "Demo WT1 spin_speed",
+   "unit_of_measurement": "rpm"
+  },
+  "sensor.demo_wt1_drying_step": {
+   "friendly_name": "Demo WT1 drying_step",
+   "device_class": "enum",
+   "options": [
+    "extra_dry",
+    "normal_plus",
+    "normal",
+    "slightly_dry",
+    "hand_iron_1",
+    "hand_iron_2",
+    "machine_iron",
+    "smoothing"
+   ]
+  },
+  "sensor.demo_g_7000_scvi": {
+   "friendly_name": "Demo G 7000 SCVi status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_g_7000_scvi_remote_control": {
+   "friendly_name": "Demo G 7000 SCVi remote_control"
+  },
+  "binary_sensor.demo_g_7000_scvi_mobile_start": {
+   "friendly_name": "Demo G 7000 SCVi mobile_start"
+  },
+  "binary_sensor.demo_g_7000_scvi_problem": {
+   "friendly_name": "Demo G 7000 SCVi problem",
+   "device_class": "problem"
+  },
+  "switch.demo_g_7000_scvi_power": {
+   "friendly_name": "Demo G 7000 SCVi power"
+  },
+  "sensor.demo_g_7000_scvi_program_id": {
+   "friendly_name": "Demo G 7000 SCVi program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "intensive",
+    "eco",
+    "automatic",
+    "gentle",
+    "extra_quiet",
+    "hygiene",
+    "quick_power_wash",
+    "power_wash",
+    "tall_items"
+   ]
+  },
+  "sensor.demo_g_7000_scvi_program_phase": {
+   "friendly_name": "Demo G 7000 SCVi program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "reactivating",
+    "pre_dishwash",
+    "main_dishwash",
+    "rinse",
+    "interim_rinse",
+    "final_rinse",
+    "drying",
+    "finished"
+   ]
+  },
+  "sensor.demo_g_7000_scvi_remaining_time": {
+   "friendly_name": "Demo G 7000 SCVi remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_scvi_elapsed_time": {
+   "friendly_name": "Demo G 7000 SCVi elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_scvi_start_time": {
+   "friendly_name": "Demo G 7000 SCVi start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_scvi_finish": {
+   "friendly_name": "Demo G 7000 SCVi finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_g_7000_scvi_start": {
+   "friendly_name": "Demo G 7000 SCVi start",
+   "device_class": "timestamp"
+  },
+  "button.demo_g_7000_scvi_start": {
+   "friendly_name": "Demo G 7000 SCVi start"
+  },
+  "button.demo_g_7000_scvi_stop": {
+   "friendly_name": "Demo G 7000 SCVi stop"
+  },
+  "button.demo_g_7000_scvi_pause": {
+   "friendly_name": "Demo G 7000 SCVi pause"
+  },
+  "binary_sensor.demo_g_7000_scvi_door": {
+   "friendly_name": "Demo G 7000 SCVi door",
+   "device_class": "door"
+  },
+  "binary_sensor.demo_g_7000_scvi_smart_grid": {
+   "friendly_name": "Demo G 7000 SCVi smart_grid"
+  },
+  "sensor.demo_g_7000_sci": {
+   "friendly_name": "Demo G 7000 SCi status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_g_7000_sci_remote_control": {
+   "friendly_name": "Demo G 7000 SCi remote_control"
+  },
+  "binary_sensor.demo_g_7000_sci_mobile_start": {
+   "friendly_name": "Demo G 7000 SCi mobile_start"
+  },
+  "binary_sensor.demo_g_7000_sci_problem": {
+   "friendly_name": "Demo G 7000 SCi problem",
+   "device_class": "problem"
+  },
+  "switch.demo_g_7000_sci_power": {
+   "friendly_name": "Demo G 7000 SCi power"
+  },
+  "sensor.demo_g_7000_sci_program_id": {
+   "friendly_name": "Demo G 7000 SCi program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "intensive",
+    "eco",
+    "automatic",
+    "gentle",
+    "extra_quiet",
+    "hygiene",
+    "quick_power_wash",
+    "power_wash",
+    "tall_items"
+   ]
+  },
+  "sensor.demo_g_7000_sci_program_phase": {
+   "friendly_name": "Demo G 7000 SCi program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "reactivating",
+    "pre_dishwash",
+    "main_dishwash",
+    "rinse",
+    "interim_rinse",
+    "final_rinse",
+    "drying",
+    "finished"
+   ]
+  },
+  "sensor.demo_g_7000_sci_remaining_time": {
+   "friendly_name": "Demo G 7000 SCi remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sci_elapsed_time": {
+   "friendly_name": "Demo G 7000 SCi elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sci_start_time": {
+   "friendly_name": "Demo G 7000 SCi start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sci_finish": {
+   "friendly_name": "Demo G 7000 SCi finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_g_7000_sci_start": {
+   "friendly_name": "Demo G 7000 SCi start",
+   "device_class": "timestamp"
+  },
+  "button.demo_g_7000_sci_start": {
+   "friendly_name": "Demo G 7000 SCi start"
+  },
+  "button.demo_g_7000_sci_stop": {
+   "friendly_name": "Demo G 7000 SCi stop"
+  },
+  "button.demo_g_7000_sci_pause": {
+   "friendly_name": "Demo G 7000 SCi pause"
+  },
+  "binary_sensor.demo_g_7000_sci_door": {
+   "friendly_name": "Demo G 7000 SCi door",
+   "device_class": "door"
+  },
+  "binary_sensor.demo_g_7000_sci_smart_grid": {
+   "friendly_name": "Demo G 7000 SCi smart_grid"
+  },
+  "sensor.demo_g_7000_sc": {
+   "friendly_name": "Demo G 7000 SC status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_g_7000_sc_remote_control": {
+   "friendly_name": "Demo G 7000 SC remote_control"
+  },
+  "binary_sensor.demo_g_7000_sc_mobile_start": {
+   "friendly_name": "Demo G 7000 SC mobile_start"
+  },
+  "binary_sensor.demo_g_7000_sc_problem": {
+   "friendly_name": "Demo G 7000 SC problem",
+   "device_class": "problem"
+  },
+  "switch.demo_g_7000_sc_power": {
+   "friendly_name": "Demo G 7000 SC power"
+  },
+  "sensor.demo_g_7000_sc_program_id": {
+   "friendly_name": "Demo G 7000 SC program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "intensive",
+    "eco",
+    "automatic",
+    "gentle",
+    "extra_quiet",
+    "hygiene",
+    "quick_power_wash",
+    "power_wash",
+    "tall_items"
+   ]
+  },
+  "sensor.demo_g_7000_sc_program_phase": {
+   "friendly_name": "Demo G 7000 SC program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "reactivating",
+    "pre_dishwash",
+    "main_dishwash",
+    "rinse",
+    "interim_rinse",
+    "final_rinse",
+    "drying",
+    "finished"
+   ]
+  },
+  "sensor.demo_g_7000_sc_remaining_time": {
+   "friendly_name": "Demo G 7000 SC remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sc_elapsed_time": {
+   "friendly_name": "Demo G 7000 SC elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sc_start_time": {
+   "friendly_name": "Demo G 7000 SC start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_g_7000_sc_finish": {
+   "friendly_name": "Demo G 7000 SC finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_g_7000_sc_start": {
+   "friendly_name": "Demo G 7000 SC start",
+   "device_class": "timestamp"
+  },
+  "button.demo_g_7000_sc_start": {
+   "friendly_name": "Demo G 7000 SC start"
+  },
+  "button.demo_g_7000_sc_stop": {
+   "friendly_name": "Demo G 7000 SC stop"
+  },
+  "button.demo_g_7000_sc_pause": {
+   "friendly_name": "Demo G 7000 SC pause"
+  },
+  "binary_sensor.demo_g_7000_sc_door": {
+   "friendly_name": "Demo G 7000 SC door",
+   "device_class": "door"
+  },
+  "binary_sensor.demo_g_7000_sc_smart_grid": {
+   "friendly_name": "Demo G 7000 SC smart_grid"
+  },
+  "sensor.demo_h_7464_bp": {
+   "friendly_name": "Demo H 7464 BP status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_h_7464_bp_remote_control": {
+   "friendly_name": "Demo H 7464 BP remote_control"
+  },
+  "binary_sensor.demo_h_7464_bp_mobile_start": {
+   "friendly_name": "Demo H 7464 BP mobile_start"
+  },
+  "binary_sensor.demo_h_7464_bp_problem": {
+   "friendly_name": "Demo H 7464 BP problem",
+   "device_class": "problem"
+  },
+  "switch.demo_h_7464_bp_power": {
+   "friendly_name": "Demo H 7464 BP power"
+  },
+  "sensor.demo_h_7464_bp_program_id": {
+   "friendly_name": "Demo H 7464 BP program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_h_7464_bp_program_phase": {
+   "friendly_name": "Demo H 7464 BP program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_h_7464_bp_remaining_time": {
+   "friendly_name": "Demo H 7464 BP remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bp_elapsed_time": {
+   "friendly_name": "Demo H 7464 BP elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bp_start_time": {
+   "friendly_name": "Demo H 7464 BP start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bp_finish": {
+   "friendly_name": "Demo H 7464 BP finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_h_7464_bp_start": {
+   "friendly_name": "Demo H 7464 BP start",
+   "device_class": "timestamp"
+  },
+  "button.demo_h_7464_bp_start": {
+   "friendly_name": "Demo H 7464 BP start"
+  },
+  "button.demo_h_7464_bp_stop": {
+   "friendly_name": "Demo H 7464 BP stop"
+  },
+  "binary_sensor.demo_h_7464_bp_door": {
+   "friendly_name": "Demo H 7464 BP door",
+   "device_class": "door"
+  },
+  "sensor.demo_h_7464_bp_temperature": {
+   "friendly_name": "Demo H 7464 BP temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_h_7464_bp_target_temperature": {
+   "friendly_name": "Demo H 7464 BP target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_h_7464_bp_light": {
+   "friendly_name": "Demo H 7464 BP light"
+  },
+  "sensor.demo_h_7860_bp": {
+   "friendly_name": "Demo H 7860 BP status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_h_7860_bp_remote_control": {
+   "friendly_name": "Demo H 7860 BP remote_control"
+  },
+  "binary_sensor.demo_h_7860_bp_mobile_start": {
+   "friendly_name": "Demo H 7860 BP mobile_start"
+  },
+  "binary_sensor.demo_h_7860_bp_problem": {
+   "friendly_name": "Demo H 7860 BP problem",
+   "device_class": "problem"
+  },
+  "switch.demo_h_7860_bp_power": {
+   "friendly_name": "Demo H 7860 BP power"
+  },
+  "sensor.demo_h_7860_bp_program_id": {
+   "friendly_name": "Demo H 7860 BP program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_h_7860_bp_program_phase": {
+   "friendly_name": "Demo H 7860 BP program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_h_7860_bp_remaining_time": {
+   "friendly_name": "Demo H 7860 BP remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7860_bp_elapsed_time": {
+   "friendly_name": "Demo H 7860 BP elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7860_bp_start_time": {
+   "friendly_name": "Demo H 7860 BP start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7860_bp_finish": {
+   "friendly_name": "Demo H 7860 BP finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_h_7860_bp_start": {
+   "friendly_name": "Demo H 7860 BP start",
+   "device_class": "timestamp"
+  },
+  "button.demo_h_7860_bp_start": {
+   "friendly_name": "Demo H 7860 BP start"
+  },
+  "button.demo_h_7860_bp_stop": {
+   "friendly_name": "Demo H 7860 BP stop"
+  },
+  "binary_sensor.demo_h_7860_bp_door": {
+   "friendly_name": "Demo H 7860 BP door",
+   "device_class": "door"
+  },
+  "sensor.demo_h_7860_bp_temperature": {
+   "friendly_name": "Demo H 7860 BP temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_h_7860_bp_target_temperature": {
+   "friendly_name": "Demo H 7860 BP target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_h_7860_bp_light": {
+   "friendly_name": "Demo H 7860 BP light"
+  },
+  "sensor.demo_h_7464_bpx": {
+   "friendly_name": "Demo H 7464 BPX status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_h_7464_bpx_remote_control": {
+   "friendly_name": "Demo H 7464 BPX remote_control"
+  },
+  "binary_sensor.demo_h_7464_bpx_mobile_start": {
+   "friendly_name": "Demo H 7464 BPX mobile_start"
+  },
+  "binary_sensor.demo_h_7464_bpx_problem": {
+   "friendly_name": "Demo H 7464 BPX problem",
+   "device_class": "problem"
+  },
+  "switch.demo_h_7464_bpx_power": {
+   "friendly_name": "Demo H 7464 BPX power"
+  },
+  "sensor.demo_h_7464_bpx_program_id": {
+   "friendly_name": "Demo H 7464 BPX program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_h_7464_bpx_program_phase": {
+   "friendly_name": "Demo H 7464 BPX program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_h_7464_bpx_remaining_time": {
+   "friendly_name": "Demo H 7464 BPX remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bpx_elapsed_time": {
+   "friendly_name": "Demo H 7464 BPX elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bpx_start_time": {
+   "friendly_name": "Demo H 7464 BPX start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7464_bpx_finish": {
+   "friendly_name": "Demo H 7464 BPX finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_h_7464_bpx_start": {
+   "friendly_name": "Demo H 7464 BPX start",
+   "device_class": "timestamp"
+  },
+  "button.demo_h_7464_bpx_start": {
+   "friendly_name": "Demo H 7464 BPX start"
+  },
+  "button.demo_h_7464_bpx_stop": {
+   "friendly_name": "Demo H 7464 BPX stop"
+  },
+  "binary_sensor.demo_h_7464_bpx_door": {
+   "friendly_name": "Demo H 7464 BPX door",
+   "device_class": "door"
+  },
+  "sensor.demo_h_7464_bpx_temperature": {
+   "friendly_name": "Demo H 7464 BPX temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_h_7464_bpx_target_temperature": {
+   "friendly_name": "Demo H 7464 BPX target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_h_7464_bpx_light": {
+   "friendly_name": "Demo H 7464 BPX light"
+  },
+  "sensor.demo_h_2465_bp": {
+   "friendly_name": "Demo H 2465 BP status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_h_2465_bp_remote_control": {
+   "friendly_name": "Demo H 2465 BP remote_control"
+  },
+  "binary_sensor.demo_h_2465_bp_mobile_start": {
+   "friendly_name": "Demo H 2465 BP mobile_start"
+  },
+  "binary_sensor.demo_h_2465_bp_problem": {
+   "friendly_name": "Demo H 2465 BP problem",
+   "device_class": "problem"
+  },
+  "switch.demo_h_2465_bp_power": {
+   "friendly_name": "Demo H 2465 BP power"
+  },
+  "sensor.demo_h_2465_bp_program_id": {
+   "friendly_name": "Demo H 2465 BP program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_h_2465_bp_program_phase": {
+   "friendly_name": "Demo H 2465 BP program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_h_2465_bp_remaining_time": {
+   "friendly_name": "Demo H 2465 BP remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_2465_bp_elapsed_time": {
+   "friendly_name": "Demo H 2465 BP elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_2465_bp_start_time": {
+   "friendly_name": "Demo H 2465 BP start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_2465_bp_finish": {
+   "friendly_name": "Demo H 2465 BP finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_h_2465_bp_start": {
+   "friendly_name": "Demo H 2465 BP start",
+   "device_class": "timestamp"
+  },
+  "button.demo_h_2465_bp_start": {
+   "friendly_name": "Demo H 2465 BP start"
+  },
+  "button.demo_h_2465_bp_stop": {
+   "friendly_name": "Demo H 2465 BP stop"
+  },
+  "binary_sensor.demo_h_2465_bp_door": {
+   "friendly_name": "Demo H 2465 BP door",
+   "device_class": "door"
+  },
+  "sensor.demo_h_2465_bp_temperature": {
+   "friendly_name": "Demo H 2465 BP temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_h_2465_bp_target_temperature": {
+   "friendly_name": "Demo H 2465 BP target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_h_2465_bp_light": {
+   "friendly_name": "Demo H 2465 BP light"
+  },
+  "sensor.demo_do_7860": {
+   "friendly_name": "Demo DO 7860 status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_do_7860_remote_control": {
+   "friendly_name": "Demo DO 7860 remote_control"
+  },
+  "binary_sensor.demo_do_7860_mobile_start": {
+   "friendly_name": "Demo DO 7860 mobile_start"
+  },
+  "binary_sensor.demo_do_7860_problem": {
+   "friendly_name": "Demo DO 7860 problem",
+   "device_class": "problem"
+  },
+  "switch.demo_do_7860_power": {
+   "friendly_name": "Demo DO 7860 power"
+  },
+  "sensor.demo_do_7860_program_id": {
+   "friendly_name": "Demo DO 7860 program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_do_7860_program_phase": {
+   "friendly_name": "Demo DO 7860 program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_do_7860_remaining_time": {
+   "friendly_name": "Demo DO 7860 remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_do_7860_elapsed_time": {
+   "friendly_name": "Demo DO 7860 elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_do_7860_start_time": {
+   "friendly_name": "Demo DO 7860 start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_do_7860_finish": {
+   "friendly_name": "Demo DO 7860 finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_do_7860_start": {
+   "friendly_name": "Demo DO 7860 start",
+   "device_class": "timestamp"
+  },
+  "button.demo_do_7860_start": {
+   "friendly_name": "Demo DO 7860 start"
+  },
+  "button.demo_do_7860_stop": {
+   "friendly_name": "Demo DO 7860 stop"
+  },
+  "binary_sensor.demo_do_7860_door": {
+   "friendly_name": "Demo DO 7860 door",
+   "device_class": "door"
+  },
+  "sensor.demo_do_7860_temperature": {
+   "friendly_name": "Demo DO 7860 temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_do_7860_target_temperature": {
+   "friendly_name": "Demo DO 7860 target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_do_7860_light": {
+   "friendly_name": "Demo DO 7860 light"
+  },
+  "sensor.demo_dgc_7440_hc": {
+   "friendly_name": "Demo DGC 7440 HC status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_dgc_7440_hc_remote_control": {
+   "friendly_name": "Demo DGC 7440 HC remote_control"
+  },
+  "binary_sensor.demo_dgc_7440_hc_mobile_start": {
+   "friendly_name": "Demo DGC 7440 HC mobile_start"
+  },
+  "binary_sensor.demo_dgc_7440_hc_problem": {
+   "friendly_name": "Demo DGC 7440 HC problem",
+   "device_class": "problem"
+  },
+  "switch.demo_dgc_7440_hc_power": {
+   "friendly_name": "Demo DGC 7440 HC power"
+  },
+  "sensor.demo_dgc_7440_hc_program_id": {
+   "friendly_name": "Demo DGC 7440 HC program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_dgc_7440_hc_program_phase": {
+   "friendly_name": "Demo DGC 7440 HC program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_dgc_7440_hc_remaining_time": {
+   "friendly_name": "Demo DGC 7440 HC remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_dgc_7440_hc_elapsed_time": {
+   "friendly_name": "Demo DGC 7440 HC elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_dgc_7440_hc_start_time": {
+   "friendly_name": "Demo DGC 7440 HC start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_dgc_7440_hc_finish": {
+   "friendly_name": "Demo DGC 7440 HC finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_dgc_7440_hc_start": {
+   "friendly_name": "Demo DGC 7440 HC start",
+   "device_class": "timestamp"
+  },
+  "button.demo_dgc_7440_hc_start": {
+   "friendly_name": "Demo DGC 7440 HC start"
+  },
+  "button.demo_dgc_7440_hc_stop": {
+   "friendly_name": "Demo DGC 7440 HC stop"
+  },
+  "binary_sensor.demo_dgc_7440_hc_door": {
+   "friendly_name": "Demo DGC 7440 HC door",
+   "device_class": "door"
+  },
+  "sensor.demo_dgc_7440_hc_temperature": {
+   "friendly_name": "Demo DGC 7440 HC temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_dgc_7440_hc_target_temperature": {
+   "friendly_name": "Demo DGC 7440 HC target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_dgc_7440_hc_light": {
+   "friendly_name": "Demo DGC 7440 HC light"
+  },
+  "sensor.demo_h_7840_bm": {
+   "friendly_name": "Demo H 7840 BM status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_h_7840_bm_remote_control": {
+   "friendly_name": "Demo H 7840 BM remote_control"
+  },
+  "binary_sensor.demo_h_7840_bm_mobile_start": {
+   "friendly_name": "Demo H 7840 BM mobile_start"
+  },
+  "binary_sensor.demo_h_7840_bm_problem": {
+   "friendly_name": "Demo H 7840 BM problem",
+   "device_class": "problem"
+  },
+  "switch.demo_h_7840_bm_power": {
+   "friendly_name": "Demo H 7840 BM power"
+  },
+  "sensor.demo_h_7840_bm_program_id": {
+   "friendly_name": "Demo H 7840 BM program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "fan_plus",
+    "conventional_heat",
+    "intensive_bake",
+    "auto_roast",
+    "fan_grill",
+    "eco_fan_heat",
+    "top_heat",
+    "bottom_heat",
+    "steam_cooking",
+    "microwave",
+    "microwave_fan_plus",
+    "defrost"
+   ]
+  },
+  "sensor.demo_h_7840_bm_program_phase": {
+   "friendly_name": "Demo H 7840 BM program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "process_running",
+    "process_finished",
+    "energy_save",
+    "pre_heating"
+   ]
+  },
+  "sensor.demo_h_7840_bm_remaining_time": {
+   "friendly_name": "Demo H 7840 BM remaining_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7840_bm_elapsed_time": {
+   "friendly_name": "Demo H 7840 BM elapsed_time",
+   "unit_of_measurement": "min",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7840_bm_start_time": {
+   "friendly_name": "Demo H 7840 BM start_time",
+   "unit_of_measurement": "h",
+   "device_class": "duration"
+  },
+  "sensor.demo_h_7840_bm_finish": {
+   "friendly_name": "Demo H 7840 BM finish",
+   "device_class": "timestamp"
+  },
+  "sensor.demo_h_7840_bm_start": {
+   "friendly_name": "Demo H 7840 BM start",
+   "device_class": "timestamp"
+  },
+  "button.demo_h_7840_bm_start": {
+   "friendly_name": "Demo H 7840 BM start"
+  },
+  "button.demo_h_7840_bm_stop": {
+   "friendly_name": "Demo H 7840 BM stop"
+  },
+  "binary_sensor.demo_h_7840_bm_door": {
+   "friendly_name": "Demo H 7840 BM door",
+   "device_class": "door"
+  },
+  "sensor.demo_h_7840_bm_temperature": {
+   "friendly_name": "Demo H 7840 BM temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_h_7840_bm_target_temperature": {
+   "friendly_name": "Demo H 7840 BM target_temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "light.demo_h_7840_bm_light": {
+   "friendly_name": "Demo H 7840 BM light"
+  },
+  "sensor.demo_cm_6360": {
+   "friendly_name": "Demo CM 6360 status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_cm_6360_remote_control": {
+   "friendly_name": "Demo CM 6360 remote_control"
+  },
+  "binary_sensor.demo_cm_6360_mobile_start": {
+   "friendly_name": "Demo CM 6360 mobile_start"
+  },
+  "binary_sensor.demo_cm_6360_problem": {
+   "friendly_name": "Demo CM 6360 problem",
+   "device_class": "problem"
+  },
+  "switch.demo_cm_6360_power": {
+   "friendly_name": "Demo CM 6360 power"
+  },
+  "sensor.demo_cm_6360_program_id": {
+   "friendly_name": "Demo CM 6360 program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "ristretto",
+    "espresso",
+    "coffee",
+    "long_coffee",
+    "cappuccino",
+    "latte_macchiato",
+    "hot_water",
+    "milk_foam",
+    "herbal_tea"
+   ]
+  },
+  "sensor.demo_cm_6360_program_phase": {
+   "friendly_name": "Demo CM 6360 program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "espresso",
+    "hot_milk",
+    "milk_foam",
+    "dispensing",
+    "pre_brewing",
+    "grinding",
+    "rinse",
+    "process_finished"
+   ]
+  },
+  "light.demo_cm_6360_light": {
+   "friendly_name": "Demo CM 6360 light"
+  },
+  "sensor.demo_cva_7845": {
+   "friendly_name": "Demo CVA 7845 status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_cva_7845_remote_control": {
+   "friendly_name": "Demo CVA 7845 remote_control"
+  },
+  "binary_sensor.demo_cva_7845_mobile_start": {
+   "friendly_name": "Demo CVA 7845 mobile_start"
+  },
+  "binary_sensor.demo_cva_7845_problem": {
+   "friendly_name": "Demo CVA 7845 problem",
+   "device_class": "problem"
+  },
+  "switch.demo_cva_7845_power": {
+   "friendly_name": "Demo CVA 7845 power"
+  },
+  "sensor.demo_cva_7845_program_id": {
+   "friendly_name": "Demo CVA 7845 program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "ristretto",
+    "espresso",
+    "coffee",
+    "long_coffee",
+    "cappuccino",
+    "latte_macchiato",
+    "hot_water",
+    "milk_foam",
+    "herbal_tea"
+   ]
+  },
+  "sensor.demo_cva_7845_program_phase": {
+   "friendly_name": "Demo CVA 7845 program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "heating_up",
+    "espresso",
+    "hot_milk",
+    "milk_foam",
+    "dispensing",
+    "pre_brewing",
+    "grinding",
+    "rinse",
+    "process_finished"
+   ]
+  },
+  "light.demo_cva_7845_light": {
+   "friendly_name": "Demo CVA 7845 light"
+  },
+  "sensor.demo_km_7897_fl": {
+   "friendly_name": "Demo KM 7897 FL status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_1": {
+   "friendly_name": "Kookzone 1",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_2": {
+   "friendly_name": "Kookzone 2",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_3": {
+   "friendly_name": "Kookzone 3",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_4": {
+   "friendly_name": "Kookzone 4",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_5": {
+   "friendly_name": "Kookzone 5",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7897_fl_plate_6": {
+   "friendly_name": "Kookzone 6",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7464_fr": {
+   "friendly_name": "Demo KM 7464 FR status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "sensor.demo_km_7464_fr_plate_1": {
+   "friendly_name": "Kookzone 1",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7464_fr_plate_2": {
+   "friendly_name": "Kookzone 2",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7464_fr_plate_3": {
+   "friendly_name": "Kookzone 3",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_km_7464_fr_plate_4": {
+   "friendly_name": "Kookzone 4",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl": {
+   "friendly_name": "Demo KMDA 7774 FL status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl_plate_1": {
+   "friendly_name": "Kookzone 1",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl_plate_2": {
+   "friendly_name": "Kookzone 2",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl_plate_3": {
+   "friendly_name": "Kookzone 3",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl_plate_4": {
+   "friendly_name": "Kookzone 4",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_kmda_7774_fl_plate_5": {
+   "friendly_name": "Kookzone 5",
+   "device_class": "enum",
+   "options": [
+    "plate_step_0",
+    "plate_step_warming",
+    "plate_step_1",
+    "plate_step_2",
+    "plate_step_3",
+    "plate_step_4",
+    "plate_step_5",
+    "plate_step_6",
+    "plate_step_7",
+    "plate_step_8",
+    "plate_step_9",
+    "plate_step_10",
+    "plate_step_11",
+    "plate_step_12",
+    "plate_step_13",
+    "plate_step_14",
+    "plate_step_15",
+    "plate_step_16",
+    "plate_step_17",
+    "plate_step_18",
+    "plate_step_boost",
+    "plate_step_boost_2"
+   ]
+  },
+  "sensor.demo_da_6698_w": {
+   "friendly_name": "Demo DA 6698 W status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_da_6698_w_remote_control": {
+   "friendly_name": "Demo DA 6698 W remote_control"
+  },
+  "binary_sensor.demo_da_6698_w_mobile_start": {
+   "friendly_name": "Demo DA 6698 W mobile_start"
+  },
+  "binary_sensor.demo_da_6698_w_problem": {
+   "friendly_name": "Demo DA 6698 W problem",
+   "device_class": "problem"
+  },
+  "switch.demo_da_6698_w_power": {
+   "friendly_name": "Demo DA 6698 W power"
+  },
+  "fan.demo_da_6698_w_fan": {
+   "friendly_name": "Demo DA 6698 W fan",
+   "percentage": 0,
+   "percentage_step": 25,
+   "preset_modes": null
+  },
+  "light.demo_da_6698_w_light": {
+   "friendly_name": "Demo DA 6698 W light"
+  },
+  "light.demo_da_6698_w_ambient_light": {
+   "friendly_name": "Demo DA 6698 W ambient_light"
+  },
+  "sensor.demo_da_7378_d": {
+   "friendly_name": "Demo DA 7378 D status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_da_7378_d_remote_control": {
+   "friendly_name": "Demo DA 7378 D remote_control"
+  },
+  "binary_sensor.demo_da_7378_d_mobile_start": {
+   "friendly_name": "Demo DA 7378 D mobile_start"
+  },
+  "binary_sensor.demo_da_7378_d_problem": {
+   "friendly_name": "Demo DA 7378 D problem",
+   "device_class": "problem"
+  },
+  "switch.demo_da_7378_d_power": {
+   "friendly_name": "Demo DA 7378 D power"
+  },
+  "fan.demo_da_7378_d_fan": {
+   "friendly_name": "Demo DA 7378 D fan",
+   "percentage": 0,
+   "percentage_step": 25,
+   "preset_modes": null
+  },
+  "light.demo_da_7378_d_light": {
+   "friendly_name": "Demo DA 7378 D light"
+  },
+  "light.demo_da_7378_d_ambient_light": {
+   "friendly_name": "Demo DA 7378 D ambient_light"
+  },
+  "sensor.demo_kfn_7774_d": {
+   "friendly_name": "Demo KFN 7774 D status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_kfn_7774_d_remote_control": {
+   "friendly_name": "Demo KFN 7774 D remote_control"
+  },
+  "binary_sensor.demo_kfn_7774_d_mobile_start": {
+   "friendly_name": "Demo KFN 7774 D mobile_start"
+  },
+  "binary_sensor.demo_kfn_7774_d_problem": {
+   "friendly_name": "Demo KFN 7774 D problem",
+   "device_class": "problem"
+  },
+  "binary_sensor.demo_kfn_7774_d_door": {
+   "friendly_name": "Demo KFN 7774 D door",
+   "device_class": "door"
+  },
+  "sensor.demo_kfn_7774_d_temperature": {
+   "friendly_name": "Demo KFN 7774 D temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_kfn_7774_d_temperature_zone_2": {
+   "friendly_name": "Demo KFN 7774 D temperature_zone_2",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "climate.demo_kfn_7774_d_zone_1": {
+   "friendly_name": "Demo KFN 7774 D zone_1",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": 4,
+   "temperature": 4,
+   "min_temp": 1,
+   "max_temp": 9,
+   "target_temp_step": 1
+  },
+  "climate.demo_kfn_7774_d_zone_2": {
+   "friendly_name": "Demo KFN 7774 D zone_2",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": -18,
+   "temperature": -18,
+   "min_temp": -26,
+   "max_temp": -16,
+   "target_temp_step": 1
+  },
+  "switch.demo_kfn_7774_d_supercooling": {
+   "friendly_name": "Demo KFN 7774 D supercooling"
+  },
+  "switch.demo_kfn_7774_d_superfreezing": {
+   "friendly_name": "Demo KFN 7774 D superfreezing"
+  },
+  "sensor.demo_kfn_4795_cd": {
+   "friendly_name": "Demo KFN 4795 CD status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_kfn_4795_cd_remote_control": {
+   "friendly_name": "Demo KFN 4795 CD remote_control"
+  },
+  "binary_sensor.demo_kfn_4795_cd_mobile_start": {
+   "friendly_name": "Demo KFN 4795 CD mobile_start"
+  },
+  "binary_sensor.demo_kfn_4795_cd_problem": {
+   "friendly_name": "Demo KFN 4795 CD problem",
+   "device_class": "problem"
+  },
+  "binary_sensor.demo_kfn_4795_cd_door": {
+   "friendly_name": "Demo KFN 4795 CD door",
+   "device_class": "door"
+  },
+  "sensor.demo_kfn_4795_cd_temperature": {
+   "friendly_name": "Demo KFN 4795 CD temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_kfn_4795_cd_temperature_zone_2": {
+   "friendly_name": "Demo KFN 4795 CD temperature_zone_2",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "climate.demo_kfn_4795_cd_zone_1": {
+   "friendly_name": "Demo KFN 4795 CD zone_1",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": 4,
+   "temperature": 4,
+   "min_temp": 1,
+   "max_temp": 9,
+   "target_temp_step": 1
+  },
+  "climate.demo_kfn_4795_cd_zone_2": {
+   "friendly_name": "Demo KFN 4795 CD zone_2",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": -18,
+   "temperature": -18,
+   "min_temp": -26,
+   "max_temp": -16,
+   "target_temp_step": 1
+  },
+  "switch.demo_kfn_4795_cd_supercooling": {
+   "friendly_name": "Demo KFN 4795 CD supercooling"
+  },
+  "switch.demo_kfn_4795_cd_superfreezing": {
+   "friendly_name": "Demo KFN 4795 CD superfreezing"
+  },
+  "sensor.demo_kwt_6834_sgs": {
+   "friendly_name": "Demo KWT 6834 SGS status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_kwt_6834_sgs_remote_control": {
+   "friendly_name": "Demo KWT 6834 SGS remote_control"
+  },
+  "binary_sensor.demo_kwt_6834_sgs_mobile_start": {
+   "friendly_name": "Demo KWT 6834 SGS mobile_start"
+  },
+  "binary_sensor.demo_kwt_6834_sgs_problem": {
+   "friendly_name": "Demo KWT 6834 SGS problem",
+   "device_class": "problem"
+  },
+  "binary_sensor.demo_kwt_6834_sgs_door": {
+   "friendly_name": "Demo KWT 6834 SGS door",
+   "device_class": "door"
+  },
+  "sensor.demo_kwt_6834_sgs_temperature": {
+   "friendly_name": "Demo KWT 6834 SGS temperature",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_kwt_6834_sgs_temperature_zone_2": {
+   "friendly_name": "Demo KWT 6834 SGS temperature_zone_2",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "sensor.demo_kwt_6834_sgs_temperature_zone_3": {
+   "friendly_name": "Demo KWT 6834 SGS temperature_zone_3",
+   "device_class": "temperature",
+   "unit_of_measurement": "°C"
+  },
+  "climate.demo_kwt_6834_sgs_zone_1": {
+   "friendly_name": "Demo KWT 6834 SGS zone_1",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": 8,
+   "temperature": 8,
+   "min_temp": 5,
+   "max_temp": 20,
+   "target_temp_step": 1
+  },
+  "climate.demo_kwt_6834_sgs_zone_2": {
+   "friendly_name": "Demo KWT 6834 SGS zone_2",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": 12,
+   "temperature": 12,
+   "min_temp": 5,
+   "max_temp": 20,
+   "target_temp_step": 1
+  },
+  "climate.demo_kwt_6834_sgs_zone_3": {
+   "friendly_name": "Demo KWT 6834 SGS zone_3",
+   "hvac_modes": [
+    "cool"
+   ],
+   "current_temperature": 16,
+   "temperature": 16,
+   "min_temp": 5,
+   "max_temp": 20,
+   "target_temp_step": 1
+  },
+  "light.demo_kwt_6834_sgs_light": {
+   "friendly_name": "Demo KWT 6834 SGS light"
+  },
+  "sensor.demo_scout_rx3": {
+   "friendly_name": "Demo Scout RX3 status",
+   "device_class": "enum",
+   "options": [
+    "off",
+    "on",
+    "programmed",
+    "waiting_to_start",
+    "in_use",
+    "pause",
+    "program_ended",
+    "program_interrupted",
+    "idle",
+    "rinse_hold",
+    "service",
+    "superfreezing",
+    "supercooling",
+    "superheating",
+    "supercooling_superfreezing",
+    "autocleaning",
+    "not_connected",
+    "failure"
+   ]
+  },
+  "binary_sensor.demo_scout_rx3_remote_control": {
+   "friendly_name": "Demo Scout RX3 remote_control"
+  },
+  "binary_sensor.demo_scout_rx3_mobile_start": {
+   "friendly_name": "Demo Scout RX3 mobile_start"
+  },
+  "binary_sensor.demo_scout_rx3_problem": {
+   "friendly_name": "Demo Scout RX3 problem",
+   "device_class": "problem"
+  },
+  "sensor.demo_scout_rx3_program_id": {
+   "friendly_name": "Demo Scout RX3 program_id",
+   "device_class": "enum",
+   "options": [
+    "no_program",
+    "auto",
+    "spot",
+    "turbo",
+    "silent"
+   ]
+  },
+  "sensor.demo_scout_rx3_program_phase": {
+   "friendly_name": "Demo Scout RX3 program_phase",
+   "device_class": "enum",
+   "options": [
+    "not_running",
+    "vacuum_cleaning",
+    "returning",
+    "vacuum_cleaning_paused",
+    "going_to_target_area",
+    "docked",
+    "remote_controlled",
+    "wheel_lifted",
+    "dirty_sensors"
+   ]
+  },
+  "sensor.demo_scout_rx3_battery": {
+   "friendly_name": "Demo Scout RX3 battery",
+   "device_class": "battery",
+   "unit_of_measurement": "%"
+  },
+  "vacuum.demo_scout_rx3_vacuum": {
+   "friendly_name": "Demo Scout RX3 vacuum",
+   "fan_speed_list": [
+    "normal",
+    "turbo",
+    "silent"
+   ],
+   "fan_speed": "normal"
+  }
+ }
+}

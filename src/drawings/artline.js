@@ -25,7 +25,7 @@ export const artlineGeom = microwave => ({
   panel: null,                                                               // details go below the drawing
 });
 
-const sensorLine = (y, ink) => {
+export const sensorLine = (y, ink) => {
   const keys = [118, 146, 168, 400, 424, 448, 472];
   return `<path d="M84 ${y} H516" style="stroke:${ink}" stroke-opacity=".28" stroke-width="1.2"/>
   <circle cx="104" cy="${y - 10}" r="6.5" fill="none" style="stroke:${ink}" stroke-opacity=".6" stroke-width="1.6"/>
@@ -35,7 +35,7 @@ const sensorLine = (y, ink) => {
 };
 
 // the H 7440 BMX's row of programme symbols: small outlined squares with a mark inside
-const symbolRow = ink => Array.from({ length: 8 }, (_, i) => {
+export const symbolRow = ink => Array.from({ length: 8 }, (_, i) => {
   const x = 146 + i * 38;
   return `<rect x="${x}" y="24" width="24" height="17" rx="3" fill="none" style="stroke:${ink}" stroke-opacity=".9" stroke-width="1.5"/>
     <path d="M${x + 6} ${i % 2 ? 31 : 34} h12 M${x + 6} ${i % 2 ? 35 : 30} h7" style="stroke:${ink}" stroke-opacity=".8" stroke-width="1.3" stroke-linecap="round"/>`;

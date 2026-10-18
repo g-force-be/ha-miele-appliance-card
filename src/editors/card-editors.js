@@ -1,5 +1,8 @@
 // Visual editors for miele-appliance-card and miele-programmes-card, on Home Assistant's ha-form.
 import { FormEditor, selectors, programmeOptions } from "./form.js";
+import { DRAWINGS } from "../drawings/index.js";
+
+const designs = (config, dev) => DRAWINGS[config.drawing || dev?.family.drawing]?.designs ?? [];
 
 export class MieleApplianceCardEditor extends FormEditor {
   get defaults() { return { theme: "dark", animations: "full", controls: true, big_countdown: false }; }
@@ -13,6 +16,7 @@ export class MieleApplianceCardEditor extends FormEditor {
         { name: "finish", selector: s.finish },
         { name: "drawing", selector: s.drawing },
       ] },
+      ...(designs(this._config, dev).length > 1 ? [{ name: "design", selector: s.design(this._config.drawing || dev?.family.drawing) }] : []),
       { type: "grid", name: "", schema: [
         { name: "theme", selector: s.theme },
         { name: "animations", selector: s.animations },

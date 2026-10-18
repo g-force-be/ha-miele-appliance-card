@@ -12,10 +12,11 @@
 //   theme: dark                     dark | light | auto | ha
 //   accent: "#4fa3e0"
 //   language: nl
-import { MieleTracker, describeDevice, scanDevices, readSnapshot } from "../miele-model.js";
+import { MieleTracker, describeDevice, scanDevices, readSnapshot, oldIntegration } from "../miele-model.js";
 import { now } from "../clock.js";
 import { t, languageOf, mieleLabel } from "../i18n/index.js";
 import { BASE_CSS } from "../ui/styles.js";
+import { ACCENTS } from "../drawings/index.js";
 import { duration, clockTime, temp } from "../ui/format.js";
 import { callService, errorText } from "../ui/call.js";
 import {
@@ -23,7 +24,6 @@ import {
   readCache, writeCache, readLast, writeLast,
 } from "../programs.js";
 
-const ACCENT = { washer: "#4fa3e0", dryer: "#e9a23b", steam_oven: "#e07a4f", microwave: "#e07a4f", coffee: "#c98b5a", drawer: "#e0a84f", generic: "#4fa3e0" };
 const FRESH = 6 * 3600e3, RETRY = 10 * 60e3;
 const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const store = () => { try { return globalThis.localStorage ?? null; } catch { return null; } };
@@ -154,12 +154,12 @@ export class MieleProgrammesCard extends HTMLElement {
 
   _buildEmpty() {
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });
-    r.innerHTML = `<style>${BASE_CSS}</style><ha-card class="theme-${this._themeName()}"><div class="err">${esc(this._t("err.no_device"))}</div></ha-card>`;
+    r.innerHTML = `<style>${BASE_CSS}</style><ha-card class="theme-${this._themeName()}"><div class="err">${esc(this._t(oldIntegration(this._hass) ? "err.old_integration" : "err.no_device"))}</div></ha-card>`;
   }
 
   _build() {
     const c = this._config, fam = this._dev.family;
-    const accent = c.accent || ACCENT[fam.drawing] || ACCENT.generic;
+    const accent = c.accent || ACCENTS[fam.drawing] || ACCENTS.generic;
     this._name = c.name || this._hass.devices?.[this._dev.id]?.name_by_user || this._t(`kind.${fam.kind}`);
     this._inText = c.name || this._hass.devices?.[this._dev.id]?.name_by_user ? this._name : this._name.toLowerCase();
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });

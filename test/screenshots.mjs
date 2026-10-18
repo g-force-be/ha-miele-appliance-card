@@ -3,6 +3,7 @@
 //   npm run shots -- m1           M1: the model harness
 //   npm run shots -- m2b / m3     M2b: kitchen appliances · M3: the programmes card
 //   npm run shots -- m4           M4: the overview card and the editors
+//   npm run shots -- m5           M5: the other design lines and appliance types (demo appliances)
 //   npm run shots -- m2a washer   only shots whose name contains "washer"
 // Output: dev/screenshots/<suite>/, with an index.html contact sheet.
 import fs from "node:fs";
@@ -139,6 +140,28 @@ function m4Shots() {
   return shots;
 }
 
+// --- M5: the other design lines and appliance types (demo appliances, dev/data/demo-registry.json)
+const M5 = [
+  ["w1-white", "demo_washer_white_cottons@1000"], ["w1-black", "demo_washer_white_cottons@1000", "design=black"], ["w1-graphite", "demo_washer_white_cottons@1000", "design=graphite"],
+  ["w1-mtouch", "demo_washer_mtouch_cottons@1000"], ["t1-mtouch", "demo_dryer_mtouch_cottons@5100"], ["wt1-drying", "demo_washer_dryer_wash_dry@6000"],
+  ["dish-integrated", "demo_dish_eco@1200"], ["dish-semi-drying", "demo_dish_semi_eco@8000"], ["dish-free-door", "demo_dish_free_eco@12010"],
+  ["oven-vitroline", "demo_oven_fan_plus@100"], ["oven-pureline", "demo_oven_fan_plus@100", "design=pureline"], ["oven-contourline", "demo_oven_fan_plus@100", "design=contourline"],
+  ["oven-artline", "demo_oven_artline_fan_plus@100"], ["oven-mtouch", "demo_oven_mtouch_fan_plus@100"], ["oven-active", "demo_oven_active_fan_plus@100"],
+  ["dialog-on", "demo_dialog_fan_plus@820"], ["compact-vitroline", "demo_steam_vitro_fan_plus@100"], ["compact-microwave-mtouch", "demo_micro_vitro_combo@1420"],
+  ["coffee-cm6", "demo_coffee_cm6_morning@200"], ["coffee-cva", "demo_coffee_cva_morning@200"],
+  ["hob-6", "demo_hob_cooking@1000"], ["hob-4", "demo_hob4_cooking@1000"], ["hob-extractor", "demo_hob_extr_cooking@1000"],
+  ["hood-wall", "demo_hood_cooking@600"], ["hood-aura", "demo_hood_aura_cooking@1000", "set=light.demo_da_7378_d_ambient_light:on"],
+  ["fridge-integrated", "demo_fridge_day@300"], ["fridge-free-supercool", "demo_fridge_free_day@1500"], ["wine", "demo_wine_day@900"],
+  ["robot-cleaning", "demo_robot_clean@1500"], ["robot-docked", "demo_robot_clean@3000"],
+];
+function m5Shots() {
+  const shots = [];
+  for (const theme of ["dark", "light"]) for (const [name, cycle, extra] of M5)
+    shots.push({ name: `${name}-${theme}`, group: name, url: `cards.html?c=${cycle}&theme=${theme}&lang=nl&bar=0&anim=off${extra ? `&${extra}` : ""}`,
+      viewport: { width: 420, height: 1400 }, scale: 2, theme, card: true });
+  return shots;
+}
+
 // --- README: the pictures on the GitHub page (docs/images/), from the same harness
 function readmeShots() {
   const ms = ["washing_machine", "steam_oven", "microwave_oven"].map(MS).join("&");
@@ -152,7 +175,7 @@ function readmeShots() {
   ];
 }
 
-const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots, m3: m3Shots, m4: m4Shots, readme: readmeShots };
+const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots, m3: m3Shots, m4: m4Shots, m5: m5Shots, readme: readmeShots };
 if (!SUITES[suite]) { console.error(`unknown suite ${suite}`); process.exit(1); }
 const shots = SUITES[suite]().filter(s => s.name.includes(filter));
 

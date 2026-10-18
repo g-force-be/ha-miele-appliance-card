@@ -140,7 +140,7 @@ export const CARD_CSS = BASE_CSS + `
 /* switched on means a lit display, like the real ones (the coffee machine's screen is a light grey UI) */
 .lcd-on .lcd.line, .lcd-on .lcd.seg, .lcd-on .lcd.oven { background: linear-gradient(#ffffff0c, #ffffff04); }
 .lcd-on .lcd.menu { background: #4a5158; }
-.coffee:not(.moving) .ring .track { opacity: 0; }
+.g-coffee:not(.moving) .ring .track { opacity: 0; }
 
 /* status icons on the front */
 .icon { aspect-ratio: 1; border-radius: 50%; display: grid; place-items: center;
@@ -216,6 +216,70 @@ export const CARD_CSS = BASE_CSS + `
 .steam .w:nth-child(2), .waves .wv:nth-child(2) { animation-delay: -1.2s !important; }
 .steam .w:nth-child(3), .waves .wv:nth-child(3) { animation-delay: -2.4s !important; }
 
+/* dishwasher: plates and glasses when loaded, water from the spray arms, steam while drying, the light inside,
+   the floor light under the plinth while it runs */
+@keyframes mc-jet { 0%, 100% { opacity: .2; transform: scaleY(.55); } 50% { opacity: .8; transform: scaleY(1); } }
+.tub { opacity: .75; transition: opacity .8s; }
+.lit .tub { opacity: 1; }
+.plates { opacity: 0; transition: opacity .8s; }
+.loaded .plates { opacity: 1; }
+.spray .jet { opacity: 0; transform-box: fill-box; transform-origin: 50% 100%; }
+.f-spray .spray .jet { opacity: .75; }
+.anim-full.f-spray .spray .jet { animation: mc-jet 1.4s ease-in-out infinite; }
+.dlight { background: radial-gradient(ellipse 90% 70% at 50% 0%, #f2f6ffd0, #f2f6ff00 75%); opacity: 0; transition: opacity .8s; }
+.f-door .dlight, .dishwasher.lamp .dlight { opacity: 1; }
+.infolight { opacity: 0; transition: opacity 1s; }
+.moving .infolight { opacity: 1; }
+
+/* hob, hood, fridges: no cycle, so no progress ring */
+.g-hob .ring, .g-hood .ring, .g-cooling .ring { display: none; }
+/* hob: a pan and a glow on every zone that is on, the glow as strong as the zone's level (--lvl, 0…1) */
+.zone .zg { opacity: calc(var(--lvl, 0) * .9); transition: opacity .8s; }
+.zone .pan { opacity: clamp(0, calc(var(--lvl, 0) * 1000), 1); transition: opacity .4s; }
+/* inside .lcd (a size container) cq units are the display's own */
+.lcd.zones { background: none; }
+.lcd.zones .zt { display: flex; width: 100%; justify-content: space-evenly; align-items: center; }
+.lcd.zones i { font-style: normal; font-weight: 700; font-size: 72cqh; line-height: 1; color: #e7a83c; opacity: .28; font-variant-numeric: tabular-nums; }
+.lcd.zones i.on { opacity: 1; text-shadow: 0 0 8cqh #e7a83c80; }
+/* hood: vapour rising into it, faster with every fan level; the light cones; the Aura's coloured ring */
+.vapour .w { opacity: 0; }
+.fan-on .vapour .w { opacity: .55; }
+.anim-full.fan-on .vapour .w, .anim-reduced.fan-on .vapour .w { animation: mc-rise 3.8s ease-in infinite; }
+.anim-full.fan-2 .vapour .w { animation-duration: 2.9s; }
+.anim-full.fan-3 .vapour .w { animation-duration: 2.2s; }
+.anim-full.fan-4 .vapour .w { animation-duration: 1.5s; }
+.cones { opacity: 0; transition: opacity .8s; }
+.lamp .cones { opacity: 1; }
+.theme-light .vapour path { stroke: #8f9ca7; }
+.theme-light .cones path { fill: #f0c86a; fill-opacity: .28; }
+.aura-glow { opacity: 0; transition: opacity 1s; }
+.ambient .aura-glow { opacity: 1; }
+.lcd.hood { background: none; }
+.lcd.hood .hb { display: flex; align-items: center; justify-content: center; gap: 4cqw; }
+.lcd.hood i { width: 16cqw; height: 26cqh; border-radius: 13cqh; background: #ffffff38; }
+.theme-light .lcd.hood i { background: #00000026; }
+.lcd.hood i.on { background: var(--c); }
+
+/* fridge and wine: the inside lit when the door opens, cold mist while SuperCool/SuperFrost runs, the zone temperatures */
+.inside { opacity: .78; transition: opacity .8s; }
+.f-door .inside, .lamp .inside { opacity: 1; }
+.cold { background: linear-gradient(#eaf6ff00, #eaf6ffb0); opacity: 0; transition: opacity 1.2s; }
+.f-super .cold { opacity: .75; }
+.anim-full.f-super .cold { animation: mc-pulse 4s ease-in-out infinite; }
+.flight { background: radial-gradient(ellipse 90% 60% at 50% 0%, #ffffffe0, #ffffff00 75%); opacity: 0; transition: opacity .6s; }
+.f-door .flight { opacity: 1; }
+.wlight { background: linear-gradient(90deg, #ffe7b800, #ffe7b855 50%, #ffe7b800); opacity: 0; transition: opacity .8s; }
+.lamp .wlight, .f-door .wlight { opacity: 1; }
+.lcd.cool .ct { display: flex; justify-content: space-evenly; width: 100%; align-items: center; }
+.lcd.cool b { font-size: 62cqh; font-weight: 600; line-height: 1; color: #9fd8ff; font-variant-numeric: tabular-nums; }
+.lcd.cool { opacity: .35; }
+.lcd-on .lcd.cool { opacity: 1; }
+/* robot: side brushes that turn while it cleans, the stretch it has done, the station's charge mark */
+.trail { opacity: 0; transition: opacity 1.5s; }
+.f-clean .trail { opacity: 1; }
+.anim-full.f-clean .brush, .anim-reduced.f-clean .brush { animation: mc-rot .7s linear infinite; }
+.g-vacuum .ring .track { opacity: .25; }
+
 /* coffee: cup light, the cup filling up, the stream, steam, rinse drops, the grinder's buzz */
 @keyframes mc-fall { to { transform: translateY(10px); } }
 @keyframes mc-drop { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(62%); opacity: 0; } }
@@ -224,7 +288,7 @@ export const CARD_CSS = BASE_CSS + `
 .lcd-on .cuplight { opacity: .3; }
 .lamp .cuplight { opacity: 1; }
 .cup { opacity: 0; transition: opacity .6s; }
-.coffee.moving .cup, .coffee.st-done .cup { opacity: 1; }
+.g-coffee.moving .cup, .g-coffee.st-done .cup { opacity: 1; }
 .cup .fill { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.04); }
 .f-dispense .cup .fill { transform: scaleY(1); transition: transform 40s ease-out; }
 .jet { position: absolute; top: 0; height: 46%; width: 1.4%; left: 47.4%; overflow: hidden; opacity: 0; transition: opacity .3s; }

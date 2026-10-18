@@ -24,6 +24,7 @@ const nl = {
     started: "{program} gestart.", cached: "Lijst van {when}, bewaard in deze browser.",
     why: {
       mobile_start: "Zet Start op afstand aan op de {name} om hier een programma te starten.",
+      waiting: "{program} staat klaar op de {name}. Druk op Start op het toestel, of zet Start op afstand aan om hier te starten.",
       busy: "Er loopt al een programma. Starten kan weer als het klaar is.",
       offline: "De {name} is niet verbonden.",
       no_programs: "Miele biedt voor de {name} geen programma's aan om op afstand te starten.",
@@ -61,6 +62,7 @@ const en = {
     started: "{program} started.", cached: "List from {when}, kept in this browser.",
     why: {
       mobile_start: "Turn on Remote start on the {name} to start a programme here.",
+      waiting: "{program} is set on the {name}. Press Start on the appliance, or turn on Remote start to start it here.",
       busy: "A programme is running. You can start again once it's finished.",
       offline: "The {name} isn't connected.",
       no_programs: "Miele offers no programmes to start remotely on the {name}.",

@@ -54,7 +54,8 @@ export function startBlock(vm, family, roles, list) {
   if (family.group === "drawer" || (list && !list.length)) return "no_programs";
   if (["running", "paused", "scheduled"].includes(vm.state)) return "busy";
   if (!roles.mobile_start) return "no_remote";
-  if (vm.flags?.mobileStart !== true) return "mobile_start";
+  // a programme is already set and waits for Start on the appliance (the Miele app can't start it either)
+  if (vm.flags?.mobileStart !== true) return vm.state === "ready" && vm.program ? "waiting" : "mobile_start";
   if (!list) return "no_list";
   return null;
 }

@@ -1,8 +1,10 @@
+![Miele Appliance Card](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/banner.png)
+
 # Miele Appliance Card for Home Assistant
 
 Dashboard cards for Miele appliances connected through Home Assistant's built-in **Miele** integration. Each appliance is drawn to look like the real one, its display shows what the real display shows, and a ring around the door or window fills up as the programme runs.
 
-![Washing machine and tumble dryer cards, both running](docs/images/laundry.png)
+![Washing machine and tumble dryer cards, both running](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/laundry.png)
 
 - **Looks like your appliance.** Own drawings of the W1 washing machine and T1 dryer, the ArtLine steam oven and oven with microwave, the CM 7750 coffee machine and the warming drawer. Front colours such as lotus white, obsidian black and graphite grey.
 - **Shows what is going on.** Time left, end time, phase, temperatures, dryness level, door and remote-start status. Water, spinning drum, heat, steam, microwaves, coffee pouring and the oven light are animated, with movement that stays light on a Nest Hub.
@@ -32,7 +34,7 @@ entity: sensor.miele_washing_machine
 
 Point `entity` at any entity of the appliance. The card finds the appliance and its other entities by itself, by what each entity *is* (Home Assistant's translation key), not by its name. Renamed entities keep working.
 
-![Steam oven, coffee machine, oven with microwave and warming drawer](docs/images/kitchen.png)
+![Steam oven, coffee machine, oven with microwave and warming drawer](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/kitchen.png)
 
 ### More examples
 
@@ -117,7 +119,7 @@ accent: "#7bb661"
 
 ## The programmes card
 
-![Programmes card: washing machine, steam oven and oven with microwave](docs/images/programmes.png)
+![Programmes card: washing machine, steam oven and oven with microwave](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/programmes.png)
 
 ```yaml
 type: custom:miele-programmes-card
@@ -189,6 +191,7 @@ npm test               # model and programme tests (node:test)
 npm run dev            # harness at http://127.0.0.1:5173/dev/cards.html
 npm run shots -- m3    # Playwright screenshots in dev/screenshots/ (uses the installed Chrome)
 npm run shots -- readme   # the pictures on this page
+node tools/brand.mjs   # logo, banner and social preview from docs/images/logo.svg
 ```
 
 ## Credits

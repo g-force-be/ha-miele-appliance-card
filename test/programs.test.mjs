@@ -71,6 +71,8 @@ test("start only with Start op afstand on, nothing running, a list known", () =>
   assert.equal(startBlock(vm("off", true), fam("washer"), roles, null), "no_list");
   assert.equal(startBlock(vm("running", true), fam("drawer"), roles, []), "no_programs", "the drawer: no programmes, whatever it does");
   assert.equal(startBlock(vm("off", true), fam("washer"), {}, l), "no_remote");
+  assert.equal(startBlock({ ...vm("ready", false), program: "fan_plus" }, fam("micro"), roles, l), "waiting", "set, waiting for Start on the oven");
+  assert.equal(startBlock({ ...vm("ready", true), program: "fan_plus" }, fam("micro"), roles, l), null);
 });
 
 test("oven defaults: usual temperatures on the step, last values win, microwave needs a time", () => {

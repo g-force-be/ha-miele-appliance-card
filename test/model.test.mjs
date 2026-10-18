@@ -144,6 +144,19 @@ describe("states and units", () => {
     assert.equal(s("unknown", { phase: "main_wash" }), "running");
     assert.equal(s("unknown", { phase: "not_running", program: "cottons" }), "standby");
   });
+  test("a programme set remotely without Start op afstand waits: pause + not_running is ready (18-10)", () => {
+    const s = extra => cardState({ status: "pause", program: "fan_plus", failure: false, ...extra }).state;
+    assert.equal(s({ phase: "not_running", elapsed: 0 }), "ready");
+    assert.equal(s({ phase: "process_running" }), "paused", "a door pause keeps its running phase");
+    assert.equal(s({ phase: "heating_up_phase", elapsed: 0 }), "paused");
+    const t = new MieleTracker(familyOf("Oven microwave", "H7440BMX")), at = Date.parse("2026-10-18T16:31:50Z");
+    const snap = (status, phase, program) => ({ status, phase, program, elapsed: 0, remaining: 0, failure: false, power: true, mobileStart: false,
+      buttons: { start: "disabled", stop: "disabled", pause: "none" } });
+    assert.equal(t.update(snap("on", "not_running", "no_program"), at).state, "standby");
+    const vm = t.update(snap("pause", "not_running", "fan_plus"), at + 49e3);
+    assert.equal(vm.state, "ready", "set from the app or HA, waiting for Start on the oven");
+    assert.equal(vm.program, "fan_plus");
+  });
   test("durations follow the entity's unit (start_in is in hours)", () => {
     assert.equal(toMinutes(1.5, "h"), 90);
     assert.equal(toMinutes(90, "min"), 90);

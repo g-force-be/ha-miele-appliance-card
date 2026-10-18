@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 400" width="1280" height="400">
+  <title>Miele Appliance Card</title>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#2c3036"></stop>
+      <stop offset="1" stop-color="#1a1c20"></stop>
+    </linearGradient>
+    <linearGradient id="front" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fbfaf6"></stop>
+      <stop offset=".55" stop-color="#efede6"></stop>
+      <stop offset="1" stop-color="#dcd9d1"></stop>
+    </linearGradient>
+    <linearGradient id="chrome" x1=".15" y1="0" x2=".85" y2="1">
+      <stop offset="0" stop-color="#ffffff"></stop>
+      <stop offset=".22" stop-color="#c3c9cf"></stop>
+      <stop offset=".45" stop-color="#8d969f"></stop>
+      <stop offset=".62" stop-color="#e9ecef"></stop>
+      <stop offset=".82" stop-color="#9aa2aa"></stop>
+      <stop offset="1" stop-color="#d7dbdf"></stop>
+    </linearGradient>
+    <radialGradient id="glass" cx=".38" cy=".32" r=".8">
+      <stop offset="0" stop-color="#46505b"></stop>
+      <stop offset=".7" stop-color="#1b1f24"></stop>
+      <stop offset="1" stop-color="#101316"></stop>
+    </radialGradient>
+    <linearGradient id="arc" x1="1" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#4fa3e0"></stop>
+      <stop offset=".6" stop-color="#4fc3c7"></stop>
+      <stop offset="1" stop-color="#5fd38a"></stop>
+    </linearGradient>
+    <clipPath id="glassClip"><circle cx="256" cy="256" r="104"></circle></clipPath>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="5" result="b"></feGaussianBlur>
+      <feMerge><feMergeNode in="b"></feMergeNode><feMergeNode in="SourceGraphic"></feMergeNode></feMerge>
+    </filter>
+  
+    <linearGradient id="bannerbg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#262a2f"></stop><stop offset="1" stop-color="#16181b"></stop></linearGradient>
+    <radialGradient id="halo"><stop offset="0" stop-color="#4fa3e0" stop-opacity=".22"></stop><stop offset="1" stop-color="#4fa3e0" stop-opacity="0"></stop></radialGradient>
+  </defs>
+  <rect width="1280" height="400" rx="28" fill="url(#bannerbg)"></rect>
+  <circle cx="206" cy="200" r="225" fill="url(#halo)"></circle>
+  <g transform="translate(56 50) scale(0.5859)">
+
+  <!-- tile -->
+  <rect x="8" y="8" width="496" height="496" rx="112" fill="url(#bg)"></rect>
+  <rect x="8.5" y="8.5" width="495" height="495" rx="111.5" fill="none" stroke="#ffffff" stroke-opacity=".08"></rect>
+
+  <!-- progress track and arc (about three quarters done) -->
+  <circle cx="256" cy="256" r="190" fill="none" stroke="#ffffff" stroke-opacity=".08" stroke-width="22"></circle>
+  <circle cx="256" cy="256" r="190" fill="none" stroke="url(#arc)" stroke-width="22" stroke-linecap="round" stroke-dasharray="859.5 1193.8" transform="rotate(-90 256 256)" filter="url(#glow)"></circle>
+
+  <!-- appliance front (lotus white disc) -->
+  <circle cx="256" cy="256" r="164" fill="url(#front)"></circle>
+  <!-- chrome door ring -->
+  <circle cx="256" cy="256" r="140" fill="url(#chrome)"></circle>
+  <circle cx="256" cy="256" r="140" fill="none" stroke="#6f7881" stroke-opacity=".5" stroke-width="2"></circle>
+  <circle cx="256" cy="256" r="118" fill="#2a2f35"></circle>
+  <!-- glass -->
+  <circle cx="256" cy="256" r="104" fill="url(#glass)"></circle>
+  <g clip-path="url(#glassClip)">
+    <path d="M140 280 C 180 260, 215 300, 256 280 S 332 260, 372 280 L 372 368 L 140 368 Z" fill="#4fa3e0" fill-opacity=".55"></path>
+    <path d="M140 294 C 186 278, 222 314, 262 294 S 334 278, 372 296 L 372 368 L 140 368 Z" fill="#7cc0ef" fill-opacity=".35"></path>
+  </g>
+  <!-- glass highlight -->
+  <path d="M190 198 A 92 92 0 0 1 286 166" fill="none" stroke="#ffffff" stroke-opacity=".35" stroke-width="10" stroke-linecap="round"></path>
+  <!-- door handle -->
+  <rect x="401" y="226" width="10" height="60" rx="5" fill="#c9cdd1"></rect>
+  <rect x="401" y="226" width="10" height="60" rx="5" fill="none" stroke="#8a9299" stroke-opacity=".6"></rect>
+</g>
+  <g font-family="Inter, 'Segoe UI', Roboto, sans-serif">
+    <text x="400" y="168" font-size="78" font-weight="600" fill="#f3f4f6" letter-spacing="-1">Miele Appliance Card</text>
+    <text x="400" y="224" font-size="30" fill="#9aa1a9">Unofficial Home Assistant cards for Miele appliances</text>
+    <g><rect x="400.0" y="280" width="103.6" height="38" rx="19" fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".10"></rect><text y="305" font-size="19" font-weight="500" fill="#c9ced4" text-anchor="middle" x="451.8">Washer</text><rect x="513.6" y="280" width="85.3" height="38" rx="19" fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".10"></rect><text y="305" font-size="19" font-weight="500" fill="#c9ced4" text-anchor="middle" x="556.3">Dryer</text><rect x="608.9" y="280" width="92.9" height="38" rx="19" fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".10"></rect><text y="305" font-size="19" font-weight="500" fill="#c9ced4" text-anchor="middle" x="655.4">Ovens</text><rect x="711.8" y="280" width="95.7" height="38" rx="19" fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".10"></rect><text y="305" font-size="19" font-weight="500" fill="#c9ced4" text-anchor="middle" x="759.7">Coffee</text><rect x="817.5" y="280" width="182.9" height="38" rx="19" fill="#ffffff" fill-opacity=".07" stroke="#ffffff" stroke-opacity=".10"></rect><text y="305" font-size="19" font-weight="500" fill="#c9ced4" text-anchor="middle" x="909.0">Warming drawer</text></g>
+  </g>
+</svg>

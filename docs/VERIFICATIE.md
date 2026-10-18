@@ -78,3 +78,13 @@ De sessies uit punten 1 en 3 staan als extra testcycli in `dev/data/fixtures-ext
 Nog open voor groep B:
 - starten met "Start op afstand" aan, per toestel;
 - of de koffiemachine "Start op afstand" kent.
+
+## Groep B: eerste starttest (18-10, oven-microgolf, met Peters akkoord)
+
+- **Aanzetten** met de knop op de kaart werkte, maar `switch.turn_on` gaf "Failed to set state for switch.miele_microwave_oven_power". De Miele-cloud gaf een HTTP-fout terug en voerde het bevel toch uit. De kaart wist die melding nu zodra de schakelaar de gevraagde stand toont.
+- **"Start op afstand"** ging bij het aanzetten niet vanzelf aan.
+- **`set_program_oven`** (programma 13 Hetelucht plus, 60 °C) zonder "Start op afstand" gaf geen fout. De oven kreeg het programma en de doeltemperatuur, maar startte niet:
+  - status `pause`, fase `not_running`, verstreken 0, starttijd 0;
+  - de Miele-app toonde hetzelfde: Hetelucht Plus, doel 60 °C, met een grijze startknop.
+  Klaarzetten kan dus van buitenaf, starten alleen aan het toestel of met "Start op afstand" aan.
+- **De kaart** toont `pause` + `not_running` + 0 min nu als "Klaar om te starten", tenzij er eerder iets liep. Een deurpauze valt na zo'n 24 s ook terug op `not_running`.

@@ -252,7 +252,7 @@ export class MieleProgrammesCard extends HTMLElement {
     const ms = vm.flags?.mobileStart === true;
     this._root.classList.toggle("remote-on", ms);
     this._set("pill", dev.roles.mobile_start ? this._t(ms ? "prog.remote_on" : "prog.remote_off") : this._t(`state.${vm.state}`));
-    this._setHTML("why", block ? `<ha-icon icon="${block === "busy" ? "mdi:progress-clock" : "mdi:information-outline"}"></ha-icon><span>${esc(this._t(`prog.why.${block}`, { name }))}</span>` : "");
+    this._setHTML("why", block ? `<ha-icon icon="${block === "busy" ? "mdi:progress-clock" : "mdi:information-outline"}"></ha-icon><span>${esc(this._t(`prog.why.${block}`, { name, program: mieleLabel(h, "program", vm.program, lang) }))}</span>` : "");
     this._set("err", this._startErr || (error && ms && !list ? this._t("err.send", { msg: error }) : ""));
     this._set("src", cachedAt ? this._t("prog.cached", { when: `${new Date(cachedAt).toLocaleDateString(lang)} ${clockTime(cachedAt, h, lang)}` }) : "");
 

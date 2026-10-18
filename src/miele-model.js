@@ -201,6 +201,11 @@ export function cardState(snap) {
     const state = IDLE_PHASES.has(snap.phase) || snap.phase == null ? "standby" : END_PHASES.has(snap.phase) ? "done" : "running";
     return { state: snap.failure ? "error" : state, connected: true, guessed: true };
   }
+  // A programme set from outside while Start op afstand is off waits on the appliance for Start: Miele reports
+  // "pause" with the phase not_running and nothing elapsed (oven-microwave, 18-10). That's ready to start.
+  // A door pause also drops to not_running after a while, so the tracker keeps "paused" when a cycle was running.
+  if (s === "pause" && IDLE_PHASES.has(snap.phase) && !(snap.elapsed > 0) && !snap.failure)
+    return { state: "ready", connected: true, guessed: false, notStarted: true };
   const state = snap.failure ? "error" : STATUS_STATE[s] ?? "standby";
   return { state, connected: true, guessed: false };
 }
@@ -275,8 +280,8 @@ export class MieleTracker {
 
   _compute(snap, now, { stale, connection, guessed = false }) {
     const fam = this.family, o = this.opts;
-    const state = cardState(snap).state;
-    const prev = this.prev;
+    const base = cardState(snap), prev = this.prev;
+    const state = base.notStarted && (prev === "running" || prev === "paused") ? "paused" : base.state;
     let c = this.c;
 
     // --- cycle bookkeeping (skipped while a held snapshot is shown)

@@ -205,6 +205,10 @@ export class MieleApplianceCard extends HTMLElement {
     const h = this._hass, dev = this._dev, lang = this._lang;
     const snap = readSnapshot(h, dev.roles);
     const vm = this._vm = this._tracker.update(snap, now());
+    if (this._powerErr && snap.power === this._powerErr.on) {
+      if (this._text.err === this._powerErr.text) this._set("err", "");
+      this._powerErr = null;
+    }
     const f = vm.flags ?? {}, s = vm.state;
     const moving = s === "running" || s === "paused";
     const draw = this._draw, prog = vm.program ?? "", phase = vm.phase ?? "";
@@ -404,11 +408,18 @@ export class MieleApplianceCard extends HTMLElement {
     this._set("ask-yes", this._t(what === "start" ? "btn.start" : what === "off" ? "btn.off" : "btn.stop"));
   }
 
-  _power(on) { return this._call("switch", on ? "turn_on" : "turn_off", { entity_id: this._dev.roles.power }); }
+  // The Miele cloud sometimes answers power on/off with an error and carries it out anyway (oven-microwave, 18-10):
+  // the error goes away as soon as the switch shows what was asked.
+  async _power(on) {
+    this._powerErr = null;
+    if (await this._call("switch", on ? "turn_on" : "turn_off", { entity_id: this._dev.roles.power }))
+      this._powerErr = { on, text: this._text.err };
+  }
 
   async _call(domain, service, data) {
     this._set("err", "");
     const msg = await callService(this._hass, domain, service, data);
     if (msg) this._set("err", this._t("err.send", { msg }));
+    return msg;
   }
 }

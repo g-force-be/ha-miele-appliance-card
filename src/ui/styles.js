@@ -53,7 +53,9 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .st-offline .art, .st-offline .glass { opacity: .5; }
 
 /* the window */
-.glass { aspect-ratio: 1; border-radius: 50%; overflow: hidden; background: #0d1116; isolation: isolate; }
+.glass { position: absolute; overflow: hidden; background: #0d1116; isolation: isolate; }
+.glass.round { aspect-ratio: 1; border-radius: 50%; }
+.glass.box { background: none; }
 .layer { position: absolute; inset: 0; }
 .layer svg { display: block; width: 100%; height: 100%; }
 .drum { opacity: .5; transition: opacity .8s; }
@@ -75,14 +77,15 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
   background: #000000a8; color: #fff; opacity: 0; transition: opacity .6s; }
 .has-phase .phase { opacity: 1; }
 
-/* the progress ring round the door */
-.ring { aspect-ratio: 1; pointer-events: none; }
-.ring svg { position: absolute; inset: 0; width: 100%; height: 100%; transform: rotate(-90deg); overflow: visible; }
-.ring .track { fill: none; stroke: #0000001f; stroke-width: 1.7; }
-.ring .bar { fill: none; stroke: var(--rc); stroke-width: 1.9; stroke-linecap: round; transition: stroke-dashoffset 1s linear, stroke .6s, opacity .4s; }
-.ring .spin { position: absolute; inset: 0; opacity: 0; transition: opacity .4s; }
-.ring .spin circle { fill: none; stroke: var(--rc); stroke-width: 1.9; stroke-linecap: round; stroke-dasharray: 12 88; }
-.m-indeterminate .ring .spin { opacity: 1; }
+/* the progress ring round the door or window: a path in drawing units, starting at the top */
+.ring { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+.ring .track { fill: none; stroke: color-mix(in srgb, var(--f-ink) 24%, transparent); }
+.ring .bar { fill: none; stroke: var(--rc); stroke-linecap: round; stroke-linejoin: round; transition: stroke-dashoffset 1s linear, stroke .6s, opacity .4s; }
+.spinbox { aspect-ratio: 1; pointer-events: none; }
+.spin { position: absolute; inset: 0; opacity: 0; transition: opacity .4s; }
+.spin svg { width: 100%; height: 100%; display: block; }
+.spin circle { fill: none; stroke: var(--rc); stroke-width: 1.8; stroke-linecap: round; stroke-dasharray: 12 88; }
+.m-indeterminate .spin { opacity: 1; }
 .st-paused { --rc: color-mix(in srgb, var(--c) 55%, #8d9298); }
 .st-done { --rc: var(--ok); }
 .f-cool { --rc: var(--cool); }
@@ -106,10 +109,18 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .icon.lit ha-icon { color: var(--c); opacity: 1; }
 .icon.warn ha-icon { color: var(--warn); opacity: 1; }
 
-/* information on the lower front */
-.panel { position: absolute; display: grid; align-content: center; gap: .9cqw; padding: 1.6cqw 3.4cqw; border-radius: 2.6cqw;
+.icon.tap { cursor: pointer; }
+
+/* information: on the lower front of the laundry machines, underneath the drawing for the others */
+.panel { display: grid; align-content: center; gap: .9cqw; padding: 1.6cqw 3.4cqw; border-radius: 2.6cqw;
   background: var(--mc-panel); color: var(--mc-panel-fg); box-shadow: 0 0 0 1px var(--mc-panel-line), 0 2px 10px #0000001f;
   font-size: clamp(11px, 3.35cqw, 14.5px); line-height: 1.3; }
+.panel.over { position: absolute; }
+.panel.below { margin: 12px auto 0; max-width: var(--maxw, 400px); gap: 3px; padding: 8px 12px; border-radius: 12px; font-size: 13.5px;
+  box-shadow: 0 0 0 1px var(--mc-panel-line); }
+.lcd.ghost { color: var(--f-ink); }
+.lcd.ghost .t { font-weight: 400; }
+.quiet .lcd.ghost { opacity: 0; }
 .quiet .panel { display: none; }
 .row { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; min-width: 0; }
 .row .k { color: var(--mc-muted); flex: none; }
@@ -124,6 +135,7 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 @keyframes mc-tumble { 0%, 100% { transform: rotate(-26deg); } 50% { transform: rotate(40deg); } }
 @keyframes mc-slosh { 0%, 100% { transform: translateX(-7%); } 50% { transform: translateX(7%); } }
 @keyframes mc-pulse { 50% { opacity: .4; } }
+@keyframes mc-breathe { 0%, 100% { opacity: .75; } 50% { opacity: .2; } }
 .moving .drum, .moving .laundry, .moving .wave, .m-indeterminate .ring .spin { will-change: transform; }
 .anim-full.moving .drum { animation: mc-rot 6s linear infinite; }
 .anim-full.moving .laundry { animation: mc-tumble 2.8s ease-in-out infinite; }
@@ -136,10 +148,65 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .anim-full.f-anti .laundry, .anim-full.st-done.f-cool .laundry { animation: mc-tumble 7s ease-in-out infinite; }
 .anim-reduced.moving .drum, .anim-reduced.f-anti .drum { animation: mc-rot 16s linear infinite; }
 .anim-reduced.moving.f-spin .drum { animation-duration: 5s; }
-.anim-full.m-indeterminate .ring .spin, .anim-reduced.m-indeterminate .ring .spin { animation: mc-rot 2.6s linear infinite; }
-.st-paused .layer, .st-paused .wave { animation-play-state: paused !important; }
+.anim-full.m-indeterminate .spin, .anim-reduced.m-indeterminate .spin { animation: mc-rot 2.6s linear infinite; }
+.breathe .ring .bar { opacity: .6; }
+.anim-full.breathe .ring .bar, .anim-reduced.breathe .ring .bar { animation: mc-breathe 3s ease-in-out infinite; }
+
+/* ovens: the cavity, glow, light, steam and microwaves */
+@keyframes mc-rise { 0% { transform: translateY(18%); opacity: 0; } 30% { opacity: .65; } 100% { transform: translateY(-24%); opacity: 0; } }
+@keyframes mc-wave { 0% { transform: scale(.35); opacity: .9; } 100% { transform: scale(2.3); opacity: 0; } }
+.cavity { opacity: .7; transition: opacity .8s; }
+.lit .cavity { opacity: 1; }
+.dish { opacity: 0; transition: opacity .8s; }
+.loaded .dish { opacity: 1; }
+.glow { background: radial-gradient(ellipse 70% 60% at 50% 100%, #ff8a3d78, #ff8a3d00 70%), radial-gradient(ellipse 80% 45% at 50% 0%, #ff6a2a5c, #ff6a2a00 70%);
+  opacity: 0; transition: opacity 1.2s; }
+.f-heat .glow { opacity: .85; }
+.light { background: radial-gradient(ellipse 80% 70% at 50% 0%, #ffe8c0a0, #ffe8c000 75%); opacity: 0; transition: opacity .8s; }
+.lit .light { opacity: 1; }
+.steam .w, .waves .wv { opacity: 0; }
+.f-steam .steam .w, .f-dispense .steam .w { opacity: .5; }
+.f-micro .waves .wv:first-child { opacity: .55; }
+.anim-full.f-heating .glow { animation: mc-pulse 2.4s ease-in-out infinite; }
+.anim-full.f-steam .steam .w, .anim-full.f-dispense .steam .w { animation: mc-rise 3.6s ease-in infinite; }
+.anim-full.f-micro .waves .wv { animation: mc-wave 2.4s ease-out infinite; }
+.steam .w:nth-child(2), .waves .wv:nth-child(2) { animation-delay: -1.2s !important; }
+.steam .w:nth-child(3), .waves .wv:nth-child(3) { animation-delay: -2.4s !important; }
+
+/* coffee: cup light, the cup filling up, the stream, steam, rinse drops, the grinder's buzz */
+@keyframes mc-fall { to { transform: translateY(10px); } }
+@keyframes mc-drop { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(62%); opacity: 0; } }
+@keyframes mc-buzz { 25% { transform: translate(.5px, -.4px); } 75% { transform: translate(-.5px, .4px); } }
+.cuplight { background: radial-gradient(ellipse 42% 62% at 50% 0%, #fff3d8a0, #fff3d800 72%); opacity: 0; transition: opacity .8s; }
+.lit .cuplight { opacity: 1; }
+.cup { opacity: 0; transition: opacity .6s; }
+.coffee.moving .cup, .coffee.st-done .cup { opacity: 1; }
+.cup .fill { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.04); }
+.f-dispense .cup .fill { transform: scaleY(1); transition: transform 40s ease-out; }
+.jet { position: absolute; top: 0; height: 46%; width: 1.4%; left: 47.4%; overflow: hidden; opacity: 0; transition: opacity .3s; }
+.jet.two { left: 51.2%; }
+.jet::before { content: ""; position: absolute; left: 0; right: 0; top: -20px; bottom: 0;
+  background: repeating-linear-gradient(to bottom, #7a4a2b 0 7px, #7a4a2b99 7px 10px); }
+.f-dispense .jet { opacity: .95; }
+.anim-full.f-dispense .jet::before { animation: mc-fall .4s linear infinite; }
+.drops .d { opacity: 0; }
+.anim-full.f-rinse .drops .d { animation: mc-drop 1.1s ease-in infinite; }
+.drops .d:nth-child(2) { animation-delay: -.4s !important; }
+.drops .d:nth-child(3) { animation-delay: -.8s !important; }
+.anim-full.f-grind .art { animation: mc-buzz .14s linear infinite; }
+
+/* warming drawer: the front slides out when the drawer opens, a warm line along the top while it heats */
+.drawer .glass.box { overflow: visible; }
+.front { transition: transform .8s ease; }
+.f-door .front { transform: translateY(5%) scale(1.015); }
+.drawer .pic { margin-bottom: 4%; }
+.warmline { bottom: auto; height: 12%; background: linear-gradient(to bottom, #ffa45c99, #ffa45c00); opacity: 0; transition: opacity 1s; }
+.f-warm .warmline { opacity: 1; }
+.anim-full.f-warm .warmline { animation: mc-pulse 4s ease-in-out infinite; }
+
+.st-paused .layer, .st-paused .wave, .st-paused .jet::before { animation-play-state: paused !important; }
 @media (prefers-reduced-motion: reduce) {
-  .layer, .wave, .ring .spin { animation: none !important; }
-  .water { transition: none; }
+  .layer, .wave, .spin, .ring .bar, .jet::before, .art { animation: none !important; }
+  .water, .cup .fill { transition: none !important; }
 }
 `;

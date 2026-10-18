@@ -54,6 +54,7 @@ const cards = entries.map(e => {
   const card = document.createElement("miele-appliance-card");
   const cfg = { type: "custom:miele-appliance-card", device_id: e.sim.deviceId, theme: q.get("cardtheme") ?? theme,
     animations: q.get("anim") ?? "full", controls: q.get("controls") !== "0" };
+  if (q.get("drawing")) cfg.drawing = q.get("drawing");
   if (q.get("finish")) cfg.finish = q.get("finish");
   card.setConfig(cfg);
   stage.append(card);

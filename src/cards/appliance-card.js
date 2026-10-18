@@ -12,12 +12,13 @@
 //   accent: "#4fa3e0"               ring and highlight colour
 //   language: nl                    default: Home Assistant's language
 //   max_width: 400px
+//   drawing: generic               another drawing: washer | dryer | steam_oven | microwave | coffee | drawer | generic
 //   images: /local/miele/           own pictures: <drawing>.svg (washer.svg, dryer.svg, …)
 //   entities: { remaining: sensor.x }   override a detected role
 import { MieleTracker, describeDevice, readSnapshot, scanDevices, DRY_LADDER } from "../miele-model.js";
 import { now } from "../clock.js";
 import { t, languageOf, mieleLabel } from "../i18n/index.js";
-import { drawingFor } from "../drawings/index.js";
+import { drawingFor, DRAWINGS } from "../drawings/index.js";
 import { finishPalette, finishVars } from "../drawings/finish.js";
 import { CARD_CSS } from "../ui/styles.js";
 import { countdown, duration, clockTime, temp } from "../ui/format.js";
@@ -98,16 +99,24 @@ export class MieleApplianceCard extends HTMLElement {
 
   _build() {
     const c = this._config, dev = this._dev, fam = dev.family;
-    const d = drawingFor(fam.drawing), g = d.geom, u = `mc${++uid}`;
-    this._round = d.round;
+    const draw = this._draw = DRAWINGS[c.drawing] ? c.drawing : fam.drawing;
+    const d = drawingFor(draw), g = d.geom, u = `mc${++uid}`;
+    this._geom = g;
     const palette = finishPalette(c.finish, fam.finish);
-    const accent = c.accent || ACCENT[fam.drawing] || ACCENT.generic;
+    const accent = c.accent || ACCENT[draw] || ACCENT.generic;
     const name = this._name = c.name || this._hass.devices?.[dev.id]?.name_by_user || this._t(`kind.${fam.kind}`);
     const icons = g.icons.at.map(([x, y], i) => `<div class="at icon" id="ic${i}" style="left:${x}%;top:${y}%;width:${g.icons.size}%"><ha-icon></ha-icon></div>`).join("");
+    const w = g.window, round = w.d != null;
+    const win = round ? `class="at glass round" style="left:${w.x}%;top:${w.y}%;width:${w.d}%"`
+      : `class="glass box" style="left:${w.left}%;top:${w.top}%;width:${w.width}%;height:${w.height}%;border-radius:${w.radius}"`;
+    const rows = [0, 1, 2, 3].map(i => `<div class="row"><span class="k" id="k${i}"></span><span class="v" id="v${i}"></span></div>`).join("");
+    const p = g.panel;
+    const panel = p ? `<div class="panel over" style="left:${p.left}%;right:${p.right}%;top:${p.top}%;bottom:${p.bottom}%">${rows}</div>`
+      : `<div class="panel below">${rows}</div>`;
     const art = c.images ? `<img src="${esc(String(c.images).replace(/\/?$/, "/") + fam.drawing + ".svg")}" alt="">` : d.svg(u);
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });
     r.innerHTML = `<style>${CARD_CSS}</style>
-<ha-card class="${fam.drawing} theme-${this._themeName()} anim-${["full", "reduced", "off"].includes(c.animations) ? c.animations : "full"}"
+<ha-card class="${draw} ${round ? "round" : "flat"} theme-${this._themeName()} anim-${["full", "reduced", "off"].includes(c.animations) ? c.animations : "full"}"
   style="--c:${esc(accent)};${finishVars(palette)}${c.max_width ? `;--maxw:${esc(c.max_width)}` : ""}">
   <div class="head"><span class="name">${esc(name)}</span><span class="pill" id="pill"></span></div>
   <div class="ctl" id="ctl" hidden>
@@ -121,20 +130,15 @@ export class MieleApplianceCard extends HTMLElement {
   <div class="err" id="err"></div>
   <div class="pic" id="pic" style="--ratio:${g.ratio}">
     <div class="art">${art}</div>
-    <div class="at glass" style="left:${g.glass.x}%;top:${g.glass.y}%;width:${g.glass.d}%">${d.window(u)}<div class="phase" id="phase"></div></div>
-    <div class="at ring" style="left:${g.ring.x}%;top:${g.ring.y}%;width:${g.ring.d}%">
-      <svg viewBox="0 0 100 100"><circle class="track" cx="50" cy="50" r="48.5" pathLength="100"/>
-        <circle class="bar" id="bar" cx="50" cy="50" r="48.5" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100"/></svg>
-      <div class="spin"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48.5" pathLength="100"/></svg></div>
-    </div>
-    <div class="lcd" style="left:${g.lcd.x}%;top:${g.lcd.y}%;width:${g.lcd.w}%;height:${g.lcd.h}%"><span class="t" id="lcd-t"></span><span class="s" id="lcd-s"></span></div>
+    <div ${win}>${d.window(u)}<div class="phase" id="phase"></div></div>
+    <svg class="ring" viewBox="${g.view}" aria-hidden="true"><path class="track" d="${g.ring.path}" pathLength="100" style="stroke-width:${g.ring.width}"/>
+      <path class="bar" id="bar" d="${g.ring.path}" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" style="stroke-width:${g.ring.width}"/></svg>
+    ${g.ring.spin ? `<div class="at spinbox" style="left:${g.ring.spin.x}%;top:${g.ring.spin.y}%;width:${g.ring.spin.d}%"><div class="spin"><svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="48.5" pathLength="100"/></svg></div></div>` : ""}
+    <div class="lcd${g.lcd.ghost ? " ghost" : ""}" style="left:${g.lcd.x}%;top:${g.lcd.y}%;width:${g.lcd.w}%;height:${g.lcd.h}%"><span class="t" id="lcd-t"></span><span class="s" id="lcd-s"></span></div>
     ${icons}
-    <div class="panel" style="left:${g.panel.left}%;right:${g.panel.right}%;top:${g.panel.top}%;bottom:${g.panel.bottom}%">
-      <div class="row"><span class="k" id="k0"></span><span class="v" id="v0"></span></div>
-      <div class="row"><span class="k" id="k1"></span><span class="v" id="v1"></span></div>
-      <div class="row"><span class="k" id="k2"></span><span class="v" id="v2"></span></div>
-    </div>
+    ${p ? panel : ""}
   </div>
+  ${p ? "" : panel}
 </ha-card>`;
     this._root = r.querySelector("ha-card");
     this._el = id => r.getElementById(id);
@@ -152,6 +156,8 @@ export class MieleApplianceCard extends HTMLElement {
       if (what === "stop") press("btn_stop")();
       if (what === "off") this._power(false);
     };
+    const lamp = this._el("ic3");
+    if (lamp) lamp.onclick = e => { e.stopPropagation(); if (this._dev.roles.light) this._call("light", "toggle", { entity_id: this._dev.roles.light }); };
     this._el("pic").onclick = () => this.dispatchEvent(new CustomEvent("hass-more-info",
       { detail: { entityId: this._dev.roles.status }, bubbles: true, composed: true }));
   }
@@ -175,14 +181,24 @@ export class MieleApplianceCard extends HTMLElement {
     const vm = this._vm = this._tracker.update(snap, now());
     const f = vm.flags ?? {}, s = vm.state;
     const moving = s === "running" || s === "paused";
+    const draw = this._draw, prog = vm.program ?? "", phase = vm.phase ?? "";
+    const oven = dev.family.group === "oven", coffee = draw === "coffee", drawer = draw === "drawer";
+    const dispensing = coffee && s === "running" && !f.rinsing && !/grinding|rinse/.test(phase);
     const cls = {
       [`st-${s}`]: true, [`m-${vm.progress.mode}`]: true, moving: moving || false, stale: vm.stale,
       "f-spin": f.spin && s === "running", "f-anti": f.antiCrease && s === "done",
-      "f-cool": f.cooling, "f-heat": (dev.family.drawing === "dryer" && moving && !f.cooling) || false,
-      lit: moving || f.doorOpen || f.antiCrease || (s === "done" && f.cooling),
-      loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s),
+      "f-cool": f.cooling,
+      "f-heat": (draw === "dryer" && moving && !f.cooling) || (oven && s === "running" && !f.cooling) || false,
+      "f-heating": oven && s === "running" && f.heating,
+      "f-steam": oven && moving && (/steam|moisture|sous_vide|blanching|bottling|defrost/.test(prog) || phase === "steam_reduction"),
+      "f-micro": oven && s === "running" && /microwave|popcorn/.test(prog),
+      "f-grind": coffee && s === "running" && /grinding/.test(phase),
+      "f-dispense": dispensing, "f-rinse": coffee && s === "running" && (f.rinsing || phase === "rinse"),
+      "f-warm": drawer && (moving || f.keepWarm), "f-door": f.doorOpen || phase === "door_open",
+      lit: moving || f.doorOpen || f.antiCrease || (s === "done" && f.cooling) || f.light === true,
+      loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s) && !(coffee && !moving),
       quiet: ["off", "standby", "offline"].includes(s),
-      wet: dev.family.drawing === "washer" && moving && !f.spin && !f.drain && !["anti_crease", "drying", "finished"].includes(vm.phase),
+      wet: draw === "washer" && moving && !f.spin && !f.drain && !["anti_crease", "drying", "finished"].includes(vm.phase),
       "has-phase": !!vm.phase && (moving || s === "done"),
     };
     const want = Object.entries(cls).filter(([, on]) => on).map(([k]) => k).join(" ");
@@ -203,13 +219,16 @@ export class MieleApplianceCard extends HTMLElement {
     // the display
     const main = vm.lcd.main, sub = vm.lcd.sub;
     this._set("lcd-t", this._lcd(main, vm));
-    // the phase already sits on the window of a front-loader; the display keeps to time and percentage
-    this._set("lcd-s", sub?.kind === "phase" && this._round ? "" : this._lcd(sub, vm));
+    // the phase already sits in the window; the display keeps to time, temperature and percentage
+    this._set("lcd-s", sub?.kind === "phase" ? "" : this._lcd(sub, vm));
     this._el("lcd-t").classList.toggle("word", ["text", "program", "phase"].includes(main?.kind));
 
     // the ring
     // a fault or an interruption closes the ring in its warning colour
-    const p = s === "error" || s === "interrupted" ? 1 : vm.progress.value;
+    // busy without a known progress: round drawings turn an arc, the others let the whole ring breathe
+    const busy = vm.progress.mode === "indeterminate" && !this._geom.ring.spin;
+    const p = s === "error" || s === "interrupted" || busy ? 1 : vm.progress.value;
+    this._root.classList.toggle("breathe", busy);
     const bar = this._el("bar");
     const off = String(100 - Math.round((p ?? 0) * 1000) / 10);
     if (bar.style.strokeDashoffset !== off) bar.style.strokeDashoffset = off;
@@ -222,6 +241,7 @@ export class MieleApplianceCard extends HTMLElement {
     this._icon(1, "mdi:cellphone-arrow-down", f.mobileStart ? "lit" : "", this._t("icon.mobile"), !!dev.roles.mobile_start);
     const door = f.doorOpen ? ["mdi:door-open", "lit", "icon.door_open"] : moving && lockable ? ["mdi:lock", "lit", "icon.door_locked"] : ["mdi:door-closed", "", "icon.door_closed"];
     this._icon(2, door[0], door[1], this._t(door[2]), !!dev.roles.door);
+    if (this._el("ic3")) this._icon(3, f.light ? "mdi:lightbulb-on" : "mdi:lightbulb-outline", f.light ? "lit" : "", this._t("icon.light"), !!dev.roles.light);
 
     this._rows(vm, snap, lang);
     this._controls(vm, snap);
@@ -233,7 +253,7 @@ export class MieleApplianceCard extends HTMLElement {
     this._text[key] = v;
     const el = this._el(key);
     el.hidden = !show;
-    el.className = `at icon ${state}`;
+    el.className = `at icon ${state}${i === 3 ? " tap" : ""}`;
     el.title = title;
     el.firstElementChild.setAttribute("icon", icon);
   }
@@ -260,7 +280,7 @@ export class MieleApplianceCard extends HTMLElement {
   _rows(vm, snap, lang) {
     const h = this._hass, fam = this._dev.family, s = vm.state;
     const rows = [[this._t("row.program"), vm.program ? esc(mieleLabel(h, "program", vm.program)) : "—"]];
-    if (fam.drawing === "dryer") {
+    if (fam.kind === "dryer" || fam.kind === "washer_dryer") {
       const target = snap.dryingStep, reached = vm.dryness?.reached;
       const ti = LADDER.indexOf(target), ri = LADDER.indexOf(reached);
       const dots = ti >= 0 ? `<span class="dots">${LADDER.slice(0, ti + 1).map((k, i) =>
@@ -269,11 +289,18 @@ export class MieleApplianceCard extends HTMLElement {
     } else if (fam.group === "laundry") {
       const parts = [snap.targetTemp != null ? temp(snap.targetTemp, vm.temps.unit) : null, snap.spin ? `${snap.spin} ${this._t("unit.rpm")}` : null].filter(Boolean);
       rows.push([this._t("row.temp"), parts.length ? parts.join(" · ") : "—"]);
+    } else if (fam.group === "oven" || fam.group === "drawer") {
+      const u = vm.temps.unit, cur = vm.temps.current, target = vm.temps.target;
+      const active = ["running", "paused", "ready", "scheduled"].includes(s);
+      const tv = cur != null && target != null && active ? `${Math.round(cur)} → ${temp(target, u)}` : target != null && active ? temp(target, u) : cur != null ? temp(cur, u) : "—";
+      rows.push([this._t("row.temp"), tv]);
+      if (vm.temps.core != null && active) rows.push([this._t("row.core"), vm.temps.coreTarget != null ? `${Math.round(vm.temps.core)} → ${temp(vm.temps.coreTarget, u)}` : temp(vm.temps.core, u)]);
     }
     if (s === "ready" && vm.lcd.main?.kind === "duration") rows.push([this._t("row.duration"), duration(vm.lcd.main.value)]);
     else if (s === "scheduled" && vm.startAt) rows.push([this._t("row.starts"), clockTime(vm.startAt, h, lang)]);
     else if (vm.endAt && ["running", "paused", "done", "scheduled"].includes(s)) rows.push([this._t(s === "done" ? "row.ended" : "row.ends"), clockTime(vm.endAt, h, lang)]);
-    else rows.push(["", ""]);
+    else if ((s === "running" || s === "paused") && vm.elapsedMin != null) rows.push([this._t("row.elapsed"), `${vm.elapsedMin} ${this._t("unit.min")}`]);
+    while (rows.length < 4) rows.push(["", ""]);
     rows.forEach(([k, v], i) => { this._set(`k${i}`, k); this._setHTML(`v${i}`, v); this._el(`k${i}`).parentElement.hidden = !k; });
   }
 

@@ -8,12 +8,13 @@
 // 600 × 850 units. Door centre (300, 370). The body takes its colours from --f-* (finish.js); `u` prefixes the ids.
 
 export const LAUNDRY_GEOM = {
-  ratio: "600/850",
-  glass: { x: 50, y: 43.53, d: 50 },          // round window, % of width
-  ring: { x: 50, y: 43.53, d: 79.4 },         // progress ring just outside the chrome door ring
+  ratio: "600/850", view: "0 0 600 850",
+  window: { x: 50, y: 43.53, d: 50 },                                    // round window, % of width
+  ring: { path: "M300 132 A238 238 0 1 1 300 608 A238 238 0 1 1 300 132", width: 8.5,   // just outside the chrome ring
+    spin: { x: 50, y: 43.53, d: 79.4 } },
   lcd: { x: 36.33, y: 3.06, w: 27.33, h: 7.53 },
-  icons: { size: 5.8, at: [[9, 7.4], [16, 7.4], [23, 7.4]] },   // where the logo and model name would be
-  panel: { left: 4.5, right: 4.5, top: 75.6, bottom: 5.4 },   // covers the flaps at the bottom
+  icons: { size: 5.8, at: [[9, 7.4], [16, 7.4], [23, 7.4]] },           // where the logo and model name would be
+  panel: { left: 4.5, right: 4.5, top: 75.6, bottom: 5.4 },             // covers the flaps at the bottom
 };
 
 const f = v => `var(--f-${v})`;

@@ -20,6 +20,12 @@
      [4800, "status", "off"], [4800, "phase", "not_running"], [4800, "program", "no_program"], [4800, "drying_step", null]]
   },
   {
+   "id": "drawer_keep_warm_synthetic", "model": "Warming drawer", "start": "2026-10-11T18:00:00+02:00", "synthetic": true,
+   "events": [[0, "status", "on"], [5, "status", "in_use"], [5, "program", "keep_warm"], [5, "phase", "heating_up"], [5, "temp", 20.1],
+     [120, "temp", 34.5], [300, "temp", 52], [600, "temp", 66.5], [600, "phase", "keeping_warm"], [1500, "phase", "door_open"],
+     [1530, "phase", "keeping_warm"], [2400, "status", "off"], [2400, "phase", "not_running"], [2400, "program", "no_program"], [2400, "temp", 41]]
+  },
+  {
    "id": "dryer_failure_synthetic", "model": "Tumble dryer", "start": "2026-10-11T14:00:00+02:00", "synthetic": true,
    "events": [[0, "status", "programmed"], [0, "program", "cottons"], [0, "drying_step", "normal"], [20, "status", "in_use"],
      [20, "phase", "drying"], [300, "status", "failure"], [900, "status", "off"], [900, "phase", "not_running"], [900, "program", "no_program"]]

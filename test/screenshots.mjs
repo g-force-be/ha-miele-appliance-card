@@ -62,7 +62,35 @@ function m2aShots() {
   return shots;
 }
 
-const SUITES = { m1: m1Shots, m2a: m2aShots };
+// --- M2b: steam oven, oven with microwave, coffee machine, warming drawer, and the built-in column
+const KITCHEN = {
+  steam_oven: [["off", "steam_oven_fan_plus_timer", -1], ["heating", "steam_oven_fan_plus_timer", 20], ["at-temp", "steam_oven_fan_plus_timer", 40],
+    ["timer", "steam_oven_fan_plus_timer", 100], ["blip-held", "steam_oven_fan_plus_timer", 315.5], ["door-paused", "steam_oven_door_pauses", 300],
+    ["done", "steam_oven_fan_plus_timer", 748], ["on", "steam_oven_fan_plus_timer", 820]],
+  microwave: [["off", "microwave_combo", -1], ["heating", "microwave_wifi_dropouts", 120], ["paused", "microwave_wifi_dropouts", 400],
+    ["microwave", "microwave_wifi_dropouts", 1420], ["wifi-lost", "microwave_wifi_dropouts", 1200], ["done", "microwave_combo", 1340]],
+  coffee: [["off", "coffee_morning", -1], ["rinsing", "coffee_morning", 10], ["on", "coffee_morning", 70], ["grinding", "coffee_morning", 180],
+    ["dispensing", "coffee_morning", 200], ["tea", "coffee_morning", 1460], ["interrupted", "coffee_interrupted", 10]],
+  drawer: [["off", "drawer_offline_while_off", 5], ["wifi-lost", "drawer_offline_while_off", 600], ["heating", "drawer_keep_warm_synthetic", 300],
+    ["keeping-warm", "drawer_keep_warm_synthetic", 900], ["door-open", "drawer_keep_warm_synthetic", 1510]],
+};
+const COLUMN = [["running", "steam_oven_fan_plus_timer@100", "microwave_wifi_dropouts@1420", "drawer_keep_warm_synthetic@900"],
+  ["off", "steam_oven_fan_plus_timer@-1", "microwave_combo@-1", "drawer_offline_while_off@5"]];
+function m2bShots() {
+  const shots = [];
+  for (const [w, width, height, cols] of WIDTHS) for (const theme of ["light", "dark"]) for (const finish of ["obsidian_black", "brilliant_white", "graphite_grey"]) {
+    const common = `theme=${theme}&finish=${finish}&lang=nl&bar=0&anim=off`;
+    for (const [drawing, list] of Object.entries(KITCHEN)) for (const [state, cycle, t] of list)
+      shots.push({ name: `${drawing}-${state}-${finish}-${theme}-${w}`, group: `${drawing}-${state}`,
+        url: `cards.html?c=${cycle}@${t}&cols=${cols}&${common}`, viewport: { width, height }, scale: width < 600 ? 2 : 1, theme, card: true });
+    if (w === "500") for (const [state, ...cs] of COLUMN)
+      shots.push({ name: `column-${state}-${finish}-${theme}`, group: `column-${state}`,
+        url: `cards.html?${cs.map(c => `c=${c}`).join("&")}&cols=1&controls=0&${common}`, viewport: { width, height: 1400 }, scale: 1, theme, stage: true });
+  }
+  return shots;
+}
+
+const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots };
 if (!SUITES[suite]) { console.error(`unknown suite ${suite}`); process.exit(1); }
 const shots = SUITES[suite]().filter(s => s.name.includes(filter));
 
@@ -92,9 +120,10 @@ try {
   server.close();
 }
 
-// contact sheet: one row per group
-const groups = [...new Set(shots.map(s => s.group))];
-const html = groups.map(g => `<section><h2>${g}</h2><div>${shots.filter(s => s.group === g).map(s =>
+// contact sheet: one row per group, with every shot of the suite that exists on disk (a filtered run keeps the rest)
+const all = SUITES[suite]().filter(x => fs.existsSync(path.join(out, `${x.name}.png`)));
+const groups = [...new Set(all.map(s => s.group))];
+const html = groups.map(g => `<section><h2>${g}</h2><div>${all.filter(s => s.group === g).map(s =>
   `<figure><a href="${s.name}.png"><img src="${s.name}.png" loading="lazy"></a><figcaption>${s.name.slice(g.length + 1)}</figcaption></figure>`).join("")}</div></section>`).join("");
 fs.writeFileSync(path.join(out, "index.html"), `<!doctype html><meta charset="utf-8"><title>${suite} screenshots</title>
 <style>body{font:14px system-ui;margin:16px;background:#e9ebee}h2{font-size:15px;margin:22px 0 8px}

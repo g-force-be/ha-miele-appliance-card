@@ -27,7 +27,7 @@ Elke kaart krijgt een visuele editor (`getConfigElement`) en een `getStubConfig(
 | Steam oven combi | `DGC7845X` = **DGC 7845 X** (ArtLine, grepeloos, Touch2Open, 45 cm, M Touch, gemotoriseerd kantelbaar bedieningspaneel) | 10916960 | obsidiaanzwart | Keuken | `b8ee6dfe5e0f82d19997caf1ab237969` |
 | Oven microwave | `H7440BMX` = **H 7440 BMX** (compacte combi-microgolfoven, grepeloos, 45 cm) | 11099850 | obsidiaanzwart (mat) | Keuken | `eeef45e3b771421c2439c81f17581b33` |
 | Coffee system | `CM7750` = **CM 7750 CoffeeSelect** (**vrijstaand aanrechtmodel**, géén inbouw) | 10947370 | obsidiaanzwart; centrale in hoogte verstelbare uitloop met kopverlichting, 3 bonenreservoirs bovenaan, inox lekbak, kopjeswarmer bovenop, monochroom display midden | Keuken | `1f0fc39845233a82f0628ef7fb858053` |
-| Warming drawer | `ESW7020` = **ESW 7020** (lade 14 cm, grepeloos) | 10891360 | **zwart glazen front zonder greep**, zelfde reeks als de ovens (bevestigd door Peter) | Keuken | `31c740bf126234441a0fd0e0f35dabfc` |
+| Warming drawer | `ESW7020` = **ESW 7020** (lade 29 cm hoog, grepeloos, Push2open; bevestigd door Peter 18-10) | 10891360 | **zwart glazen front zonder greep**, zelfde reeks als de ovens (bevestigd door Peter) | Keuken | `31c740bf126234441a0fd0e0f35dabfc` |
 
 De frontend krijgt `model` (familie) en `model_id` (typenummer) uit `hass.devices`. Gebruik `model_id` om **vorm en tekening** te kiezen, zie §7. Het materiaalnummer staat alleen in de integratie-diagnostics en is niet bruikbaar in de kaart.
 
@@ -301,7 +301,7 @@ De kaart moet ook werken voor types die Peter niet heeft: vaatwasser, oven, micr
 | `steam_oven` | Steam oven combi/Steam oven/Oven/Dialog oven; `DGC*`, `DG*`, `H*` zonder `M` | **DGC 7845 X ArtLine:** 45 cm, obsidiaanzwart glas, **grepeloos** (Touch2Open), M Touch-display in een zwarte strook bovenaan; het bedieningspaneel kantelt motorisch naar voren (waterreservoir erachter) | binnengloed, **stoom**-sliertjes bij stoomprogramma's; `heating_up_phase`: pulserende gloed; licht aan → ovenruimte verlicht | gloed uit, ring groen |
 | `microwave` | Oven microwave/Microwave; `H*BM*`, `M*` | **H 7440 BMX:** 45 cm, obsidiaanzwart mat, grepeloos, zelfde ArtLine-familie als de stoomoven | **golven** (concentrische bogen) bij microgolfprogramma's (`microwave*`, `quick_microwave`); anders als de oven | |
 | `coffee` | Coffee system; `CM*` = **vrijstaand**, `CVA*` = inbouw | **CM 7750 CoffeeSelect:** vrijstaand, obsidiaanzwart, smal-hoog; **centrale uitloop** met kopverlichting (rol `light`), drie bonenreservoirs bovenop, monochroom display midden, inox-lekbak, glazen melkreservoir aan de zijkant. `CVA*`: inbouwvariant (zwart front, uitloop in een nis) | `grinding`: lichte trilling plus bonen; `dispensing`: straal in het kopje plus damp; `rinse`: druppels; `autocleaning`: spoelen | kopje vol, damp |
-| `drawer` | Warming drawer; `ESW*` | **ESW 7020:** lade 14 cm, **zwart glazen front zonder greep**, zelfde ArtLine-reeks als de ovens. Glas, randen en zwart moeten naadloos aansluiten op de oventekeningen in de inbouwkolom. | warme gloed langs de bovenrand; `keeping_warm`: rustige puls; `door_open`: lade een stukje uit | |
+| `drawer` | Warming drawer; `ESW*` | **ESW 7020:** lade 29 cm hoog (595 × 289 mm), **zwart glazen front zonder greep en zonder display**, zelfde ArtLine-reeks als de ovens. Glas, randen en zwart moeten naadloos aansluiten op de oventekeningen in de inbouwkolom. | warme gloed langs de bovenrand; `keeping_warm`: rustige puls; `door_open`: lade een stukje uit | |
 | `generic` | rest | eenvoudige getekende kast | icoon plus ring | |
 
 ### Kleur en uitvoering
@@ -345,7 +345,7 @@ De kaart moet ook werken voor types die Peter niet heeft: vaatwasser, oven, micr
    - **Per ruimte** (standaard):
      - Bijkeuken: wasmachine en droogkast naast elkaar (2 kolommen), elk met een programmakaart eronder (ingeklapt).
      - Keuken:
-       - een **inbouwkolom** met van boven naar onder de stoomoven (45 cm), de oven-microgolf (45 cm) en de warmhoudlade (14 cm), zoals een echte Miele-inbouwwand;
+       - een **inbouwkolom** met van boven naar onder de stoomoven (45 cm), de oven-microgolf (45 cm) en de warmhoudlade (29 cm), zoals een echte Miele-inbouwwand;
        - de **vrijstaande** koffiemachine ernaast "op het aanrecht" (CM = vrijstaand; een `CVA*` zou in de kolom komen).
        - De volgorde in de kolom is instelbaar.
    - **Raster:** alle toestellen in een automatisch raster.

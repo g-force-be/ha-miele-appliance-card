@@ -32,10 +32,11 @@ device_id: 82ddfc7a46859e3c356f96713e446d32   # or: entity: sensor.miele_washing
 | `accent` | Ring and highlight colour. |
 | `language` | `nl` or `en`. Default: Home Assistant's language. |
 | `max_width` | Maximum width of the drawing, e.g. `380px`. |
+| `drawing` | Another drawing: `washer`, `dryer`, `steam_oven`, `microwave`, `coffee`, `drawer` or `generic`. |
 | `images` | A folder with your own drawings (`washer.svg`, `dryer.svg`, …), e.g. `/local/miele/`. |
 | `entities` | Override a detected entity, e.g. `{ remaining: sensor.my_remaining_time }`. |
 
-Washing machine and tumble dryer have their own drawings so far; other appliances use a plain fallback drawing for now.
+Own drawings: washing machine and tumble dryer (W1/T1), steam oven and oven with microwave (ArtLine, 45 cm), the CM 7750 coffee machine and the ESW 7020 warming drawer. Other appliances (dishwasher, hob, hood, fridge, …) get a plain fallback drawing. `drawing:` picks another one.
 
 ## Requirements
 

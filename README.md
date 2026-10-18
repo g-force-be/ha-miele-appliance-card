@@ -156,12 +156,57 @@ show_all: false
 
 | Appliance | Programme list | The card starts |
 |---|---|---|
-| Ovens, microwave | Always available, with each programme's temperature and time limits | with Remote start on |
-| Coffee machine | Always available | with Remote start on |
+| Ovens, microwave | Always available, with each programme's temperature and time limits | with Remote start on; *Set up* without it |
+| Coffee machine | Always available | with Remote start on; *Set up* without it |
 | Washing machine, tumble dryer | Only while Remote start is on | with Remote start on |
 | Warming drawer | Empty: the API offers nothing to start | never |
 
+**Set up without Remote start.** Miele does take a programme from outside while Remote start is off: the oven or coffee machine then shows it and waits until you press Start on the appliance. So with Remote start off and the appliance switched on, the card offers **Set up** instead of **Start**. Washing machine and tumble dryer give no programme list without Remote start.
+
 The card keeps the last list it received in your browser, so the tiles are there even when the appliance is off. Programmes start with the numbers the appliance itself reports, never with numbers from a table.
+
+## The overview card
+
+One card for all your Miele appliances. It finds them by itself and lays them out:
+
+```yaml
+type: custom:miele-overview-card
+layout: rooms
+```
+
+| Layout | What you get |
+|---|---|
+| `rooms` | Per area: the washing machine and dryer side by side; the built-in appliances as one column (oven, oven with microwave, warming drawer, like the real wall) with the coffee machine next to it. Programmes folded under each appliance. |
+| `grid` | All appliances in a grid. |
+| `active` | Only the appliances that are on, the busiest first. |
+| `phone` | One column with smaller drawings, the busiest first. |
+| `display` | For a wall or kitchen screen: only what's on, no buttons, the time left in large type, and a calm clock when everything is off. |
+
+Use it in a view of type *Panel*, or in a sections view in a section that spans the full width. With `appliances` you set the order, names, front colours, which programmes card shows and the favourites, or hide one:
+
+```yaml
+type: custom:miele-overview-card
+layout: phone
+theme: light
+appliances:
+  - entity: sensor.miele_washing_machine
+    programs: [cottons, eco_40_60, quick_power_wash]
+  - entity: sensor.miele_tumble_dryer
+  - entity: sensor.miele_coffee_machine
+    name: Coffee
+  - entity: sensor.miele_warming_drawer
+    show: false
+```
+
+Appliances not in the list follow in the suggested order, so a new appliance shows up by itself.
+
+**Visual editors.** All three cards have one. The overview editor lists every appliance with its type number and drawing. You can show or hide it, move it up or down, and set its name, colours, programmes card and favourites. It also warns you:
+
+- when the start, pause and stop buttons are switched off in Home Assistant, with a button to switch them on;
+- when Remote start is off;
+- when an appliance isn't connected.
+
+*Suggest a layout* fills in the list. *Copy as separate cards* gives the same layout as plain appliance and programmes cards, in YAML, for a sections view you arrange yourself.
 
 ## Supported appliances
 

@@ -5,7 +5,7 @@ import fs from "node:fs";
 import { registry } from "./support.mjs";
 import { familyOf } from "../src/miele-model.js";
 import {
-  slug, readPrograms, arrange, startBlock, defaultsFor, stepTime, startCall, readCache, writeCache, FAVOURITES, iconFor,
+  slug, readPrograms, arrange, startBlock, canPrepare, defaultsFor, stepTime, startCall, readCache, writeCache, FAVOURITES, iconFor,
 } from "../src/programs.js";
 
 const programs = JSON.parse(fs.readFileSync(new URL("../dev/data/programs.json", import.meta.url), "utf8"));
@@ -73,6 +73,16 @@ test("start only with Start op afstand on, nothing running, a list known", () =>
   assert.equal(startBlock(vm("off", true), fam("washer"), {}, l), "no_remote");
   assert.equal(startBlock({ ...vm("ready", false), program: "fan_plus" }, fam("micro"), roles, l), "waiting", "set, waiting for Start on the oven");
   assert.equal(startBlock({ ...vm("ready", true), program: "fan_plus" }, fam("micro"), roles, l), null);
+});
+
+test("set up without Start op afstand: ovens and coffee, switched on, list known", () => {
+  assert.equal(canPrepare("mobile_start", vm("standby", false), fam("micro")), true);
+  assert.equal(canPrepare("waiting", { ...vm("ready", false), program: "fan_plus" }, fam("micro")), true, "another programme over the waiting one");
+  assert.equal(canPrepare("mobile_start", vm("standby", false), fam("coffee")), true);
+  assert.equal(canPrepare("mobile_start", vm("off", false), fam("micro")), false, "switched off: switch it on first");
+  assert.equal(canPrepare("mobile_start", vm("standby", false), fam("washer")), false, "washer and dryer: no list without Start op afstand");
+  assert.equal(canPrepare("busy", vm("running", false), fam("micro")), false);
+  assert.equal(canPrepare("no_programs", vm("standby", false), fam("drawer")), false);
 });
 
 test("oven defaults: usual temperatures on the step, last values win, microwave needs a time", () => {

@@ -45,6 +45,10 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .ask.start { border-color: color-mix(in srgb, var(--c) 50%, transparent); }
 .ask.start .go { background: var(--c); }
 .err { font-size: 12.5px; color: var(--bad); margin: -4px 0 8px; }
+.bigtime { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 12px; margin: -2px 0 8px; }
+.bt { font-size: 44px; line-height: 1.05; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.5px; color: var(--c); }
+.st-done .bt { color: var(--ok); }
+.bs { font-size: 15px; color: var(--mc-muted); }
 .err:empty { display: none; }
 `;
 

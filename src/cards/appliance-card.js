@@ -9,6 +9,7 @@
 //   theme: dark                     dark | light | auto | ha
 //   animations: full                full | reduced | off
 //   controls: true                  false hides pause/stop/power (kitchen display)
+//   big_countdown: false            true shows the time left in large type above the drawing (kitchen display)
 //   accent: "#4fa3e0"               ring and highlight colour
 //   language: nl                    default: Home Assistant's language
 //   max_width: 400px
@@ -50,6 +51,7 @@ const esc = s => String(s ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "
 let uid = 0;
 
 export class MieleApplianceCard extends HTMLElement {
+  static getConfigElement() { return document.createElement("miele-appliance-card-editor"); }
   static getStubConfig(hass) {
     const d = scanDevices(hass)[0];
     return d ? { device_id: d.id } : {};
@@ -143,6 +145,7 @@ export class MieleApplianceCard extends HTMLElement {
 <ha-card class="${draw} ${round ? "round" : "flat"} theme-${this._themeName()} anim-${["full", "reduced", "off"].includes(c.animations) ? c.animations : "full"}"
   style="--c:${esc(accent)};${finishVars(palette)}${c.max_width ? `;--maxw:${esc(c.max_width)}` : ""}">
   <div class="head"><span class="name">${esc(name)}</span><span class="pill" id="pill"></span></div>
+  <div class="bigtime" id="bigtime" hidden><span class="bt" id="bt"></span><span class="bs" id="bs"></span></div>
   <div class="ctl" id="ctl" hidden>
     <button id="b-pause"><ha-icon icon="mdi:pause"></ha-icon>${esc(this._t("btn.pause"))}</button>
     <button id="b-resume"><ha-icon icon="mdi:play"></ha-icon>${esc(this._t("btn.resume"))}</button>
@@ -275,6 +278,7 @@ export class MieleApplianceCard extends HTMLElement {
 
     this._rows(vm, snap, lang);
     this._controls(vm, snap);
+    if (this._config.big_countdown) this._bigTime(vm);
   }
 
   // The appliance's own display, in the style of the real one (Peter's photos, 18-10):
@@ -325,6 +329,34 @@ export class MieleApplianceCard extends HTMLElement {
         : s === "running" || s === "paused" ? `<span class="big">${esc(vm.flags.rinsing ? this._t("lcd.rinsing") : drink)}</span><span class="small">${esc(vm.phase ? L("phase", vm.phase) : "")}</span>`
         : text ? `<span class="big">${esc(text)}</span>` : "");
     }
+  }
+
+  // Large enough to read across the kitchen: the time left and when it's done, the oven's temperature while it heats
+  // up, the start time when it waits, or "done".
+  _bigTime(vm) {
+    const s = vm.state, h = this._hass, lang = this._lang, main = vm.lcd.main, moving = s === "running" || s === "paused";
+    const L = (kind, key) => mieleLabel(h, kind, key, lang);
+    let big = "", sub = "";
+    if (moving && main?.kind === "countdown") {
+      big = hm(main.value);
+      sub = vm.endAt ? `${this._t("row.ends")} ${clockTime(vm.endAt, h, lang)}` : "";
+    } else if (moving && vm.progress.mode === "heat" && vm.temps.current != null) {
+      big = temp(vm.temps.current, vm.temps.unit);
+      sub = vm.temps.target != null ? `${this._t("lcd.heating")} → ${temp(vm.temps.target, vm.temps.unit)}` : this._t("lcd.heating");
+    } else if (moving) {
+      big = vm.program ? L("program", vm.program) : this._t(`state.${s}`);
+      sub = vm.phase ? L("phase", vm.phase) : "";
+    } else if (s === "scheduled" && vm.startAt) {
+      big = clockTime(vm.startAt, h, lang);
+      sub = this._t("row.starts");
+    } else if (s === "done") {
+      big = this._t("state.done");
+      sub = vm.endAt ? clockTime(vm.endAt, h, lang) : "";
+    }
+    if (s === "paused") sub = [this._t("state.paused"), sub].filter(Boolean).join(" · ");
+    this._el("bigtime").hidden = !big;
+    this._set("bt", big);
+    this._set("bs", sub);
   }
 
   _icon(i, icon, state, title, show) {

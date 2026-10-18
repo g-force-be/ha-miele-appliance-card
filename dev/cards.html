@@ -6,13 +6,17 @@
 <link rel="icon" href="data:,">
 <title>Miele kaarten</title>
 <style>
-  :root { --page: #f5f6f8; color-scheme: light; }
-  :root[data-theme="dark"] { --page: #111315; color-scheme: dark; }
+  :root { --page: #f5f6f8; color-scheme: light; color: #1f2226; }
+  :root[data-theme="dark"] { --page: #111315; color-scheme: dark; color: #e4e6e9; }
   * { box-sizing: border-box; }
   body { margin: 0; background: var(--page); font: 14px system-ui, -apple-system, "Segoe UI", sans-serif; }
   #stage { display: grid; gap: 12px; padding: 12px; grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)); align-items: start; }
   #bar { display: flex; gap: 8px; align-items: center; padding: 8px 12px; font-size: 12px; color: #6b7280; }
   #bar[hidden] { display: none; }
+  .editor { background: #fff; color: #222; border-radius: 12px; padding: 16px; --primary-color: #03a9f4; --divider-color: #dcdfe3; --secondary-text-color: #6b7280; }
+  :root[data-theme="dark"] .editor { background: #1c1c1e; color: #e5e7eb; --card-background-color: #26272a; --secondary-background-color: #2c2d30;
+    --primary-text-color: #e5e7eb; --divider-color: #3a3c40; --secondary-text-color: #9ca3af; }
+  .yaml { margin: 12px 0 0; padding: 10px; border-radius: 8px; background: rgba(127,127,127,.12); font-size: 12px; white-space: pre-wrap; }
 </style>
 </head>
 <body>

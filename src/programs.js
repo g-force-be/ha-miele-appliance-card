@@ -60,6 +60,14 @@ export function startBlock(vm, family, roles, list) {
   return null;
 }
 
+// Without Start op afstand Miele still takes a programme from outside: it waits on the appliance until you press
+// Start (oven-microwave, 18-10; the Miele app can't start it either). So ovens and the coffee machine can get one
+// set up while they're on. Washer and dryer give no list without Start op afstand.
+export function canPrepare(block, vm, family) {
+  return (block === "mobile_start" || block === "waiting") && ["oven", "coffee"].includes(family.group)
+    && ["standby", "ready"].includes(vm?.state);
+}
+
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 const onStep = (v, t) => clamp(t.min + Math.round((v - t.min) / t.step) * t.step, t.min, t.max);
 export const isMicrowave = p => /microwave/.test(p.key ?? slug(p.name));

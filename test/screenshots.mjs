@@ -2,6 +2,7 @@
 //   npm run shots                 M2a: washer and dryer cards, every state × theme × front colour × width
 //   npm run shots -- m1           M1: the model harness
 //   npm run shots -- m2b / m3     M2b: kitchen appliances · M3: the programmes card
+//   npm run shots -- m4           M4: the overview card and the editors
 //   npm run shots -- m2a washer   only shots whose name contains "washer"
 // Output: dev/screenshots/<suite>/, with an index.html contact sheet.
 import fs from "node:fs";
@@ -112,6 +113,32 @@ function m3Shots() {
   return shots;
 }
 
+// --- M4: the overview card in its presets, and the visual editors (with the harness's stand-in for ha-form)
+const RUNNING = "c=washer_cottons_with_pause@1000&c=dryer_cottons_dryness_ladder@5100&c=steam_oven_fan_plus_timer@100&c=microwave_wifi_dropouts@1420&c=drawer_keep_warm_synthetic@900&c=coffee_morning@70";
+const SOME = "c=washer_cottons_with_pause@1000&c=dryer_cottons_dryness_ladder@-1&c=steam_oven_fan_plus_timer@-1&c=microwave_wifi_dropouts@1420&c=drawer_offline_while_off@5&c=coffee_morning@-1";
+const ALL_OFF = "c=washer_cottons_with_pause@-1&c=dryer_cottons_dryness_ladder@-1&c=steam_oven_fan_plus_timer@-1&c=microwave_combo@-1&c=drawer_offline_while_off@5&c=coffee_morning@-1";
+function m4Shots() {
+  const ov = (name, cycles, layout, theme, [width, height], extra = "") => ({ name, group: name.replace(/-(light|dark)$/, ""),
+    url: `cards.html?${cycles}&card=overview&layout=${layout}&theme=${theme}&lang=nl&bar=0&anim=off${extra}`,
+    viewport: { width, height }, scale: width < 600 ? 2 : 1, theme, card: "miele-overview-card" });
+  const shots = [];
+  for (const theme of ["dark", "light"]) {
+    shots.push(ov(`rooms-running-${theme}`, RUNNING, "rooms", theme, [1400, 1200]));
+    shots.push(ov(`rooms-1024-${theme}`, SOME, "rooms", theme, [1024, 1200]));
+    shots.push(ov(`grid-${theme}`, SOME, "grid", theme, [1400, 1200]));
+    shots.push(ov(`active-${theme}`, SOME, "active", theme, [1024, 900]));
+    shots.push(ov(`phone-${theme}`, SOME, "phone", theme, [390, 844]));
+  }
+  shots.push(ov("display-two-dark", SOME, "display", "dark", [1024, 600]));
+  shots.push(ov("display-three-dark", "c=washer_cottons_with_pause@1000&c=dryer_cottons_dryness_ladder@5100&c=steam_oven_fan_plus_timer@100&c=microwave_combo@-1&c=drawer_offline_while_off@5&c=coffee_morning@-1", "display", "dark", [1024, 600]));
+  shots.push(ov("display-all-off-dark", ALL_OFF, "display", "dark", [1024, 600]));
+  for (const [name, url] of [["editor-overview", `${SOME}&card=overview&layout=rooms`], ["editor-appliance", "c=washer_cottons_with_pause@1000"],
+    ["editor-programmes", "c=steam_oven_fan_plus_timer@820&card=programmes"]])
+    shots.push({ name: `${name}-light`, group: name, url: `cards.html?${url}&theme=light&lang=nl&bar=0&anim=off&editor=1`,
+      viewport: { width: 1400, height: 1000 }, scale: 1, theme: "light", stage: true });
+  return shots;
+}
+
 // --- README: the pictures on the GitHub page (docs/images/), from the same harness
 function readmeShots() {
   const ms = ["washing_machine", "steam_oven", "microwave_oven"].map(MS).join("&");
@@ -125,7 +152,7 @@ function readmeShots() {
   ];
 }
 
-const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots, m3: m3Shots, readme: readmeShots };
+const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots, m3: m3Shots, m4: m4Shots, readme: readmeShots };
 if (!SUITES[suite]) { console.error(`unknown suite ${suite}`); process.exit(1); }
 const shots = SUITES[suite]().filter(s => s.name.includes(filter));
 

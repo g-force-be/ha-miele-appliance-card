@@ -7,6 +7,8 @@
 //   name: Wasmachine                (default: the name you gave the device, else its type)
 //   programs: [cottons, eco_40_60]  favourites, by Home Assistant's programme key or Miele's number; default per type
 //   show_all: true                  false shows only the favourites
+//   collapsed: false                true starts folded to one line ("Programma's"), a tap opens it
+//   show_name: false                true adds the appliance to that line ("Programma's · Stoomoven")
 //   theme: dark                     dark | light | auto | ha
 //   accent: "#4fa3e0"
 //   language: nl
@@ -17,7 +19,7 @@ import { BASE_CSS } from "../ui/styles.js";
 import { duration, clockTime, temp } from "../ui/format.js";
 import { callService, errorText } from "../ui/call.js";
 import {
-  FAVOURITES, readPrograms, arrange, startBlock, defaultsFor, stepTime, startCall, isMicrowave, iconFor,
+  FAVOURITES, readPrograms, arrange, startBlock, canPrepare, defaultsFor, stepTime, startCall, isMicrowave, iconFor,
   readCache, writeCache, readLast, writeLast,
 } from "../programs.js";
 
@@ -85,9 +87,16 @@ const PROG_CSS = `
 .src { margin: 10px 0 0; font-size: 12px; color: var(--mc-muted); }
 .src:empty { display: none; }
 .err { margin: 0 0 10px; }
+.fold .head { margin: 0; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+.fold .head .name { font-size: 15px; flex: 1 1 auto; min-width: 0; }
+.fold .head .pill { max-width: 46%; }
+.fold .head ha-icon { --mdc-icon-size: 20px; color: var(--mc-muted); flex: none; }
+.fold:not(.open) > :not(.head) { display: none; }
+.fold.open .head { margin-bottom: 10px; }
 `;
 
 export class MieleProgrammesCard extends HTMLElement {
+  static getConfigElement() { return document.createElement("miele-programmes-card-editor"); }
   static getStubConfig(hass) {
     const d = scanDevices(hass).find(x => x.family.group !== "drawer") ?? scanDevices(hass)[0];
     return d ? { device_id: d.id } : {};
@@ -113,7 +122,7 @@ export class MieleProgrammesCard extends HTMLElement {
   }
 
   connectedCallback() { if (this._hass && !this._dev) this._init(); }
-  getCardSize() { return 6; }
+  getCardSize() { return this._config?.collapsed ? 1 : 6; }
   getGridOptions() { return { columns: 12, min_columns: 4, rows: "auto" }; }
 
   get _lang() { return languageOf(this._hass, this._config); }
@@ -130,6 +139,7 @@ export class MieleProgrammesCard extends HTMLElement {
     this._seen = null;
     this._pick = null;
     this._showAll = false;
+    this._open = !this._config.collapsed;
     this._sig = null;
     h.loadBackendTranslation?.("entity", "miele")?.then?.(() => { this._sig = null; this._update(); });
     this._build();
@@ -154,8 +164,8 @@ export class MieleProgrammesCard extends HTMLElement {
     this._inText = c.name || this._hass.devices?.[this._dev.id]?.name_by_user ? this._name : this._name.toLowerCase();
     const r = this.shadowRoot ?? this.attachShadow({ mode: "open" });
     r.innerHTML = `<style>${BASE_CSS}${PROG_CSS}</style>
-<ha-card class="prog theme-${this._themeName()}" lang="${esc(this._lang)}" style="--c:${esc(accent)}">
-  <div class="head"><span class="name">${esc(this._name)}</span><span class="pill" id="pill"></span></div>
+<ha-card class="prog theme-${this._themeName()}${c.collapsed ? " fold" : ""}" lang="${esc(this._lang)}" style="--c:${esc(accent)}">
+  <div class="head" id="head"><span class="name">${esc(c.collapsed ? (c.show_name ? `${this._t("prog.title")} · ${this._name}` : this._t("prog.title")) : this._name)}</span><span class="pill" id="pill"></span>${c.collapsed ? `<ha-icon id="fold" icon="mdi:chevron-down"></ha-icon>` : ""}</div>
   <div class="why" id="why"></div>
   <div class="ok" id="ok"></div>
   <div class="err" id="err"></div>
@@ -168,7 +178,7 @@ export class MieleProgrammesCard extends HTMLElement {
       <button id="time-up" aria-label="+"><ha-icon icon="mdi:plus"></ha-icon></button></span></div>
     <div class="q" id="q"></div>
     <div class="acts"><button id="no">${esc(this._t("btn.cancel"))}</button>
-      <button class="go" id="go"><ha-icon icon="mdi:play"></ha-icon>${esc(this._t("prog.start"))}</button></div>
+      <button class="go" id="go"><ha-icon id="go-i" icon="mdi:play"></ha-icon><span id="go-t"></span></button></div>
   </div>
   <div class="tiles" id="favs"></div>
   <button class="more" id="more" hidden><ha-icon icon="mdi:chevron-down"></ha-icon><span id="more-t"></span></button>
@@ -180,6 +190,12 @@ export class MieleProgrammesCard extends HTMLElement {
     this._text = {};
     const tap = e => { const b = e.target.closest(".tile"); if (b && !b.disabled) this._choose(this._tiles[Number(b.dataset.i)]); };
     this._el("favs").onclick = tap;
+    if (c.collapsed) this._el("head").onclick = () => {
+      this._open = !this._open;
+      this._root.classList.toggle("open", this._open);
+      this._el("fold").setAttribute("icon", this._open ? "mdi:chevron-up" : "mdi:chevron-down");
+      if (!this._open) this._choose(null);
+    };
     this._el("rest").onclick = tap;
     this._el("more").onclick = () => { this._showAll = !this._showAll; this._update(); };
     this._el("no").onclick = () => this._choose(null);
@@ -247,12 +263,14 @@ export class MieleProgrammesCard extends HTMLElement {
     const fav = this._config.programs ?? FAVOURITES[fam.drawing] ?? [];
     const { favs, rest } = arrange(list, fav);
     const block = this._block = startBlock(vm, fam, dev.roles, list);
+    // start it, or (Start op afstand off, appliance on) set it up for Start on the appliance
+    const mode = this._mode = !block ? "start" : canPrepare(block, vm, fam) ? "prepare" : null;
     const name = this._inText;
 
     const ms = vm.flags?.mobileStart === true;
     this._root.classList.toggle("remote-on", ms);
     this._set("pill", dev.roles.mobile_start ? this._t(ms ? "prog.remote_on" : "prog.remote_off") : this._t(`state.${vm.state}`));
-    this._setHTML("why", block ? `<ha-icon icon="${block === "busy" ? "mdi:progress-clock" : "mdi:information-outline"}"></ha-icon><span>${esc(this._t(`prog.why.${block}`, { name, program: mieleLabel(h, "program", vm.program, lang) }))}</span>` : "");
+    this._setHTML("why", block ? `<ha-icon icon="${block === "busy" ? "mdi:progress-clock" : "mdi:information-outline"}"></ha-icon><span>${esc(this._t(`prog.why.${mode === "prepare" && block === "mobile_start" ? "prepare" : block}`, { name, program: mieleLabel(h, "program", vm.program, lang) }))}</span>` : "");
     this._set("err", this._startErr || (error && ms && !list ? this._t("err.send", { msg: error }) : ""));
     this._set("src", cachedAt ? this._t("prog.cached", { when: `${new Date(cachedAt).toLocaleDateString(lang)} ${clockTime(cachedAt, h, lang)}` }) : "");
 
@@ -275,11 +293,13 @@ export class MieleProgrammesCard extends HTMLElement {
     const moving = vm.state === "running" || vm.state === "paused";
     this._root.querySelectorAll(".tile").forEach(b => {
       const p = this._tiles[Number(b.dataset.i)];
-      b.disabled = !!block || p.id == null;
-      b.classList.toggle("now", moving && !!p.key && p.key === vm.program);
+      b.disabled = !mode || p.id == null;
+      // the dot: running, or set and waiting for Start on the appliance
+      b.classList.toggle("now", (moving || vm.state === "ready") && !!p.key && p.key === vm.program);
       b.classList.toggle("sel", p === this._pick);
     });
-    if (this._pick && (block || !this._tiles.includes(this._pick))) this._choose(null);
+    if (this._pick && (!mode || !this._tiles.includes(this._pick))) this._choose(null);
+    else if (this._pick) this._sheet();
   }
 
   _choose(p) {
@@ -321,13 +341,17 @@ export class MieleProgrammesCard extends HTMLElement {
     this._setHTML("time-v", none ? `${esc(this._t("prog.none"))}<small>${esc(this._t("prog.until_stop"))}</small>` : esc(minutes(v.minutes, this._lang)));
     const what = [label, oven && p.temp ? temp(v.temperature, unit) : null, oven && p.dur && v.minutes ? minutes(v.minutes, this._lang) : null].filter(Boolean).join(" · ");
     const name = this._inText;
-    this._set("q", this._t("prog.ask", { what, name }));
-    this._el("go").disabled = !!this._block || this._starting === true;
+    const prepare = this._mode === "prepare";
+    this._set("q", this._t(prepare ? "prog.ask_prepare" : "prog.ask", { what, name }));
+    this._set("go-t", this._t(prepare ? "prog.prepare" : "prog.start"));
+    this._el("go-i").setAttribute("icon", prepare ? "mdi:tray-arrow-down" : "mdi:play");
+    this._el("go").disabled = !this._mode || this._starting === true;
   }
 
   async _start() {
     const p = this._pick, dev = this._dev;
-    if (!p || this._block || this._starting) return;
+    const mode = this._mode;
+    if (!p || !mode || this._starting) return;
     this._starting = true;
     this._el("go").disabled = true;
     this._startErr = "";
@@ -335,10 +359,11 @@ export class MieleProgrammesCard extends HTMLElement {
     const [domain, service, data] = startCall(dev.id, dev.family, p, this._values);
     const msg = await callService(this._hass, domain, service, data);
     this._starting = false;
-    if (msg) { this._startErr = this._t("err.send", { msg }); this._set("err", this._startErr); this._el("go").disabled = !!this._block; return; }
+    if (msg) { this._startErr = this._t("err.send", { msg }); this._set("err", this._startErr); this._el("go").disabled = !this._mode; return; }
     if (dev.family.group === "oven") writeLast(store(), dev.id, p.id, this._values);
     const label = this._label(p);
     this._choose(null);
-    this._set("ok", this._t("prog.started", { program: label }));
+    const name = this._inText;
+    this._set("ok", this._t(mode === "prepare" ? "prog.prepared" : "prog.started", { program: label, name }));
   }
 }

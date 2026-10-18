@@ -54,7 +54,7 @@ export function simulate(cycle, registry, { mobileStart, pad = 180 } = {}) {
   const raw = { status: "off", program: "no_program", phase: "not_running", program_type: "normal_operation_mode", drying_step: null,
     target_temp: null, temp: fam.group === "drawer" ? 20.11 : null, remaining: null, elapsed: null };
   let anchorIdx = -1, runSec = 0, elapsedStart = null, finishPrev = null, startPrev = null, lastT = 0, ei = 0;
-  const memo = { elapsed: null, finish: null, start_ts: null };
+  const memo = { elapsed: null, finish: null, start_ts: null, remaining: null };
 
   const valueAt = (role, t) => {
     const s = raw.status, abs = t0 + t * 1000;
@@ -64,7 +64,8 @@ export function simulate(cycle, registry, { mobileStart, pad = 180 } = {}) {
         if (OFF_LIKE.has(s)) return null;
         if (s === "program_ended") return 0;
         if (explicit.has("remaining")) return raw.remaining;
-        if (oracle) return s === "in_use" ? Math.ceil((endedAt - t) / 60) : s === "programmed" ? Math.ceil((endedAt - firstRun) / 60) : null;
+        if (oracle) return s === "in_use" ? Math.ceil((endedAt - t) / 60) : s === "programmed" ? Math.ceil((endedAt - firstRun) / 60)
+          : s === "pause" ? memo.remaining : null;
         if (anchorIdx < 0) return fam.group === "oven" && (s === "in_use" || s === "pause") ? 0 : null;
         const a = anchors[anchorIdx], next = anchors[anchorIdx + 1];
         const floor = next && next.v <= a.v ? next.v : 0;
@@ -145,6 +146,7 @@ export function simulate(cycle, registry, { mobileStart, pad = 180 } = {}) {
     if (raw.status !== "program_ended" && raw.status !== "not_connected") {
       memo.elapsed = valueAt("elapsed", t) ?? memo.elapsed;
       memo.finish = finishPrev; memo.start_ts = startPrev;
+      if (raw.status === "in_use") memo.remaining = valueAt("remaining", t);
     }
   }
   return { cycle: cycle.id, deviceId, roles, t0, duration, initial, changes };

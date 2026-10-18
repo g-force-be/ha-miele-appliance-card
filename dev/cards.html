@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="icon" href="data:,">
+<title>Miele kaarten</title>
+<style>
+  :root { --page: #f5f6f8; color-scheme: light; }
+  :root[data-theme="dark"] { --page: #111315; color-scheme: dark; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--page); font: 14px system-ui, -apple-system, "Segoe UI", sans-serif; }
+  #stage { display: grid; gap: 12px; padding: 12px; grid-template-columns: repeat(var(--cols, 1), minmax(0, 1fr)); align-items: start; }
+  #bar { display: flex; gap: 8px; align-items: center; padding: 8px 12px; font-size: 12px; color: #6b7280; }
+  #bar[hidden] { display: none; }
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<div id="stage"></div>
+<script type="module" src="./cards.js"></script>
+</body>
+</html>

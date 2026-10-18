@@ -187,6 +187,7 @@ const STATUS_STATE = {
 };
 const CYCLE = new Set(["ready", "scheduled", "running", "paused"]);
 const HOLD_LONG = new Set(["scheduled", "running", "paused", "done"]);
+const HOLD_ALWAYS = new Set(["off", "standby"]);
 const IDLE_PHASES = new Set(["not_running"]);
 const END_PHASES = new Set(["finished", "process_finished"]);
 
@@ -240,6 +241,9 @@ export class MieleTracker {
     const hold = (since, limitMs) => {
       if (!this.good) return false;
       if (now - since < limitMs) return true;
+      // An appliance that was off or idle stays "off" with a lost-connection mark: the kitchen drops off Wi-Fi
+      // whenever the microwave runs, and "not connected" on every appliance would only be noise.
+      if (HOLD_ALWAYS.has(this.good.state)) return true;
       if (!HOLD_LONG.has(this.good.state)) return false;
       // An active cycle keeps counting down while the appliance is unreachable (the microwave knocks the whole
       // kitchen off Wi-Fi for minutes); give up after the expected end, or after activeHoldMs without one.
@@ -259,7 +263,7 @@ export class MieleTracker {
     } else this.unknownSince = null;
 
     const vm = this._compute(snap, now, { stale: false, connection: "ok", guessed: base.guessed });
-    this.good = { snap, state: vm.state, endAt: vm.endAt };
+    this.good = { snap, state: vm.state, endAt: vm.state === "done" ? null : vm.endAt };
     return vm;
   }
 
@@ -349,7 +353,7 @@ export class MieleTracker {
     if (!stale && state === "running") c.last = { mode, progress, leftSec };
 
     // --- end and start times
-    const endAt = CYCLE.has(state) ? snap.finish ?? (leftSec > 0 ? now + leftSec * 1000 : null) : null;
+    const endAt = CYCLE.has(state) ? snap.finish ?? (leftSec > 0 ? now + leftSec * 1000 : null) : state === "done" ? snap.finish : null;
     const startAt = state !== "scheduled" ? null
       : snap.startTs != null && snap.startTs > now ? snap.startTs : snap.startIn ? now + snap.startIn * 60e3 : null;
 

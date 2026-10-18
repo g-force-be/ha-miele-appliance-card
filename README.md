@@ -14,6 +14,29 @@ Dashboard cards for Miele appliances connected through Home Assistant's built-in
 
 Appliance types: washing machine, tumble dryer, steam oven, oven, microwave, coffee machine and warming drawer, with a generic drawing for the rest (dishwasher, hob, hood, fridge, wine cabinet, robot vacuum). Light and dark themes, Dutch and English, and front colours such as lotus white and obsidian black.
 
+## Use (preview)
+
+```yaml
+type: custom:miele-appliance-card
+device_id: 82ddfc7a46859e3c356f96713e446d32   # or: entity: sensor.miele_washing_machine
+```
+
+| Option | What it does |
+|---|---|
+| `device_id` / `entity` | The appliance. Without either, the card takes the first Miele appliance it finds. |
+| `name` | Card title. Default: the name you gave the device, else its type. |
+| `finish` | Front colour: `lotus_white`, `obsidian_black`, `graphite_grey`, `brilliant_white`, `pearl_beige`, `clean_steel` or a hex colour. Default: lotus white for laundry, obsidian black for the rest. |
+| `theme` | `dark` (default), `light`, `auto` (follows Home Assistant) or `ha` (Home Assistant's own card colours). |
+| `animations` | `full` (default), `reduced` or `off`. Reduced motion in the operating system is respected. |
+| `controls` | `false` hides the buttons, e.g. on a wall display. |
+| `accent` | Ring and highlight colour. |
+| `language` | `nl` or `en`. Default: Home Assistant's language. |
+| `max_width` | Maximum width of the drawing, e.g. `380px`. |
+| `images` | A folder with your own drawings (`washer.svg`, `dryer.svg`, …), e.g. `/local/miele/`. |
+| `entities` | Override a detected entity, e.g. `{ remaining: sensor.my_remaining_time }`. |
+
+Washing machine and tumble dryer have their own drawings so far; other appliances use a plain fallback drawing for now.
+
 ## Requirements
 
 - Home Assistant with the core **Miele** integration (Settings → Devices & services → Add integration → Miele).

@@ -377,12 +377,20 @@ describe("oven-microwave: Wi-Fi drops out for minutes while it runs", () => {
   });
 });
 
-test("warming drawer: off and unreachable for 13 min shows 'offline' after 60 s", () => {
+test("warming drawer: off and unreachable for 13 min stays 'off', marked as lost (decision C)", () => {
   const r = play("drawer_offline_while_off");
-  assert.equal(r.at(5).state, "off");
+  assert.equal(r.at(5).state, "off"); assert.equal(r.at(5).connection, "ok");
   assert.equal(r.at(40).state, "off"); assert.equal(r.at(40).stale, true);
-  assert.equal(r.at(80).state, "offline");
-  assert.equal(r.at(780).state, "off");
+  assert.equal(r.at(600).state, "off"); assert.equal(r.at(600).connection, "lost");
+  assert.ok(!states(r, 0, 958).has("offline"));
+  assert.equal(r.at(780).state, "off"); assert.equal(r.at(780).connection, "ok");
+});
+
+test("a programmed (ready) appliance that stays unreachable shows 'offline' after 60 s", () => {
+  const tr = new MieleTracker(fam);
+  tr.update({ ...base, status: "programmed" }, 0);
+  assert.equal(tr.update({ ...base, status: "not_connected", statusAt: 1000 }, 30e3).state, "ready");
+  assert.equal(tr.update({ ...base, status: "not_connected", statusAt: 1000 }, 90e3).state, "offline");
 });
 
 describe("coffee", () => {

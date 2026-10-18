@@ -1,0 +1,28 @@
+{
+ "_about": "SYNTHETISCHE cycli, niet uit Peters historie: alleen om toestanden te tonen waarvan geen echte cyclus bestaat (storing, onderbroken wasmachine, gepauzeerde droogkast). Niet gebruiken als bewijs voor gedrag van de integratie.",
+ "cycles": [
+  {
+   "id": "washer_interrupted_synthetic", "model": "Washing machine", "start": "2026-10-11T09:00:00+02:00", "synthetic": true,
+   "events": [[0, "status", "on"], [2, "status", "programmed"], [2, "program", "eco_40_60"], [2, "remaining", 199],
+     [60, "status", "in_use"], [60, "phase", "main_wash"], [600, "status", "program_interrupted"], [900, "status", "off"],
+     [900, "phase", "not_running"], [900, "program", "no_program"], [900, "remaining", null]]
+  },
+  {
+   "id": "washer_failure_synthetic", "model": "Washing machine", "start": "2026-10-11T09:00:00+02:00", "synthetic": true,
+   "events": [[0, "status", "programmed"], [0, "program", "cottons"], [0, "remaining", 159], [30, "status", "in_use"], [30, "phase", "main_wash"],
+     [300, "status", "failure"], [900, "status", "off"], [900, "phase", "not_running"], [900, "program", "no_program"]]
+  },
+  {
+   "id": "dryer_paused_synthetic", "model": "Tumble dryer", "start": "2026-10-11T14:00:00+02:00", "synthetic": true,
+   "events": [[0, "status", "programmed"], [0, "program", "minimum_iron"], [0, "drying_step", "normal"],
+     [20, "status", "in_use"], [20, "phase", "drying"], [1500, "phase", "hand_iron_2"], [1800, "status", "pause"],
+     [2400, "status", "in_use"], [3600, "phase", "hand_iron_1"], [4200, "status", "program_ended"], [4200, "phase", "cooling_down"],
+     [4800, "status", "off"], [4800, "phase", "not_running"], [4800, "program", "no_program"], [4800, "drying_step", null]]
+  },
+  {
+   "id": "dryer_failure_synthetic", "model": "Tumble dryer", "start": "2026-10-11T14:00:00+02:00", "synthetic": true,
+   "events": [[0, "status", "programmed"], [0, "program", "cottons"], [0, "drying_step", "normal"], [20, "status", "in_use"],
+     [20, "phase", "drying"], [300, "status", "failure"], [900, "status", "off"], [900, "phase", "not_running"], [900, "program", "no_program"]]
+  }
+ ]
+}

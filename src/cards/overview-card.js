@@ -32,7 +32,8 @@ const CSS = `
 .ov { container-type: inline-size; color: var(--primary-text-color, inherit);
   font-family: var(--ha-font-family-body, Roboto, system-ui, -apple-system, "Segoe UI", sans-serif); }
 .blocks { display: flex; flex-wrap: wrap; gap: 20px 24px; align-items: flex-start; }
-.room { flex: 1 1 320px; min-width: 0; }
+/* a room is no wider than its appliances side by side (--n), so rooms sit together on a wide screen */
+.room { flex: 1 1 320px; min-width: 0; max-width: calc(var(--n, 2) * 460px + (var(--n, 2) - 1) * 12px); }
 .set { flex: 1 1 100%; min-width: 0; }
 .set .part { flex: 1 1 100%; }
 .room h2 { margin: 0 0 10px 2px; font-size: 18px; font-weight: 500; line-height: 1.3; }
@@ -138,6 +139,7 @@ export class MieleOverviewCard extends HTMLElement {
       for (const b of plan.blocks) {
         const block = document.createElement("section");
         block.className = b.kind === "room" ? "room" : "set";
+        if (b.parts) block.style.setProperty("--n", b.parts.reduce((n, p) => n + (p.kind === "column" ? 1 : p.items.length), 0));
         if (b.title) block.innerHTML = `<h2>${esc(b.title)}</h2>`;
         const parts = document.createElement("div");
         parts.className = "parts";

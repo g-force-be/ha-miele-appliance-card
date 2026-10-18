@@ -211,10 +211,10 @@ export class MieleApplianceCard extends HTMLElement {
     // header pill: what is going on, in a few words
     let pill = this._t(`state.${s}`);
     if (s === "running" && f.almostDone) pill = this._t("pill.almost_done");
-    else if (s === "running" && vm.phase) pill = mieleLabel(h, "phase", vm.phase);
+    else if (s === "running" && vm.phase) pill = mieleLabel(h, "phase", vm.phase, this._lang);
     else if (s === "scheduled" && f.smartGridWait) pill = this._t("pill.smart_grid");
     this._set("pill", pill);
-    this._set("phase", vm.phase ? mieleLabel(h, "phase", vm.phase) : "");
+    this._set("phase", vm.phase ? mieleLabel(h, "phase", vm.phase, this._lang) : "");
 
     // the display
     const main = vm.lcd.main, sub = vm.lcd.sub;
@@ -270,8 +270,8 @@ export class MieleApplianceCard extends HTMLElement {
       case "temp": return temp(part.value, vm.temps.unit);
       case "elapsed": return `${part.value} ${this._t("unit.min")}`;
       case "percent": return vm.progress.value == null ? "" : `${Math.round(vm.progress.value * 100)}%`;
-      case "program": return mieleLabel(h, "program", part.value);
-      case "phase": return mieleLabel(h, "phase", part.value);
+      case "program": return mieleLabel(h, "program", part.value, this._lang);
+      case "phase": return mieleLabel(h, "phase", part.value, this._lang);
       case "text": return this._t(`lcd.${part.value}`);
     }
     return "";
@@ -279,13 +279,13 @@ export class MieleApplianceCard extends HTMLElement {
 
   _rows(vm, snap, lang) {
     const h = this._hass, fam = this._dev.family, s = vm.state;
-    const rows = [[this._t("row.program"), vm.program ? esc(mieleLabel(h, "program", vm.program)) : "—"]];
+    const rows = [[this._t("row.program"), vm.program ? esc(mieleLabel(h, "program", vm.program, this._lang)) : "—"]];
     if (fam.kind === "dryer" || fam.kind === "washer_dryer") {
       const target = snap.dryingStep, reached = vm.dryness?.reached;
       const ti = LADDER.indexOf(target), ri = LADDER.indexOf(reached);
       const dots = ti >= 0 ? `<span class="dots">${LADDER.slice(0, ti + 1).map((k, i) =>
-        `<i class="${i <= ri ? "on" : ""}${i === ti ? " target" : ""}" title="${esc(mieleLabel(h, "dryness", k))}"></i>`).join("")}</span>` : "";
-      rows.push([this._t("row.dryness"), target ? dots + esc(mieleLabel(h, "dryness", target)) : "—"]);
+        `<i class="${i <= ri ? "on" : ""}${i === ti ? " target" : ""}" title="${esc(mieleLabel(h, "dryness", k, this._lang))}"></i>`).join("")}</span>` : "";
+      rows.push([this._t("row.dryness"), target ? dots + esc(mieleLabel(h, "dryness", target, this._lang)) : "—"]);
     } else if (fam.group === "laundry") {
       const parts = [snap.targetTemp != null ? temp(snap.targetTemp, vm.temps.unit) : null, snap.spin ? `${snap.spin} ${this._t("unit.rpm")}` : null].filter(Boolean);
       rows.push([this._t("row.temp"), parts.length ? parts.join(" · ") : "—"]);
@@ -323,7 +323,7 @@ export class MieleApplianceCard extends HTMLElement {
     const vm = this._vm, name = this._lang === "nl" ? this._name.toLowerCase() : this._name;
     const active = vm && ["running", "paused", "scheduled"].includes(vm.state);
     ask.classList.toggle("start", what === "start");
-    this._set("ask-t", what === "start" ? this._t("ask.start", { program: mieleLabel(this._hass, "program", vm?.program) || "", name })
+    this._set("ask-t", what === "start" ? this._t("ask.start", { program: mieleLabel(this._hass, "program", vm?.program, this._lang) || "", name })
       : what === "off" ? this._t(active ? "ask.off_running" : "ask.off", { name }) : this._t("ask.stop", { name }));
     this._set("ask-yes", this._t(what === "start" ? "btn.start" : what === "off" ? "btn.off" : "btn.stop"));
   }

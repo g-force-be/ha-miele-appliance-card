@@ -62,10 +62,65 @@ export function t(lang, key, vars) {
   return vars ? s.replace(/\{(\w+)\}/g, (m, k) => vars[k] ?? "") : s;
 }
 
+// Dutch for Miele values that Home Assistant 2026.10 still shows in English: [English as HA shows it, Dutch].
+// Used only while HA returns exactly that English text, so a real HA translation always wins.
+// Brand and international names (QuickPowerWash, Cappuccino, ECO 40-60, …) need no entry.
+const NL_FALLBACK = {
+  status: {
+    autocleaning: ["Automatic cleaning", "Automatisch spoelen"], reserved: ["Reserved", "Gereserveerd"],
+    supercooling: ["Supercooling", "SuperKoelen"], superfreezing: ["Superfreezing", "SuperVriezen"],
+    supercooling_superfreezing: ["Supercooling/superfreezing", "SuperKoelen/SuperVriezen"], superheating: ["Superheating", "Snel opwarmen"],
+  },
+  phase: {
+    "2nd_espresso": ["2nd espresso coffee", "2e espresso"], "2nd_grinding": ["2nd grinding", "2e keer malen"],
+    "2nd_pre_brewing": ["2nd pre-brewing", "2e voorbrouwen"], comfort_cooling: ["Comfort cooling", "Comfortkoeling"],
+    cooling_phase: ["Cooling phase", "Afkoelen"], dispensing: ["Dispensing", "Uitschenken"], dust_box_missing: ["Missing dust box", "Stofbox ontbreekt"],
+    energy_save: ["Energy save", "Energiebesparing"], espresso: ["Espresso coffee", "Espresso"], final_rinse: ["Final rinse", "Laatste spoeling"],
+    flex_load_active: ["FlexLoad active", "FlexLoad actief"], freshen_up_and_moisten: ["Freshen up & moisten", "Opfrissen en bevochtigen"],
+    going_to_target_area: ["Going to target area", "Onderweg naar doelzone"], grinding: ["Grinding", "Malen"], hand_iron: ["Hand iron", "Strijkdroog"],
+    hygiene_drying: ["Hygiene drying", "Hygiënisch drogen"], interim_rinse: ["Interim rinse", "Tussenspoeling"], keep_warm: ["Keep warm", "Warmhouden"],
+    keeping_warm: ["Keeping warm", "Warmhouden"], milk_foam: ["Milk foam", "Melkschuim"], moisten: ["Moisten", "Bevochtigen"],
+    motor_overload: ["Check dust box and filter", "Controleer stofbox en filter"], perfect_dry_active: ["PerfectDry active", "PerfectDry actief"],
+    pre_brewing: ["Pre-brewing", "Voorbrouwen"], pre_dishwash: ["Pre-cleaning", "Voorreinigen"], process_finished: ["Process finished", "Klaar"],
+    process_running: ["Process running", "Bezig"], program_running: ["Program running", "Programma loopt"], reactivating: ["Reactivating", "Opnieuw starten"],
+    remote_controlled: ["Remote controlled", "Op afstand bediend"], rinse_out_lint: ["Rinse out lint", "Pluizen uitspoelen"], rinses: ["Rinses", "Spoelen"],
+    roasting: ["Roasting", "Braden"], safety_cooling: ["Safety cooling", "Veiligheidskoeling"], searing: ["Searing", "Aanbraden"],
+    slightly_dry: ["Slightly dry", "Licht droog"], slow_roasting: ["Slow roasting", "Lagetemperatuurgaren"], soak: ["Soak", "Inweken"],
+    starch_stop: ["Starch stop", "Stijfselstop"], steam_reduction: ["Steam reduction", "Stoomreductie"], steam_smoothing: ["Steam smoothing", "Stoomgladmaken"],
+    thermo_spin: ["Thermo spin", "ThermoSpin"], timed_drying: ["Timed drying", "Drogen op tijd"], venting: ["Venting", "Ontluchten"],
+    waiting_for_start: ["Waiting for start", "Wacht op start"], warm_cups_glasses: ["Warm cups/glasses", "Kopjes en glazen voorverwarmen"],
+    warm_dishes_plates: ["Warm dishes/plates", "Borden voorverwarmen"], wheel_lifted: ["Wheel lifted", "Wiel opgetild"],
+  },
+  program: {
+    clean_machine: ["Clean machine", "Machine reinigen"], easy_care: ["Easy care", "Onderhoudsarm"], freshen_up: ["Freshen up", "Opfrissen"],
+    outdoor_garments: ["Outdoor garments", "Outdoorkleding"], rinse_out_lint: ["Rinse out lint", "Pluizen uitspoelen"],
+    separate_rinse_starch: ["Separate rinse/starch", "Apart spoelen/stijven"], steam_care: ["Steam care", "Stoomverzorging"],
+    stuffed_toys: ["Stuffed toys", "Knuffels"], towels: ["Towels", "Handdoeken"], trainers_refresh: ["Trainers refresh", "Sportschoenen opfrissen"],
+    downs_duvets: ["Downs/Duvets", "Dons/dekbedden"], pillows_sanitize: ["Pillows sanitize", "Kussens hygiëne"], steam_smoothing: ["Steam smoothing", "Stoomgladmaken"],
+    fan_plus: ["Fan plus", "Hetelucht plus"], conventional_heat: ["Conventional heat", "Boven- en onderwarmte"], intensive_bake: ["Intensive bake", "Intensief bakken"],
+    fan_grill: ["Fan grill", "Grill met circulatie"], eco_fan_heat: ["ECO fan heat", "ECO hetelucht"], top_heat: ["Top heat", "Bovenwarmte"],
+    steam_cooking: ["Steam cooking", "Stoomgaren"], rapid_steam_cooking: ["Rapid steam cooking", "Snel stoomgaren"],
+    reheating_with_steam: ["Reheating with steam", "Opwarmen met stoom"], moisture_plus_fan_plus: ["Moisture plus + Fan plus", "Klimaatgaren + hetelucht plus"],
+    keeping_warm: ["Keeping warm", "Warmhouden"], descale: ["Descale", "Ontkalken"], microwave_fan_plus: ["Microwave + Fan plus", "Microgolf + hetelucht plus"],
+    microwave_fan_grill: ["Microwave + Fan grill", "Microgolf + grill met circulatie"], microwave_auto_roast: ["Microwave + Auto roast", "Microgolf + automatisch braden"],
+    reheating_with_microwave: ["Reheating with microwave", "Opwarmen met microgolf"], auto_roast: ["Auto roast", "Automatisch braden"],
+    low_temperature_cooking: ["Low temperature cooking", "Lagetemperatuurgaren"], appliance_settings: ["Appliance settings menu", "Instellingen"],
+    brewing_unit_degrease: ["Brewing unit degrease", "Zetgroep ontvetten"], coffee_pot: ["Coffee pot", "Koffiepot"], descaling: ["Appliance descaling", "Ontkalken"],
+    fruit_tea: ["Fruit tea", "Vruchtenthee"], herbal_tea: ["Herbal tea", "Kruidenthee"], intermediate_rinsing: ["Intermediate rinsing", "Tussentijds spoelen"],
+    long_coffee: ["Long coffee", "Lange koffie"], very_hot_water: ["Very hot water", "Zeer heet water"], white_tea: ["White tea", "Witte thee"],
+    evaporate_water: ["Evaporate water", "Water verdampen"],
+    // no translation at all in HA yet (warming drawer and two microwave programmes)
+    quick_microwave: ["", "Snel microgolf"], microwave_grill: ["", "Microgolf + grill"], keep_warm: ["", "Warmhouden"],
+    slow_roasting: ["", "Lagetemperatuurgaren"], warm_cups_glasses: ["", "Kopjes en glazen voorverwarmen"], warm_dishes_plates: ["", "Borden voorverwarmen"],
+  },
+};
+
 // Miele's own enum values, in the user's language, from Home Assistant's translations.
-export function mieleLabel(hass, kind, key) {
+export function mieleLabel(hass, kind, key, lang) {
   if (key == null) return "";
   const tk = { program: "program_id", phase: "program_phase", dryness: "drying_step", status: "status" }[kind];
   const s = hass?.localize?.(`component.miele.entity.sensor.${tk}.state.${key}`);
+  const nl = lang === "nl" ? NL_FALLBACK[kind]?.[key] : null;
+  if (nl && (!s || s === nl[0])) return nl[1];
   return s || String(key).replace(/_/g, " ").replace(/^./, c => c.toUpperCase());
 }

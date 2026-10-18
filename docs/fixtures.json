@@ -1,0 +1,155 @@
+{
+  "_about": "Echte Miele-cycli uit Peters Home Assistant (HA 2026.10.2, core miele-integratie), samengevat uit de recorder-historie. Offsets in seconden vanaf 'start' (Europe/Brussels). Rollen = zie spec §2. remaining_time is in minuten; tussen ankerpunten daalt hij ~1/min (synthetiseer lineair, houd vast tijdens pause). 'blip' = korte not_connected/unavailable die de kaart moet negeren.",
+  "cycles": [
+    {
+      "id": "washer_cottons_with_pause",
+      "model": "Washing machine",
+      "start": "2026-10-10T10:29:56+02:00",
+      "events": [
+        [0, "status", "on"],
+        [3, "status", "programmed"], [3, "program", "cottons"], [3, "remaining", 159],
+        [136, "status", "in_use"], [136, "phase", "main_wash"],
+        [207, "remaining", 158],
+        [2981, "remaining", 111],
+        [2993, "status", "pause"],
+        [3002, "status", "in_use"],
+        [3065, "remaining", 110],
+        [7117, "phase", "rinse"],
+        [7159, "remaining", 41],
+        [8828, "phase", "drain"],
+        [8859, "phase", "spin"],
+        [9893, "status", "program_ended"], [9893, "phase", "anti_crease"], [9893, "remaining", 0],
+        [10143, "status", "off"], [10143, "phase", "not_running"], [10143, "program", "no_program"], [10143, "remaining", null]
+      ],
+      "notes": "Miele-schatting loopt uit: om 7159 s nog 41 min, werkelijk einde 45,5 min later. Eindtijd dus niet hard afronden."
+    },
+    {
+      "id": "washer_end_anti_crease_to_finished",
+      "model": "Washing machine",
+      "start": "2026-10-10T15:44:18+02:00",
+      "events": [
+        [0, "status", "program_ended"], [0, "phase", "anti_crease"],
+        [1798, "phase", "finished"],
+        [2332, "status", "off"], [2332, "phase", "not_running"], [2332, "program", "no_program"]
+      ],
+      "notes": "Na program_ended draait de trommel tot 30 min anti-kreuk; pas daarna phase 'finished'."
+    },
+    {
+      "id": "dryer_cottons_dryness_ladder",
+      "model": "Tumble dryer",
+      "start": "2026-10-10T13:27:22+02:00",
+      "events": [
+        [0, "status", "programmed"], [0, "program", "cottons"], [0, "drying_step", "extra_dry"],
+        [76, "status", "in_use"], [76, "phase", "drying"],
+        [3734, "phase", "hand_iron_1"],
+        [5023, "phase", "normal"],
+        [6315, "status", "program_ended"], [6315, "phase", "cooling_down"],
+        [6375, "phase", "comfort_cooling"],
+        [6645, "phase", "anti_crease"],
+        [10249, "phase", "finished"],
+        [10548, "status", "off"], [10548, "phase", "not_running"], [10548, "program", "no_program"], [10548, "drying_step", null]
+      ],
+      "notes": "Fasen hand_iron_1 -> normal zijn BEREIKTE droogtegraden onderweg naar het doel (drying_step = extra_dry). remaining niet opgehaald: synthetiseren."
+    },
+    {
+      "id": "dryer_interrupted",
+      "model": "Tumble dryer",
+      "start": "2026-10-13T17:09:33+02:00",
+      "events": [
+        [0, "status", "programmed"], [0, "program", "warm_air"],
+        [3, "status", "in_use"], [3, "phase", "drying"],
+        [9, "status", "program_interrupted"],
+        [916, "status", "off"], [916, "program", "no_program"]
+      ]
+    },
+    {
+      "id": "steam_oven_fan_plus_timer",
+      "model": "Steam oven combi",
+      "start": "2026-10-09T19:12:38+02:00",
+      "events": [
+        [0, "status", "not_connected"],
+        [0.4, "status", "in_use"], [0.4, "program", "fan_plus"], [0.4, "phase", "heating_up_phase"], [0.4, "target_temp", 195], [0.4, "temp", 168.45], [0.4, "remaining", 0],
+        [12, "temp", 178.68], [29, "temp", 188.56], [33, "temp", 194.28],
+        [71, "temp", 195.0], [71, "phase", "process_running"], [71, "remaining", 11],
+        [314, "status", "not_connected"],
+        [317, "status", "in_use"], [317, "remaining", 7],
+        [368, "remaining", 6], [428, "remaining", 5], [488, "remaining", 4],
+        [668, "remaining", 2], [715, "remaining", 4], [732, "remaining", 3], [740, "remaining", 2], [744, "remaining", 1],
+        [747, "status", "program_ended"], [747, "phase", "process_finished"], [747, "remaining", 0],
+        [799, "status", "on"], [799, "program", "no_program"], [799, "phase", "not_running"], [799, "target_temp", null], [799, "temp", null]
+      ],
+      "notes": "remaining = 0 tijdens opwarmen (timer nog niet gestart) en bij ovens zonder timer. Temperatuur update na einde sub-seconde -> renderen throttlen. not_connected-blips van ~3 s."
+    },
+    {
+      "id": "steam_oven_door_pauses",
+      "model": "Steam oven combi",
+      "start": "2026-10-10T12:46:00+02:00",
+      "events": [
+        [0, "status", "on"],
+        [154, "status", "in_use"], [154, "program", "fan_plus"], [154, "target_temp", 160],
+        [157, "target_temp", 180], [163, "target_temp", 220], [173, "target_temp", 60],
+        [174, "phase", "heating_up_phase"],
+        [217, "phase", "process_running"],
+        [268, "status", "pause"], [268, "phase", "heating_up_phase"],
+        [292, "phase", "not_running"],
+        [332, "status", "in_use"], [332, "phase", "heating_up_phase"],
+        [354, "phase", "process_running"],
+        [500, "status", "pause"], [500, "phase", "not_running"],
+        [507, "status", "in_use"], [507, "phase", "heating_up_phase"],
+        [2488, "status", "on"], [2488, "program", "no_program"],
+        [2489, "status", "off"]
+      ],
+      "notes": "Pause = meestal deur open tijdens koken (tientallen keren per sessie). Toon dit rustig, geen alarmkleur."
+    },
+    {
+      "id": "microwave_combo",
+      "model": "Oven microwave",
+      "start": "2026-10-10T13:39:38+02:00",
+      "events": [
+        [0, "status", "on"],
+        [28, "status", "in_use"], [28, "program", "fan_plus"],
+        [41, "phase", "heating_up_phase"],
+        [144, "status", "not_connected"], [144.2, "status", "in_use"],
+        [428, "phase", "process_running"],
+        [475, "status", "pause"], [475, "phase", "not_running"],
+        [518, "status", "in_use"], [518, "phase", "process_running"],
+        [862, "status", "pause"], [870, "status", "in_use"],
+        [1031, "program", "microwave_fan_plus"],
+        [1038, "phase", "process_finished"],
+        [1039, "phase", "heating_up_phase"],
+        [1337, "status", "not_connected"],
+        [1338, "status", "program_ended"], [1338, "phase", "process_finished"],
+        [1951, "status", "on"], [1951, "program", "no_program"], [1951, "phase", "not_running"],
+        [1952, "status", "off"]
+      ]
+    },
+    {
+      "id": "coffee_morning",
+      "model": "Coffee system",
+      "start": "2026-10-09T07:00:40+02:00",
+      "events": [
+        [0, "status", "on"],
+        [2, "status", "autocleaning"],
+        [65, "status", "on"], [65, "phase", "heating_up"],
+        [87, "status", "autocleaning"], [87, "phase", "not_running"],
+        [169, "status", "on"],
+        [172, "status", "in_use"], [172, "program", "long_coffee"], [172, "phase", "grinding"],
+        [193, "phase", "dispensing"],
+        [250, "status", "on"], [250, "program", "no_program"], [250, "phase", "not_running"],
+        [1448, "status", "in_use"], [1448, "program", "herbal_tea"], [1448, "phase", "rinse"],
+        [1476, "status", "off"], [1476, "program", "no_program"], [1476, "phase", "not_running"]
+      ],
+      "notes": "autocleaning = spoelen bij aan/uitzetten. Dranken duren ~1 min, geen remaining_time."
+    },
+    {
+      "id": "coffee_interrupted",
+      "model": "Coffee system",
+      "start": "2026-10-09T20:07:52+02:00",
+      "events": [
+        [0, "status", "in_use"], [0, "program", "milk_foam"], [0, "phase", "heating_up"],
+        [7, "status", "program_interrupted"], [7, "phase", "dispensing"],
+        [15, "status", "on"], [15, "program", "no_program"], [15, "phase", "not_running"]
+      ]
+    }
+  ]
+}

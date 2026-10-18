@@ -171,7 +171,12 @@ function readmeShots() {
     { name: "kitchen", url: "cards.html?c=steam_oven_fan_plus_timer@100&c=coffee_morning@200&c=microwave_wifi_dropouts@1420&c=drawer_keep_warm_synthetic@900&cols=2&theme=light&lang=en&bar=0&anim=off",
       viewport: { width: 820, height: 1200 }, scale: 1.5, theme: "light", stage: true },
     { name: "programmes", url: `cards.html?c=washer_cottons_with_pause@-1&c=steam_oven_fan_plus_timer@820&c=microwave_combo@-1&card=programmes&cols=3&theme=dark&lang=en&bar=0&anim=off&${ms}&set=sensor.miele_microwave_oven:on&pick=cottons&pick=fan_plus&pick=microwave`,
-      viewport: { width: 1180, height: 900 }, scale: 1.25, theme: "dark", stage: true }
+      viewport: { width: 1180, height: 900 }, scale: 1.25, theme: "dark", stage: true },
+    { name: "overview", url: `cards.html?${RUNNING}&card=overview&layout=rooms&theme=dark&lang=en&bar=0&anim=off`,
+      viewport: { width: 1400, height: 1200 }, scale: 1, theme: "dark", card: "miele-overview-card" },
+    { name: "lines", url: "cards.html?c=demo_dish_eco@1200&c=demo_oven_fan_plus@100&c=demo_hob_cooking@1000&c=demo_hood_cooking@600"
+      + "&c=demo_fridge_free_day@1500&c=demo_robot_clean@1500&cols=3&theme=dark&lang=en&bar=0&anim=off&controls=0",
+      viewport: { width: 1180, height: 1400 }, scale: 1, theme: "dark", stage: true },
   ];
 }
 

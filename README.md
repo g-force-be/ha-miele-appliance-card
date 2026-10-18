@@ -6,13 +6,14 @@ Dashboard cards for Miele appliances connected through Home Assistant's built-in
 
 ![Washing machine and tumble dryer cards, both running](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/laundry.png)
 
-- **Looks like your appliance.** Own drawings of the W1 washing machine and T1 dryer, the ArtLine steam oven and oven with microwave, the CM 7750 coffee machine and the warming drawer. Front colours such as lotus white, obsidian black and graphite grey.
-- **Shows what is going on.** Time left, end time, phase, temperatures, dryness level, door and remote-start status. Water, spinning drum, heat, steam, microwaves, coffee pouring and the oven light are animated, with movement that stays light on a Nest Hub.
+- **Looks like your appliance.** Own drawings for every connected Miele line of the last five years: W1/T1 washers and dryers, dishwashers, ovens in PureLine, VitroLine, ArtLine and ContourLine, steam and combi ovens, coffee machines, warming drawers, hobs, cooker hoods, fridges, wine units and the Scout robot. Front colours such as lotus white, obsidian black and graphite grey.
+- **Shows what is going on.** Time left, end time, phase, temperatures, dryness level, hob zones, fan level, door and remote-start status. Water, spinning drum, spray arms, heat, steam, microwaves, coffee pouring, pans on the hob, vapour into the hood and the lights are animated, with movement that stays light on a Nest Hub.
 - **Copes with a flaky connection.** When an appliance briefly drops off Wi-Fi, the card keeps the last known state instead of flashing "unavailable".
 - **Starts programmes safely.** `miele-programmes-card` lists the programmes your appliance offers and always asks before it starts one.
-- **Dutch and English**, light and dark themes, and Home Assistant's own Miele translations.
+- **One card for everything.** `miele-overview-card` finds your appliances and lays them out per room, for the phone or for a kitchen display.
+- **Visual editors** for all three cards, **Dutch and English**, light and dark themes, and Home Assistant's own Miele translations.
 
-> **Status:** in development. The appliance card and the programmes card work; the overview card with a visual editor comes next. The build spec is in [`docs/SPEC.md`](docs/SPEC.md).
+> **Status:** the three cards and their editors are done and in daily use with the author's own appliances (W1, T1, DGC 7845 X, H 7440 BMX, CM 7750, ESW 7020). The other lines are drawn from Miele's spec sheets and tested on synthetic data; reports from people who own them are welcome in [Issues](https://github.com/g-force-be/ha-miele-appliance-card/issues). The original build spec is in [`docs/SPEC.md`](docs/SPEC.md).
 
 ## Installation
 
@@ -110,6 +111,7 @@ accent: "#7bb661"
 | `theme` | `dark` (default), `light`, `auto` (follows Home Assistant) or `ha` (Home Assistant's own card colours). |
 | `animations` | `full` (default), `reduced` or `off`. Reduced motion in the operating system is respected. |
 | `controls` | `false` hides the buttons, e.g. on a wall display. |
+| `big_countdown` | `true` shows the time left in large type above the drawing (kitchen display). |
 | `accent` | Ring and highlight colour. |
 | `language` | `nl` or `en`. Default: Home Assistant's language. |
 | `max_width` | Maximum width of the drawing, e.g. `380px`. |
@@ -151,6 +153,8 @@ show_all: false
 | `entity` | Any entity of the appliance. |
 | `programs` | Favourites, by Home Assistant's programme key (`cottons`, `eco_40_60`, `fan_plus`, `long_coffee`, …) or by Miele's programme number. Default: a sensible set per appliance type. |
 | `show_all` | `false` shows the favourites only. Default `true`. |
+| `collapsed` | `true` folds the card to one line ("Programmes"); a tap opens it. |
+| `show_name` | With `collapsed`: adds the appliance to that line ("Programmes · Steam oven"). |
 | `name`, `theme`, `accent`, `language` | As on the appliance card. |
 
 **Remote start.** Miele only accepts a programme from outside while *Remote start* (MobileStart) is on at the appliance. Until then the card is greyed out and says what to do. The programme lists, as the Miele API gave them for real appliances:
@@ -174,6 +178,8 @@ One card for all your Miele appliances. It finds them by itself and lays them ou
 type: custom:miele-overview-card
 layout: rooms
 ```
+
+![Overview card per room: laundry room side by side, the kitchen's built-in column with the coffee machine next to it](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/overview.png)
 
 | Layout | What you get |
 |---|---|
@@ -201,7 +207,13 @@ appliances:
 
 Appliances not in the list follow in the suggested order, so a new appliance shows up by itself.
 
-**Visual editors.** All three cards have one. The overview editor lists every appliance with its type number and drawing. You can show or hide it, move it up or down, and set its name, colours, programmes card and favourites. It also warns you:
+| Option | What it does |
+|---|---|
+| `layout` | `rooms` (default), `grid`, `active`, `phone` or `display`. |
+| `theme`, `animations`, `language`, `accent` | Passed on to every card. |
+| `appliances` | Per appliance: `entity`, and optionally `name`, `finish`, `accent`, `design`, `programmes` (`false`: no programmes card), `programs` (favourites) and `show` (`false`: hidden). |
+
+**Visual editors.** All three cards have one. The overview editor lists every appliance with its type number, drawing and room. You can show or hide it, move it up or down, and set its name, colours, design line, programmes card and favourites. It also warns you:
 
 - when the start, pause and stop buttons are switched off in Home Assistant, with a button to switch them on;
 - when Remote start is off;
@@ -213,6 +225,8 @@ Appliances not in the list follow in the suggested order, so a new appliance sho
 
 Every connected Miele line of the last five years has its own drawing, in its design lines. The card picks the drawing
 and the line from the appliance's type number; `drawing:` and `design:` override them.
+
+![Dishwasher, oven, hob, cooker hood, fridge and robot vacuum cards](https://raw.githubusercontent.com/g-force-be/ha-miele-appliance-card/main/docs/images/lines.png)
 
 | Drawing | Design lines (`design`) | Recognised from |
 |---|---|---|
@@ -233,7 +247,7 @@ and the line from the appliance's type number; `drawing:` and `design:` override
 | `robot` | — | Scout RX2/RX3 |
 | `generic` | — | anything else |
 
-Peter's own appliances (W1 WEI 895, T1 TEF 775 WP, DGC 7845 X, H 7440 BMX, CM 7750, ESW 7020) were drawn from photos
+The author's own appliances (W1 WEI 895, T1 TEF 775 WP, DGC 7845 X, H 7440 BMX, CM 7750, ESW 7020) were drawn from photos
 and tested live; the other lines are drawn from Miele's spec sheets ([docs/TOESTELREEKSEN.md](docs/TOESTELREEKSEN.md))
 and tested on synthetic data. The newest generations (W2/T2, KM 8000, G8, the 2025–26 hoods and fridges) aren't in
 Miele's API yet, so Home Assistant can't show them.
@@ -244,15 +258,17 @@ Versions follow the calendar: **year.week.number**, e.g. `2026.42.1` is the firs
 
 ## Development
 
-Requires Node 20+. The dev harness replays real appliance cycles (`docs/fixtures.json`) and real programme lists (`dev/data/programs.json`) through a mock Home Assistant.
+Requires Node 20+. The dev harness replays real appliance cycles (`docs/fixtures.json`) and real programme lists (`dev/data/programs.json`) through a mock Home Assistant. Appliances the author doesn't own come from `dev/data/demo-registry.json` (built by `dev/data/make-demo.mjs` with the entities Home Assistant creates for each type) and the cycles in `dev/data/fixtures-demo.json`.
 
 ```sh
 npm install
-npm test               # model and programme tests (node:test)
-npm run dev            # harness at http://127.0.0.1:5173/dev/cards.html
-npm run shots -- m3    # Playwright screenshots in dev/screenshots/ (uses the installed Chrome)
-npm run shots -- readme   # the pictures on this page
-node tools/brand.mjs   # logo, banner and social preview from docs/images/logo.svg
+npm test                    # model, programmes, layouts and design lines (node:test)
+npm run dev                 # harness at http://127.0.0.1:5173/dev/cards.html
+                            #   ?c=<cycle>@<seconds>  &card=programmes|overview  &design=…  &demo=1  &editor=1
+npm run shots -- m5         # Playwright screenshots in dev/screenshots/ (suites m1–m5, uses the installed Chrome)
+npm run shots -- readme     # the pictures on this page
+node test/regress.mjs       # the author's six appliances must stay pixel-identical (--baseline to record)
+node tools/brand.mjs        # logo, banner and social preview from docs/images/logo.svg
 ```
 
 ## Credits

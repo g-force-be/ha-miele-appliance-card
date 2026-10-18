@@ -2,7 +2,7 @@
 // Enough for the model, the cards and their editors: states, entities, devices, areas, locale, translations,
 // and callService / callWS that log instead of doing anything.
 
-export function createMockHass({ registry, translations, states, language = "nl", darkMode = false, isAdmin = true, log = () => {} }) {
+export function createMockHass({ registry, translations, states, programs = {}, failStart = false, language = "nl", darkMode = false, isAdmin = true, log = () => {} }) {
   const tr = translations[language]?.resources ?? {};
   const entities = Object.fromEntries(registry.entities.map(e => [e.entity_id, { ...e }]));
 
@@ -29,15 +29,13 @@ export function createMockHass({ registry, translations, states, language = "nl"
     return state;
   };
 
-  // Coffee machine's real answer to miele.get_programs (first entries), washer's real error while off.
-  const PROGRAMS = {
-    "1f0fc39845233a82f0628ef7fb858053": [
-      { program_id: 24001, program: "Ristretto", parameters: {} }, { program_id: 24002, program: "espresso", parameters: {} },
-      { program_id: 24003, program: "coffee", parameters: {} }, { program_id: 24004, program: "Long coffee", parameters: {} },
-      { program_id: 24005, program: "cappuccino", parameters: {} }, { program_id: 24020, program: "Hot milk", parameters: {} },
-      { program_id: 24030, program: "", parameters: {} }, { program_id: 24031, program: "", parameters: {} }],
-    "31c740bf126234441a0fd0e0f35dabfc": [],
-  };
+  // miele.get_programs answers as in Peter's HA (dev/data/programs.json): washer and dryer give 400 / Bad Request
+  // until their "Start op afstand" entity is on.
+  const mobileStartOn = id => registry.entities.some(e => e.device_id === id && e.translation_key === "mobile_start" && states[e.entity_id]?.state === "on");
+  const ACTION = { get_programs_error: "Get programs", set_program_error: "Set program", set_program_oven_error: "Set program on oven" };
+  const fail = (key, status, message) => Object.assign(new Error(`'${ACTION[key]}' action failed: ${status} / ${message}`),
+    { code: "home_assistant_error", translation_domain: "miele", translation_key: key, translation_placeholders: { status: String(status), message } });
+  const LAUNDRY = new Set(["82ddfc7a46859e3c356f96713e446d32", "16dcdde6211a28156e33bc53c65c55e4"]);
 
   return {
     states, entities, devices: registry.devices, areas: registry.areas,
@@ -54,11 +52,12 @@ export function createMockHass({ registry, translations, states, language = "nl"
     callService: async (domain, service, data, target, notifyOnError = true, returnResponse = false) => {
       log("callService", { domain, service, data, target, returnResponse });
       if (domain === "miele" && service === "get_programs") {
-        const list = PROGRAMS[data?.device_id];
-        if (!list) throw Object.assign(new Error("'Get programs' action failed: 400 / Bad Request"),
-          { code: "home_assistant_error", translation_domain: "miele", translation_key: "get_programs_error", translation_placeholders: { status: "400", message: "Bad Request" } });
+        const list = programs[data?.device_id];
+        if (!list || (LAUNDRY.has(data.device_id) && !mobileStartOn(data.device_id))) throw fail("get_programs_error", 400, "Bad Request");
         return { context: { id: "mock" }, response: { programs: list } };
       }
+      if (domain === "miele" && service.startsWith("set_program") && failStart)
+        throw fail(`${service}_error`, 400, "Bad Request");
       return { context: { id: "mock" } };
     },
     callWS: async msg => {

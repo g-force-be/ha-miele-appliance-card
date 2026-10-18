@@ -1,6 +1,7 @@
 // Playwright screenshots, per milestone. Uses the installed Chrome (playwright-core, channel "chrome").
 //   npm run shots                 M2a: washer and dryer cards, every state × theme × front colour × width
 //   npm run shots -- m1           M1: the model harness
+//   npm run shots -- m2b / m3     M2b: kitchen appliances · M3: the programmes card
 //   npm run shots -- m2a washer   only shots whose name contains "washer"
 // Output: dev/screenshots/<suite>/, with an index.html contact sheet.
 import fs from "node:fs";
@@ -12,7 +13,7 @@ import { serve } from "../dev/serve.mjs";
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), "..");
 const suite = process.argv[2] ?? "m2a";
 const filter = process.argv[3] ?? "";
-const out = path.join(root, "dev", "screenshots", suite);
+const out = suite === "readme" ? path.join(root, "docs", "images") : path.join(root, "dev", "screenshots", suite);
 
 // --- M1: the model harness
 const M1_MOMENTS = [
@@ -90,7 +91,41 @@ function m2bShots() {
   return shots;
 }
 
-const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots };
+// --- M3: the programmes card (real programme lists from Peter's HA; washer and dryer lists are synthetic)
+const MS = id => `set=binary_sensor.miele_${id}_mobiel_starten:on`;
+const PROGRAMMES = [
+  ["washer-remote-off", "washer_cottons_with_pause@-1", ""], ["washer-remote-on", "washer_cottons_with_pause@-1", MS("washing_machine")],
+  ["washer-cached", "washer_cottons_with_pause@-1", "cache=seed"], ["washer-confirm", "washer_cottons_with_pause@-1", `${MS("washing_machine")}&pick=cottons`],
+  ["washer-busy", "washer_cottons_with_pause@1000", MS("washing_machine")],
+  ["dryer-remote-on", "dryer_cottons_dryness_ladder@-1", MS("tumble_dryer")],
+  ["steam-remote-on", "steam_oven_fan_plus_timer@820", MS("steam_oven")], ["steam-sheet", "steam_oven_fan_plus_timer@820", `${MS("steam_oven")}&pick=fan_plus`],
+  ["microwave-sheet", "microwave_combo@-1", `${MS("microwave_oven")}&set=sensor.miele_microwave_oven:on&pick=microwave`],
+  ["coffee-remote-off", "coffee_morning@70", ""], ["drawer", "drawer_keep_warm_synthetic@300", ""],
+];
+function m3Shots() {
+  const shots = [];
+  // phone and the 500 px column only: the kitchen display never starts anything
+  for (const [w, width, height] of WIDTHS.filter(x => x[0] !== "1024")) for (const theme of ["light", "dark"])
+    for (const [name, cycle, extra] of PROGRAMMES)
+      shots.push({ name: `${name}-${theme}-${w}`, group: name, url: `cards.html?c=${cycle}&card=programmes&theme=${theme}&lang=nl&bar=0&anim=off${extra ? `&${extra}` : ""}`,
+        viewport: { width, height }, scale: width < 600 ? 2 : 1, theme, card: "miele-programmes-card" });
+  return shots;
+}
+
+// --- README: the pictures on the GitHub page (docs/images/), from the same harness
+function readmeShots() {
+  const ms = ["washing_machine", "steam_oven", "microwave_oven"].map(MS).join("&");
+  return [
+    { name: "laundry", url: "cards.html?c=washer_cottons_with_pause@1000&c=dryer_cottons_dryness_ladder@5100&cols=2&theme=dark&lang=en&bar=0&anim=off",
+      viewport: { width: 820, height: 900 }, scale: 1.5, theme: "dark", stage: true },
+    { name: "kitchen", url: "cards.html?c=steam_oven_fan_plus_timer@100&c=coffee_morning@200&c=microwave_wifi_dropouts@1420&c=drawer_keep_warm_synthetic@900&cols=2&theme=light&lang=en&bar=0&anim=off",
+      viewport: { width: 820, height: 1200 }, scale: 1.5, theme: "light", stage: true },
+    { name: "programmes", url: `cards.html?c=washer_cottons_with_pause@-1&c=steam_oven_fan_plus_timer@820&c=microwave_combo@-1&card=programmes&cols=3&theme=dark&lang=en&bar=0&anim=off&${ms}&set=sensor.miele_microwave_oven:on&pick=cottons&pick=fan_plus&pick=microwave`,
+      viewport: { width: 1180, height: 900 }, scale: 1.25, theme: "dark", stage: true }
+  ];
+}
+
+const SUITES = { m1: m1Shots, m2a: m2aShots, m2b: m2bShots, m3: m3Shots, readme: readmeShots };
 if (!SUITES[suite]) { console.error(`unknown suite ${suite}`); process.exit(1); }
 const shots = SUITES[suite]().filter(s => s.name.includes(filter));
 
@@ -111,7 +146,7 @@ try {
     await page.goto(base + s.url);
     await page.waitForSelector("body[data-ready='1']");
     const file = path.join(out, `${s.name}.png`);
-    if (s.card) await page.locator("miele-appliance-card").first().screenshot({ path: file, animations: "disabled" });
+    if (s.card) await page.locator(s.card === true ? "miele-appliance-card" : s.card).first().screenshot({ path: file, animations: "disabled" });
     else if (s.stage) await page.locator("#stage").screenshot({ path: file, animations: "disabled" });
     else await page.screenshot({ path: file, fullPage: true });
   }
@@ -119,6 +154,8 @@ try {
   await browser.close();
   server.close();
 }
+
+if (suite === "readme") { console.log(`${shots.length} pictures in docs/images`); process.exit(); }
 
 // contact sheet: one row per group, with every shot of the suite that exists on disk (a filtered run keeps the rest)
 const all = SUITES[suite]().filter(x => fs.existsSync(path.join(out, `${x.name}.png`)));

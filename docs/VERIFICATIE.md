@@ -53,3 +53,28 @@ De sessies uit punten 1 en 3 staan als extra testcycli in `dev/data/fixtures-ext
 6. Pauzeren via de API, en hervatten met START, tijdens een echte cyclus van de droogkast (§5). Meteen ook: telt `elapsed` daar de pauzes mee?
 7. De warmhoudlade starten met `miele.set_program` (§6).
 8. Open punt 3: de knoppen van de wasmachine inschakelen, alleen na akkoord.
+
+### Stand 18-10, live gezien
+
+- **Punt 5 (deels).** Tijdens een droogcyclus en bij de wasmachine op "Programma klaar" gaf `get_programs` nog 400, met "Start op afstand" uit. Met "Start op afstand" aan is het nog niet getest: in tien dagen historie stond het bij wasmachine, droogkast en koffiemachine nooit aan.
+- **Punt 6 (deels).** De pauzeknop van de droogkast bleef `unavailable` terwijl hij droogde, dus de API biedt daar geen pauze aan. De kaart verbergt de knop dan.
+
+## M3: programmakaart (18-10, browserconsole op het testdashboard, alleen lezen)
+
+1. **`returnResponse`-signatuur: bevestigd.** `hass.callService("miele", "get_programs", {device_id}, undefined, false, true)` geeft `{context, response: {programs: [...]}}`. Elk item heeft `program_id`, `program` (Engels) en `parameters`.
+2. **`get_programs` per toestel, met "Start op afstand" overal uit:**
+   - Stoomoven (aan): 13 programma's, elk met temperatuur min/max/stap en tijd min/max (bv. Hetelucht plus 30–225 °C per 5, tot 12:00).
+   - Oven-microgolf (uit): 7 programma's. Microgolf heeft geen temperatuur en 0:00–1:00 tijd. Grill heeft vast 230 °C.
+   - Koffiemachine (aan): 22 items, waarvan 20 met naam. 24030 en 24031 hebben geen naam en worden verborgen.
+   - Warmhoudlade (uit): `[]`.
+   - Wasmachine en droogkast: 400 / Bad Request.
+3. **De ID's volgen HA's eigen tabellen niet.** Ristretto is 24001 in `get_programs` en 24000 in HA's const; cappuccino 24005 tegenover 24004; caffè latte 24008 tegenover 24009. Daarom:
+   - de kaart koppelt een programma aan HA's sleutel **op naam** (genormaliseerd, tegen de `options` van de programmasensor);
+   - ze start **alleen met de ID's die het toestel zelf geeft** (vers of uit de cache), nooit met een fallback-tabel. Dat wijkt af van §6: een tabel-ID kan een ander programma starten.
+   Koppelen op naam: koffie 20/20, oven-microgolf 7/7, stoomoven 12/13. "Cake plus" kent HA niet; die toont de kaart met de Miele-naam.
+4. **Entity-vertalingen: geladen.** `hass.localize("component.miele.entity.sensor.program_id.state.cottons")` geeft "Katoen". Waar HA nog Engels geeft, vult de Nederlandse fallback aan.
+5. **"Start op afstand" in de historie (10 dagen).** Bij de oven-microgolf en de stoomoven ging het vaak aan, steeds tijdens het koken. Bij wasmachine, droogkast en koffiemachine nooit.
+
+Nog open voor groep B:
+- starten met "Start op afstand" aan, per toestel;
+- of de koffiemachine "Start op afstand" kent.

@@ -23,6 +23,7 @@ import { finishPalette, finishVars } from "../drawings/finish.js";
 import { CARD_CSS } from "../ui/styles.js";
 import { countdown, duration, clockTime, temp } from "../ui/format.js";
 import { sevenSeg } from "../ui/sevenseg.js";
+import { callService } from "../ui/call.js";
 
 // The four drinks tiles of the CM 7750's start screen ("Dranken").
 const DRINK_TILES = `<svg viewBox="0 0 100 62" aria-hidden="true"><g fill="#c4cad0">
@@ -126,6 +127,8 @@ export class MieleApplianceCard extends HTMLElement {
     const palette = finishPalette(c.finish, fam.finish);
     const accent = c.accent || ACCENT[draw] || ACCENT.generic;
     const name = this._name = c.name || this._hass.devices?.[dev.id]?.name_by_user || this._t(`kind.${fam.kind}`);
+    // in a sentence: "on the washing machine", but a name you gave stays as you wrote it
+    this._inText = c.name || this._hass.devices?.[dev.id]?.name_by_user ? name : name.toLowerCase();
     const icons = g.icons.at.map(([x, y], i) => `<div class="at icon" id="ic${i}" style="left:${x}%;top:${y}%;width:${g.icons.size}%"><ha-icon></ha-icon></div>`).join("");
     const w = g.window, round = w.d != null;
     const win = round ? `class="at glass round" style="left:${w.x}%;top:${w.y}%;width:${w.d}%"`
@@ -219,6 +222,8 @@ export class MieleApplianceCard extends HTMLElement {
       "f-dispense": dispensing, "f-rinse": coffee && s === "running" && (f.rinsing || phase === "rinse"),
       "f-warm": drawer && (moving || f.keepWarm), "f-door": f.doorOpen || phase === "door_open" || (drawer && s === "paused"),
       lit: moving || f.doorOpen || f.antiCrease || (s === "done" && f.cooling) || f.light === true,
+      // the oven and cup light itself: what the light entity says; without one, on while running or with the door open
+      lamp: f.light === true || (f.light == null && (moving || f.doorOpen)) || false,
       loaded: ["ready", "scheduled", "running", "paused", "done", "interrupted", "error"].includes(s) && !(coffee && !moving)
         && vm.programType !== "maintenance_program" && !/clean_machine|descal|rinse_out_lint|^rinse$/.test(prog),
       quiet: ["off", "standby", "offline"].includes(s),
@@ -391,7 +396,7 @@ export class MieleApplianceCard extends HTMLElement {
     const ask = this._el("ask");
     ask.hidden = !what;
     if (!what) return;
-    const vm = this._vm, name = this._lang === "nl" ? this._name.toLowerCase() : this._name;
+    const vm = this._vm, name = this._inText;
     const active = vm && ["running", "paused", "scheduled"].includes(vm.state);
     ask.classList.toggle("start", what === "start");
     this._set("ask-t", what === "start" ? this._t("ask.start", { program: mieleLabel(this._hass, "program", vm?.program, this._lang) || "", name })
@@ -403,14 +408,7 @@ export class MieleApplianceCard extends HTMLElement {
 
   async _call(domain, service, data) {
     this._set("err", "");
-    try { await this._hass.callService(domain, service, data); }
-    catch (e) {
-      let msg = e?.message || String(e);
-      if (e?.translation_key && e?.translation_domain) {
-        const localize = await this._hass.loadBackendTranslation?.("exceptions", e.translation_domain);
-        msg = localize?.(`component.${e.translation_domain}.exceptions.${e.translation_key}.message`, e.translation_placeholders) || msg;
-      }
-      this._set("err", this._t("err.send", { msg }));
-    }
+    const msg = await callService(this._hass, domain, service, data);
+    if (msg) this._set("err", this._t("err.send", { msg }));
   }
 }

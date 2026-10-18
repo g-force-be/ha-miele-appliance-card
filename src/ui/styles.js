@@ -1,5 +1,6 @@
 // Styles for miele-appliance-card. Only transform and opacity animate (the kitchen display is a Nest Hub).
-export const CARD_CSS = `
+// BASE_CSS (card, themes, header, buttons, confirmation bar) is shared with miele-programmes-card.
+export const BASE_CSS = `
 :host { display: block; }
 ha-card {
   display: block; overflow: hidden; padding: 12px 14px 14px; box-shadow: none;
@@ -45,7 +46,9 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 .ask.start .go { background: var(--c); }
 .err { font-size: 12.5px; color: var(--bad); margin: -4px 0 8px; }
 .err:empty { display: none; }
+`;
 
+export const CARD_CSS = BASE_CSS + `
 .pic { position: relative; margin: 0 auto; max-width: var(--maxw, 400px); aspect-ratio: var(--ratio); container-type: inline-size;
   cursor: pointer; -webkit-tap-highlight-color: transparent; }
 .art, .art img, .art-svg { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
@@ -189,14 +192,17 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 @keyframes mc-rise { 0% { transform: translateY(18%); opacity: 0; } 30% { opacity: .65; } 100% { transform: translateY(-24%); opacity: 0; } }
 @keyframes mc-wave { 0% { transform: scale(.35); opacity: .9; } 100% { transform: scale(2.3); opacity: 0; } }
 .cavity { opacity: .7; transition: opacity .8s; }
-.lit .cavity { opacity: 1; }
+.lit .cavity, .lcd-on .cavity { opacity: 1; }
 .dish { opacity: 0; transition: opacity .8s; }
 .loaded .dish { opacity: 1; }
 .glow { background: radial-gradient(ellipse 70% 60% at 50% 100%, #ff8a3d78, #ff8a3d00 70%), radial-gradient(ellipse 80% 45% at 50% 0%, #ff6a2a5c, #ff6a2a00 70%);
   opacity: 0; transition: opacity 1.2s; }
 .f-heat .glow { opacity: .85; }
-.light { background: radial-gradient(ellipse 80% 70% at 50% 0%, #ffe8c0a0, #ffe8c000 75%); opacity: 0; transition: opacity .8s; }
-.lit .light { opacity: 1; }
+/* switched on: a soft glow behind the glass; the light really on (light entity): the full light */
+.light { background: radial-gradient(ellipse 90% 85% at 50% 0%, #fff0d2d8, #fff0d200 80%), linear-gradient(#ffe8c040, #ffe8c018);
+  opacity: 0; transition: opacity .8s; }
+.lcd-on .light { opacity: .3; }
+.lamp .light { opacity: 1; }
 .steam .w, .waves .wv { opacity: 0; }
 .f-steam .steam .w, .f-dispense .steam .w { opacity: .5; }
 .f-micro .waves .wv:first-child { opacity: .55; }
@@ -211,7 +217,8 @@ button:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 @keyframes mc-drop { 0% { transform: translateY(0); opacity: 0; } 15% { opacity: .9; } 100% { transform: translateY(62%); opacity: 0; } }
 @keyframes mc-buzz { 25% { transform: translate(.5px, -.4px); } 75% { transform: translate(-.5px, .4px); } }
 .cuplight { background: radial-gradient(ellipse 42% 62% at 50% 0%, #fff3d8a0, #fff3d800 72%); opacity: 0; transition: opacity .8s; }
-.lit .cuplight { opacity: 1; }
+.lcd-on .cuplight { opacity: .3; }
+.lamp .cuplight { opacity: 1; }
 .cup { opacity: 0; transition: opacity .6s; }
 .coffee.moving .cup, .coffee.st-done .cup { opacity: 1; }
 .cup .fill { transform-box: fill-box; transform-origin: 50% 100%; transform: scaleY(.04); }

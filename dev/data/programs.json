@@ -1,0 +1,704 @@
+{
+ "_about": "Answers of miele.get_programs in Peter's HA on 2026-10-18 (coffee machine on, ovens and drawer off, 'Start op afstand' off everywhere). Washer and dryer answered 400 / Bad Request; their lists below are SYNTHETIC (names as the Miele API writes them, IDs from HA's const) and only served by the mock while their mobile_start entity is on.",
+ "1f0fc39845233a82f0628ef7fb858053": [
+  {
+   "program_id": 24001,
+   "program": "Ristretto",
+   "parameters": {}
+  },
+  {
+   "program_id": 24002,
+   "program": "espresso",
+   "parameters": {}
+  },
+  {
+   "program_id": 24003,
+   "program": "coffee",
+   "parameters": {}
+  },
+  {
+   "program_id": 24004,
+   "program": "Long coffee",
+   "parameters": {}
+  },
+  {
+   "program_id": 24005,
+   "program": "cappuccino",
+   "parameters": {}
+  },
+  {
+   "program_id": 24006,
+   "program": "Cappuccino Italiano",
+   "parameters": {}
+  },
+  {
+   "program_id": 24007,
+   "program": "Latte macchiato",
+   "parameters": {}
+  },
+  {
+   "program_id": 24008,
+   "program": "Caffè latte",
+   "parameters": {}
+  },
+  {
+   "program_id": 24009,
+   "program": "Caffè Americano",
+   "parameters": {}
+  },
+  {
+   "program_id": 24010,
+   "program": "Espresso macchiato",
+   "parameters": {}
+  },
+  {
+   "program_id": 24011,
+   "program": "Long black",
+   "parameters": {}
+  },
+  {
+   "program_id": 24012,
+   "program": "Flat white",
+   "parameters": {}
+  },
+  {
+   "program_id": 24013,
+   "program": "Cafe au lait",
+   "parameters": {}
+  },
+  {
+   "program_id": 24014,
+   "program": "Green tea",
+   "parameters": {}
+  },
+  {
+   "program_id": 24015,
+   "program": "Black tea",
+   "parameters": {}
+  },
+  {
+   "program_id": 24016,
+   "program": "herbal tea",
+   "parameters": {}
+  },
+  {
+   "program_id": 24017,
+   "program": "Fruit tea",
+   "parameters": {}
+  },
+  {
+   "program_id": 24018,
+   "program": "Hot water",
+   "parameters": {}
+  },
+  {
+   "program_id": 24019,
+   "program": "Milk foam",
+   "parameters": {}
+  },
+  {
+   "program_id": 24020,
+   "program": "Hot milk",
+   "parameters": {}
+  },
+  {
+   "program_id": 24030,
+   "program": "",
+   "parameters": {}
+  },
+  {
+   "program_id": 24031,
+   "program": "",
+   "parameters": {}
+  }
+ ],
+ "eeef45e3b771421c2439c81f17581b33": [
+  {
+   "program_id": 1,
+   "program": "Defrost",
+   "parameters": {
+    "temperature": {
+     "min": 25,
+     "max": 50,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 13,
+   "program": "Fan plus",
+   "parameters": {
+    "temperature": {
+     "min": 30,
+     "max": 250,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 19,
+   "program": "Microwave",
+   "parameters": {
+    "temperature": {},
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 0
+     },
+     "max": {
+      "hours": 1,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 7,
+   "program": "Auto roast",
+   "parameters": {
+    "temperature": {
+     "min": 100,
+     "max": 230,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 9,
+   "program": "Grill",
+   "parameters": {
+    "temperature": {
+     "min": 230,
+     "max": 230,
+     "step": null,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 29,
+   "program": "Fan grill",
+   "parameters": {
+    "temperature": {
+     "min": 100,
+     "max": 220,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 6,
+   "program": "Eco Fan heat",
+   "parameters": {
+    "temperature": {
+     "min": 100,
+     "max": 230,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  }
+ ],
+ "b8ee6dfe5e0f82d19997caf1ab237969": [
+  {
+   "program_id": 13,
+   "program": "Fan plus",
+   "parameters": {
+    "temperature": {
+     "min": 30,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 24,
+   "program": "Conventional heat",
+   "parameters": {
+    "temperature": {
+     "min": 30,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 8,
+   "program": "Steam cooking",
+   "parameters": {
+    "temperature": {
+     "min": 40,
+     "max": 100,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 10,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 72,
+   "program": "Sous-vide",
+   "parameters": {
+    "temperature": {
+     "min": 45,
+     "max": 90,
+     "step": 1,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 10,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 14,
+   "program": "Intensive bake",
+   "parameters": {
+    "temperature": {
+     "min": 50,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 31,
+   "program": "Bottom heat",
+   "parameters": {
+    "temperature": {
+     "min": 100,
+     "max": 200,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 25,
+   "program": "Top heat",
+   "parameters": {
+    "temperature": {
+     "min": 100,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 10,
+   "program": "Full grill",
+   "parameters": {
+    "temperature": {
+     "min": 225,
+     "max": 225,
+     "step": null,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 11,
+   "program": "Economy grill",
+   "parameters": {
+    "temperature": {
+     "min": 225,
+     "max": 225,
+     "step": null,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 29,
+   "program": "Fan grill",
+   "parameters": {
+    "temperature": {
+     "min": 50,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 6,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 18,
+   "program": "Cake plus",
+   "parameters": {
+    "temperature": {
+     "min": 30,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 6,
+   "program": "Eco Fan heat",
+   "parameters": {
+    "temperature": {
+     "min": 30,
+     "max": 225,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 12,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  },
+  {
+   "program_id": 75,
+   "program": "Eco Steam cooking",
+   "parameters": {
+    "temperature": {
+     "min": 40,
+     "max": 100,
+     "step": 5,
+     "mandatory": false
+    },
+    "duration": {
+     "min": {
+      "hours": 0,
+      "minutes": 1
+     },
+     "max": {
+      "hours": 10,
+      "minutes": 0
+     },
+     "mandatory": false
+    }
+   }
+  }
+ ],
+ "31c740bf126234441a0fd0e0f35dabfc": [],
+ "82ddfc7a46859e3c356f96713e446d32": [
+  {
+   "program_id": 1,
+   "program": "Cottons",
+   "parameters": {}
+  },
+  {
+   "program_id": 190,
+   "program": "ECO 40-60",
+   "parameters": {}
+  },
+  {
+   "program_id": 3,
+   "program": "Minimum iron",
+   "parameters": {}
+  },
+  {
+   "program_id": 4,
+   "program": "Delicates",
+   "parameters": {}
+  },
+  {
+   "program_id": 8,
+   "program": "Woollens",
+   "parameters": {}
+  },
+  {
+   "program_id": 24,
+   "program": "Denim",
+   "parameters": {}
+  },
+  {
+   "program_id": 146,
+   "program": "QuickPowerWash",
+   "parameters": {}
+  },
+  {
+   "program_id": 76,
+   "program": "Freshen up",
+   "parameters": {}
+  },
+  {
+   "program_id": 21,
+   "program": "Drain/spin",
+   "parameters": {}
+  },
+  {
+   "program_id": 95,
+   "program": "Down duvets",
+   "parameters": {}
+  },
+  {
+   "program_id": 69,
+   "program": "Cottons hygiene",
+   "parameters": {}
+  },
+  {
+   "program_id": 23,
+   "program": "Shirts",
+   "parameters": {}
+  },
+  {
+   "program_id": 29,
+   "program": "Sportswear",
+   "parameters": {}
+  },
+  {
+   "program_id": 122,
+   "program": "Express 20",
+   "parameters": {}
+  },
+  {
+   "program_id": 18,
+   "program": "Rinse",
+   "parameters": {}
+  },
+  {
+   "program_id": 9,
+   "program": "Silks",
+   "parameters": {}
+  }
+ ],
+ "16dcdde6211a28156e33bc53c65c55e4": [
+  {
+   "program_id": 20,
+   "program": "Cottons",
+   "parameters": {}
+  },
+  {
+   "program_id": 30,
+   "program": "Minimum iron",
+   "parameters": {}
+  },
+  {
+   "program_id": 60,
+   "program": "Warm air",
+   "parameters": {}
+  },
+  {
+   "program_id": 99003,
+   "program": "Cottons Eco",
+   "parameters": {}
+  },
+  {
+   "program_id": 40,
+   "program": "Woollens handcare",
+   "parameters": {}
+  },
+  {
+   "program_id": 80,
+   "program": "Express",
+   "parameters": {}
+  },
+  {
+   "program_id": 130,
+   "program": "Denim",
+   "parameters": {}
+  },
+  {
+   "program_id": 150,
+   "program": "Sportswear",
+   "parameters": {}
+  },
+  {
+   "program_id": 70,
+   "program": "Cool air",
+   "parameters": {}
+  }
+ ]
+}

@@ -1663,7 +1663,10 @@
     "popcorn",
     "auto_roast",
     "low_temperature_cooking",
-    "sous_vide"
+    "sous_vide",
+    "defrost",
+    "economy_grill",
+    "eco_steam_cooking"
    ],
    "device_class": "enum",
    "friendly_name": "Miele Microwave Oven Programma"
@@ -1930,7 +1933,10 @@
     "popcorn",
     "auto_roast",
     "low_temperature_cooking",
-    "sous_vide"
+    "sous_vide",
+    "defrost",
+    "economy_grill",
+    "eco_steam_cooking"
    ],
    "device_class": "enum",
    "friendly_name": "Miele Steam Oven Programma"

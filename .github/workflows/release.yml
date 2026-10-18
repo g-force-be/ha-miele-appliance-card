@@ -1,0 +1,55 @@
+# A release, by hand: Actions → Release → Run workflow (or: gh workflow run release.yml).
+# Version = ISO year . ISO week . number within that week, e.g. 2026.42.1, 2026.42.2, 2026.43.1.
+# Runs the tests, builds dist/miele-appliance-card.js with that version inside, tags the commit and publishes a
+# GitHub release with the file attached. HACS offers each release as an update.
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      notes:
+        description: "Release notes (empty: the commits since the previous release)"
+        required: false
+        default: ""
+
+permissions:
+  contents: write
+
+concurrency: release
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+      - run: npm test
+
+      - name: Version
+        id: version
+        run: |
+          week="$(date -u +%G).$((10#$(date -u +%V)))"
+          n=$(git tag -l "$week.*" | wc -l)
+          echo "version=$week.$((n + 1))" >> "$GITHUB_OUTPUT"
+
+      - name: Build
+        run: npm run build
+        env:
+          CARD_VERSION: ${{ steps.version.outputs.version }}
+
+      - name: Publish
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          NOTES: ${{ inputs.notes }}
+        run: |
+          if [ -n "$NOTES" ]; then notes=(--notes "$NOTES"); else notes=(--generate-notes); fi
+          gh release create "$VERSION" dist/miele-appliance-card.js --target "$GITHUB_SHA" --title "$VERSION" "${notes[@]}"

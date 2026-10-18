@@ -1,5 +1,9 @@
 // Card harness: real cards on a mock hass, fed by replayed cycles.
 // /dev/cards.html?c=<cycle>@<t>&c=<cycle>@<t>&theme=light|dark&finish=<finish>&lang=nl&cols=2&anim=full&controls=1&bar=0&play=1&speed=60
+//   card=appliance|programmes|both   which card per cycle (default appliance)
+//   set=<entity_id>:<state>          pin a state (e.g. "Start op afstand" on), repeatable
+//   cache=seed                       programme lists already in the browser's cache, two days old (else the cache is emptied)
+//   failstart=1                      miele.set_program answers 400
 // All cards share one virtual clock: every cycle is shifted so its moment t falls on the same instant.
 import * as mdi from "../node_modules/@mdi/js/mdi.js";
 import { simulate, Player } from "./replay.js";
@@ -20,9 +24,9 @@ if (!customElements.get("ha-icon")) customElements.define("ha-icon", class exten
 });
 
 const getJSON = p => fetch(p).then(r => r.json());
-const [registry, nl, en, fixtures, extra, synthetic] = await Promise.all([
+const [registry, nl, en, fixtures, extra, synthetic, programs] = await Promise.all([
   getJSON("./data/peter-registry.json"), getJSON("./data/translations.nl.json"), getJSON("./data/translations.en.json"),
-  getJSON("../docs/fixtures.json"), getJSON("./data/fixtures-extra.json"), getJSON("./data/fixtures-synthetic.json")]);
+  getJSON("../docs/fixtures.json"), getJSON("./data/fixtures-extra.json"), getJSON("./data/fixtures-synthetic.json"), getJSON("./data/programs.json")]);
 const cycles = Object.fromEntries([...fixtures.cycles, ...extra.cycles, ...synthetic.cycles].map(c => [c.id, c]));
 
 const q = new URLSearchParams(location.search);
@@ -45,21 +49,36 @@ for (const e of entries) {
 let virtual = anchor;
 globalThis.__MIELE_NOW__ = () => virtual;
 
-const states = () => Object.assign({}, ...entries.map(e => e.player.states));
-const makeHass = () => createMockHass({ registry, translations: { nl, en }, states: states(), language: lang, darkMode: theme === "dark",
-  log: (...a) => console.log("[mock]", ...a) });
+// ?set=light.miele_steam_oven_licht:on pins an entity's state, whatever the cycle says
+const pinned = q.getAll("set").map(s => s.split(":"));
+const states = () => {
+  const all = Object.assign({}, ...entries.map(e => e.player.states));
+  for (const [id, state] of pinned) all[id] = { ...(all[id] ?? { entity_id: id, attributes: {} }), state };
+  return all;
+};
+const makeHass = () => createMockHass({ registry, translations: { nl, en }, states: states(), programs, failStart: q.get("failstart") === "1",
+  language: lang, darkMode: theme === "dark", log: (...a) => console.log("[mock]", ...a) });
+
+// the programmes card's cache in this browser: empty, or seeded with lists from two days ago
+try {
+  for (const k of Object.keys(localStorage)) if (k.startsWith("miele-programmes:")) localStorage.removeItem(k);
+  if (q.get("cache") === "seed") for (const e of entries)
+    localStorage.setItem(`miele-programmes:${e.sim.deviceId}`, JSON.stringify({ at: anchor - 2 * 86400e3, programs: programs[e.sim.deviceId] ?? [] }));
+} catch { /* no storage */ }
 
 const stage = document.getElementById("stage");
-const cards = entries.map(e => {
-  const card = document.createElement("miele-appliance-card");
-  const cfg = { type: "custom:miele-appliance-card", device_id: e.sim.deviceId, theme: q.get("cardtheme") ?? theme,
+const kinds = { appliance: ["miele-appliance-card"], programmes: ["miele-programmes-card"], both: ["miele-appliance-card", "miele-programmes-card"] }[q.get("card") ?? "appliance"];
+const cards = entries.flatMap(e => kinds.map(tag => {
+  const card = document.createElement(tag);
+  const cfg = { type: `custom:${tag}`, device_id: e.sim.deviceId, theme: q.get("cardtheme") ?? theme,
     animations: q.get("anim") ?? "full", controls: q.get("controls") !== "0" };
   if (q.get("drawing")) cfg.drawing = q.get("drawing");
   if (q.get("finish")) cfg.finish = q.get("finish");
+  if (q.get("programs")) cfg.programs = q.get("programs").split(",");
   card.setConfig(cfg);
   stage.append(card);
   return card;
-});
+}));
 
 // Warm up: play every cycle up to its moment in 5 s steps, so the cards' trackers have seen the history
 // (pauses, dryness reached) as they would on a dashboard that was open all along.
@@ -94,5 +113,9 @@ if (q.get("play") === "1") {
   }, 250);
 }
 
-// Ready for screenshots once the cards have rendered and the icons are drawn.
-requestAnimationFrame(() => requestAnimationFrame(() => { document.body.dataset.ready = "1"; }));
+// Ready for screenshots once the cards have rendered and the icons are drawn. ?pick=fan_plus opens that programme's sheet.
+requestAnimationFrame(() => requestAnimationFrame(() => {
+  const picks = q.getAll("pick");
+  for (const c of cards) { const p = c._tiles?.find(x => picks.includes(x.key) || picks.includes(String(x.id))); if (p) c._choose(p); }
+  document.body.dataset.ready = "1";
+}));

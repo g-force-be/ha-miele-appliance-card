@@ -268,6 +268,7 @@ npm run dev                 # harness at http://127.0.0.1:5173/dev/cards.html
 npm run shots -- m5         # Playwright screenshots in dev/screenshots/ (suites m1–m5, uses the installed Chrome)
 npm run shots -- readme     # the pictures on this page
 node test/regress.mjs       # the author's six appliances must stay pixel-identical (--baseline to record)
+node test/escape.mjs        # entity attributes show as text, never as markup
 node tools/brand.mjs        # logo, banner and social preview from docs/images/logo.svg
 ```
 

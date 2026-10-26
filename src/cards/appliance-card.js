@@ -461,13 +461,13 @@ export class MieleApplianceCard extends HTMLElement {
     const h = this._hass, fam = this._dev.family, s = vm.state;
     const special = this._specialRows(fam, snap);
     if (special) return this._showRows(special);
-    const rows = [[this._t("row.program"), vm.program ? esc(mieleLabel(h, "program", vm.program, this._lang)) : "—"]];
+    const rows = [[this._t("row.program"), vm.program ? mieleLabel(h, "program", vm.program, this._lang) : "—"]];
     if (fam.kind === "dryer" || fam.kind === "washer_dryer") {
       const target = snap.dryingStep, reached = vm.dryness?.reached;
       const ti = LADDER.indexOf(target), ri = LADDER.indexOf(reached);
       const dots = ti >= 0 ? `<span class="dots">${LADDER.slice(0, ti + 1).map((k, i) =>
         `<i class="${i <= ri ? "on" : ""}${i === ti ? " target" : ""}" title="${esc(mieleLabel(h, "dryness", k, this._lang))}"></i>`).join("")}</span>` : "";
-      rows.push([this._t("row.dryness"), target ? dots + esc(mieleLabel(h, "dryness", target, this._lang)) : "—"]);
+      rows.push([this._t("row.dryness"), target ? { html: dots + esc(mieleLabel(h, "dryness", target, this._lang)) } : "—"]);
     } else if (fam.group === "laundry") {
       const parts = [snap.targetTemp != null ? temp(snap.targetTemp, vm.temps.unit) : null, snap.spin ? `${snap.spin} ${this._t("unit.rpm")}` : null].filter(Boolean);
       rows.push([this._t("row.temp"), parts.length ? parts.join(" · ") : "—"]);
@@ -485,10 +485,15 @@ export class MieleApplianceCard extends HTMLElement {
     this._showRows(rows);
   }
 
+  // A row's value is text; only markup the card builds itself (the dryness dots) comes as { html }, already escaped.
   _showRows(rows) {
     rows = rows.slice(0, 4);
     while (rows.length < 4) rows.push(["", ""]);
-    rows.forEach(([k, v], i) => { this._set(`k${i}`, k); this._setHTML(`v${i}`, v); this._el(`k${i}`).parentElement.hidden = !k; });
+    rows.forEach(([k, v], i) => {
+      this._set(`k${i}`, k);
+      if (v?.html != null) this._setHTML(`v${i}`, v.html); else this._set(`v${i}`, v);
+      this._el(`k${i}`).parentElement.hidden = !k;
+    });
   }
 
   // Rows for appliances without programmes: hob zones, the hood's fan and lights. Null for the rest.
@@ -496,7 +501,7 @@ export class MieleApplianceCard extends HTMLElement {
     const onOff = v => v == null ? "—" : this._t(v ? "btn.on_state" : "state.off");
     if (fam.group === "hob") {
       const on = (snap.plates ?? []).map((k, i) => [i + 1, plateLevel(k)]).filter(([, p]) => p.level > 0);
-      return [[this._t("row.zones"), on.length ? on.map(([i, p]) => `${i}: ${esc(p.text)}`).join(" · ") : this._t("state.off")]];
+      return [[this._t("row.zones"), on.length ? on.map(([i, p]) => `${i}: ${p.text}`).join(" · ") : this._t("state.off")]];
     }
     if (fam.group === "hood") {
       const lvl = fanLevel(snap);
@@ -517,8 +522,8 @@ export class MieleApplianceCard extends HTMLElement {
     }
     if (fam.group === "vacuum") {
       return [[this._t("row.battery"), snap.battery != null ? `${Math.round(snap.battery)} %` : "—"],
-        [this._t("row.suction"), snap.fanSpeed ? esc(snap.fanSpeed.replace(/^./, c => c.toUpperCase())) : "—"],
-        [this._t("row.program"), this._vm?.program ? esc(mieleLabel(this._hass, "program", this._vm.program, this._lang)) : "—"]];
+        [this._t("row.suction"), snap.fanSpeed ? snap.fanSpeed.replace(/^./, c => c.toUpperCase()) : "—"],
+        [this._t("row.program"), this._vm?.program ? mieleLabel(this._hass, "program", this._vm.program, this._lang) : "—"]];
     }
     return null;
   }
